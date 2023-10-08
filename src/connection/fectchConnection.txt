@@ -1,0 +1,30 @@
+// interface ConnectionData extends RequestInit {
+//     url: string;
+//     method: string;
+//     data: string;
+//     headers: { [key: string]: string };
+//     redirect: RequestRedirect;
+// }
+
+// export const connectionData = (data:object):ConnectionData=> { 
+//     // Define the data as form-urlenconded
+//     const formData = new URLSearchParams();
+
+//     for (const [key, value] of Object.entries(data)) {
+//         formData.append(key, value.toString());
+//     }
+//     /*for (const key in data) {
+//         if (data.hasOwnProperty(key)) { //Avoiding potential pitfalls
+//             const value = data[key as keyof typeof data];
+//             formData.append(key, value.toString());
+//         }
+//     }*/
+//     console.log(formData.toString());
+//     return {
+//         url : connectionUrl,
+//         method: 'POST',
+//         data: 'hola',
+//         headers: {'Content-type': 'text/plain;charset=utf-8' },
+//         redirect: "follow"
+//     }
+// }
