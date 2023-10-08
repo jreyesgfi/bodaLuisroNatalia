@@ -1,17 +1,11 @@
+import { HandleConfirm, type GuestType } from "../types"
 
-interface Props {
-    firstName : string
-    lastName1: string
-    lastName2?: string
-    confirmed: boolean
-    peopleCount: number
-    groupID?: string
-    guestID: string
-
+interface Props extends GuestType {
+    handleConfirm: HandleConfirm
 }
 
 export const Guest : React.FC<Props> = 
-    ({firstName, lastName1, lastName2, confirmed, peopleCount, groupID, guestID})=>{
+    ({firstName, lastName1, lastName2, confirmed, peopleCount, groupID, guestID, handleConfirm})=>{
     return(
     <>
         <h3>
@@ -21,8 +15,9 @@ export const Guest : React.FC<Props> =
                 className="toggle"
                 type="checkbox"
                 checked={confirmed}
+                onChange={() => { handleConfirm(guestID) }}
                 />
-        <p>Número de acompañantes -sin incluirle-: {peopleCount-1} </p>
+        <p>Número de acompañantes* :   {peopleCount-1} </p>
     </>
     )
 }

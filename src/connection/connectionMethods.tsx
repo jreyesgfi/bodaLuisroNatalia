@@ -1,5 +1,5 @@
 import { connectionData, connectionUrl, getDataMethod, postDataMethod } from "./connectionConfig";
-import { Row } from "../types";
+import { GuestType } from "../types";
 import axios from 'axios';
 
 // ----------------------------------------------------------------
@@ -23,7 +23,7 @@ export const submitData = (text: string): void => {
 };
 
 //----------------------------------------------------------------
-export const receiveData = (groupID: Row['groupID'], callback: (data:string[][])=>void): void => {
+export const receiveData = (groupID: GuestType['groupID'], callback: (data:GuestType[])=>void): void => {
     
     const data = {
         GroupID: groupID,
@@ -36,11 +36,23 @@ export const receiveData = (groupID: Row['groupID'], callback: (data:string[][])
             // Transform the data
             const text = response.data;
             const rows = text.split('\n');
-            const parsedData = rows.map((row:string) => row.split('\t'));
-
+            const arrayParsedData = rows.map((row:string) => row.split('\t'));
+            const objectParsedData = arrayParsedData.map((row:string)=> {
+                const guest: GuestType = {
+                    firstName:row[0],
+                    lastName1:row[1],
+                    lastName2:row[2],
+                    confirmed:row[3] === "No" ? false : true,
+                    peopleCount:Number(row[4]),
+                    groupID:row[5],
+                    guestID:row[6]
+                }
+                return guest;
+            });
+            
             // Use the retrieved data
-            console.log(parsedData); // Handle the parsed data here
-            callback(parsedData);
+            console.log(objectParsedData); // Handle the parsed data here
+            callback(objectParsedData);
         })
         .catch((error) => {
             console.error('Error:', error);

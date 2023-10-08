@@ -1,7 +1,7 @@
 import './App.css'
 import { useState } from 'react'
 import { Todos } from './components/Todos'
-import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId } from './types'
+import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, HandleConfirm } from './types'
 import { FILTERS_BUTTONS, TODO_FILTERS } from './consts'
 import { Footer } from './components/Footer'
 import { receiveData, submitData } from './connection/connectionMethods'
@@ -30,7 +30,7 @@ const App = (): JSX.Element => {
   const [todos, setTodos] = useState(mockTodos)
   const [filterSelected, setFilterSelected] = useState<FilterValue>(TODO_FILTERS.ALL)
   
-  const [guests, setGuests] = useState<ListOfGuests>([['']]);
+  const [guests, setGuests] = useState<ListOfGuests>([]);
 
   // Footer properties
   const activeCount = todos.filter(todo => !todo.completed).length
@@ -63,7 +63,14 @@ const App = (): JSX.Element => {
   }
 
   const handleNewData = (data:ListOfGuests):void => {
-    const newGuests = data;
+    setGuests(data);
+  }
+
+  const handleConfirm:HandleConfirm = (id:GuestID):void => {
+    const newGuests:ListOfGuests = guests.map(guest => {
+      guest.confirmed = (guest.guestID === id? !guest.confirmed :guest.confirmed)
+      return guest
+    });
     setGuests(newGuests);
   }
 
@@ -87,29 +94,28 @@ const App = (): JSX.Element => {
   
   return (
     <>
-      <h1>TEST</h1>
+      <h1>Boda Luisro y Natalia</h1>
       {/* <Todos
         todos = {filteredTodos}
         onToggleComplete = {handleCompleted}
         onRemoveTodo = {handleRemove}
-      /> */}
+      /> 
       <h2>{FILTERS_BUTTONS[0].key}</h2>
-      <h2 onClick={(e)=>{submitData('Ester')}}>Submit</h2>
-      <h2 onClick={(e)=>{receiveData('2',handleNewData)}}>Receive</h2>
+      */}
+      <br/>
       <Guests
         guests = {guests}
+        handleConfirm = {handleConfirm}
       />
-
-      <button onClick={(e)=>{
-        console.log(guests)}}>
-          Any change?
-      </button>
-      <Footer
+      <br/><br/><br/><br/><br/>
+      <button onClick={(e)=>{submitData('Ester')}}>Submit</button>
+      <button onClick={(e)=>{receiveData('2',handleNewData)}}>Receive</button>
+      {/*<Footer
         filterSelected={filterSelected}
         activeCount={activeCount}
         completedCount={completedCount}
         handleFilterChange={handleFilterChange}
-      />
+    />*/}
     </>
 
   )

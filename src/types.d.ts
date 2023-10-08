@@ -13,17 +13,21 @@ export type TodoFunction = (id: TodoId) => void
 
 export type FilterValue = typeof TODO_FILTERS[keyof typeof TODO_FILTERS]
 
-export type ListOfGuests = string[][];
 
+// Guest Data
+export type GuestID = string;
 
-
-// connection
-export interface Row {
-  ID: string,
+export interface GuestType {
+  guestID: GuestID,
   groupID : string,
-  nombre: string,
-  apellido1: string,
-  apellido2: string,
-  asistencia: boolean,
-  numPersonas: number
+  firstName: string,
+  lastName1: string,
+  lastName2: string,
+  confirmed: boolean,
+  peopleCount: number
 }
+
+export type ListOfGuests = GuestType[];
+
+// Handle Functions
+export type HandleConfirm = (id: GuestID) => void;

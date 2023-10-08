@@ -1,29 +1,33 @@
-import { ListOfGuests } from "../types"
+import { ListOfGuests, GuestID, HandleConfirm } from "../types"
 import { Guest } from "./Guest"
 
 
 interface Props {
-    guests:ListOfGuests
+    guests: ListOfGuests
+    handleConfirm: HandleConfirm
 }
 
-export const Guests: React.FC<Props> = ({guests}) => {
-    return(
+export const Guests: React.FC<Props> = ({ guests, handleConfirm }) => {
+    return (
         <>
-            {guests.map((guest)=>{
-                
-                <Guest 
-                    key = {guest[6]}
-                    firstName={guest[0]}
-                    lastName1={guest[1]}
-                    lastName2={guest[2]}
-                    confirmed={guest[3] === "No" ? false : true}
-                    peopleCount={Number(guest[4])}
-                    groupID={guest[5]}
-                    guestID={guest[6]}
+            {guests.length >0 && guests.map((guest) => {
+                return (
+                    <Guest
+                        key={guest.guestID}
+                        firstName={guest.firstName}
+                        lastName1={guest.lastName1}
+                        lastName2={guest.lastName2}
+                        confirmed={guest.confirmed}
+                        peopleCount={guest.peopleCount}
+                        groupID={guest.groupID}
+                        guestID={guest.guestID}
+                        handleConfirm={handleConfirm}
 
-                />
+                    />
+                )
+
             })}
-        </> 
+        </>
     )
-    
+
 }
