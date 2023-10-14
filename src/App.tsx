@@ -108,7 +108,7 @@ const App = (): JSX.Element => {
         handleConfirm = {handleConfirm}
       />
       <br/><br/><br/><br/><br/>
-      <button onClick={(e)=>{submitData('Ester')}}>Submit</button>
+      <button onClick={(e)=>{submitData(guests)}}>Submit</button>
       <button onClick={(e)=>{receiveData('2',handleNewData)}}>Receive</button>
       {/*<Footer
         filterSelected={filterSelected}

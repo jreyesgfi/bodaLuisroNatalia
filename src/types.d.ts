@@ -24,6 +24,7 @@ export interface GuestType {
   lastName1: string,
   lastName2: string,
   confirmed: boolean,
+  willGo: boolean,
   peopleCount: number
 }
 

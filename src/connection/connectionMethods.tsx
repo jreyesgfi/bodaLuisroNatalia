@@ -1,17 +1,15 @@
 import { connectionData, connectionUrl, getDataMethod, postDataMethod } from "./connectionConfig";
-import { GuestType } from "../types";
+import { GuestType, ListOfGuests } from "../types";
 import axios from 'axios';
 
 // ----------------------------------------------------------------
-export const submitData = (text: string): void => {
+export const submitData = (guests:ListOfGuests): void => {
 
     const data = {
-        Name: text,
-        Description: text,
-        Follow: true,
+        Guests:JSON.stringify(guests),
         Method: postDataMethod
     }
-
+    console.log(data);
     // Send a POST request with the data string to your Google Apps Script
     axios.post(connectionUrl, data, connectionData)
         .then(response => {
