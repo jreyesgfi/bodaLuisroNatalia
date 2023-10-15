@@ -131,11 +131,10 @@ export const MainHeading = styled.h1<InversedElementItf>`
 	mt?:string;
 `;
 
-interface HeaderInterface extends InversedElementItf, LocatedElementItf, TextItf, ResponsiveElementItf {
-  }
+interface HeadingInterface extends InversedElementItf, LocatedElementItf, TextItf, ResponsiveElementItf {
+}
 
-
-export const Heading = styled.h2<HeaderInterface>`
+export const Heading = styled.h2<HeadingInterface>`
 	font-size: ${({ fontSize }) => (fontSize ? fontSize : 'clamp(1.2rem, 4.8vw, 3.6rem)')};
 	font-family: primary-bold, sans-serif;
 	user-select: none;

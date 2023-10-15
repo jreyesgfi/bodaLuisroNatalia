@@ -5,7 +5,8 @@ import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, Ha
 import { FILTERS_BUTTONS, TODO_FILTERS } from './consts'
 import { Footer } from './components/Footer'
 import { receiveData, submitData } from './connection/connectionMethods'
-import { Guests } from './components/Guests'
+import { ConfirmationSection } from './sections/ConfirmationSection'
+
 
 
 const mockTodos = [
@@ -82,7 +83,7 @@ const App = (): JSX.Element => {
   
   return (
     <>
-      <h1>Boda Luisro y Natalia</h1>
+      
       {/* <Todos
         todos = {filteredTodos}
         onToggleComplete = {handleCompleted}
@@ -91,12 +92,10 @@ const App = (): JSX.Element => {
       <h2>{FILTERS_BUTTONS[0].key}</h2>
       */}
       <br/>
-      <Guests
-        guests = {guests}
-        handleConfirm = {handleConfirm}
-      />
-      <br/><br/><br/><br/><br/>
-      <button onClick={(e)=>{submitData(guests)}}>Submit</button>
+      <ConfirmationSection
+        guests={guests}
+        handleConfirm={handleConfirm}
+      ></ConfirmationSection>
       {/*
       <button onClick={(e)=>{receiveData('2',handleNewData)}}>Receive</button>
       <Footer

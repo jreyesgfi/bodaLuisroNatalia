@@ -1,0 +1,1 @@
+export const mainTitleText = 'Boda Luis Rodrigo y Natalia';
