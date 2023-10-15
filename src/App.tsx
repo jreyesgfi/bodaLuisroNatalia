@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Todos } from './components/Todos'
 import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, HandleConfirm } from './types'
 import { FILTERS_BUTTONS, TODO_FILTERS } from './consts'
@@ -74,23 +74,11 @@ const App = (): JSX.Element => {
     setGuests(newGuests);
   }
 
-  // const submitData = (text:string):void => {
-  //     const data = { Name: text, Description: text };
+  // First load of the data
+  useEffect(()=>{
+    receiveData('2',handleNewData);
+  },[])
 
-  //   // Send a preflight (OPTIONS) request
-  //   fetch(excelConnectionData.url, {
-  //     redirect: "follow",
-  //     method: 'POST',
-  //     body: "hi",
-  //     headers: {
-  //       'Content-type': "text/plain;charset=utf-8",
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((json) => console.log(json));
-  // }
-
-  
   
   return (
     <>
@@ -109,8 +97,9 @@ const App = (): JSX.Element => {
       />
       <br/><br/><br/><br/><br/>
       <button onClick={(e)=>{submitData(guests)}}>Submit</button>
+      {/*
       <button onClick={(e)=>{receiveData('2',handleNewData)}}>Receive</button>
-      {/*<Footer
+      <Footer
         filterSelected={filterSelected}
         activeCount={activeCount}
         completedCount={completedCount}
