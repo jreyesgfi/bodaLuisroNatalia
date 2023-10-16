@@ -9,7 +9,7 @@ interface Props {
 export const ConfirmationSection: React.FC<Props> =
     ({guests, handleConfirm}) => {
         return (
-            <Section inverse={false}>
+            <Section inverse={true}>
                 <Guests
                     guests={guests}
                     handleConfirm={handleConfirm}

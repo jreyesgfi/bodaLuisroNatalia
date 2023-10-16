@@ -1,11 +1,12 @@
 import './App.css'
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { Todos } from './components/Todos'
-import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, HandleConfirm } from './types'
+import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, HandleConfirm, GuestType, UpdateGuest } from './types'
 import { FILTERS_BUTTONS, TODO_FILTERS } from './consts'
 import { Footer } from './components/Footer'
 import { receiveData, submitData } from './connection/connectionMethods'
 import { ConfirmationSection } from './sections/ConfirmationSection'
+import { HeroSection } from './sections/HeroSection'
 
 
 
@@ -26,12 +27,18 @@ const mockTodos = [
     completed: false
   }
 ]
+// intialize the context
+export const UpdateGuestContext = createContext<any>(null);
 
 const App = (): JSX.Element => {
   const [todos, setTodos] = useState(mockTodos)
   const [filterSelected, setFilterSelected] = useState<FilterValue>(TODO_FILTERS.ALL)
   
   const [guests, setGuests] = useState<ListOfGuests>([]);
+  const setGuest = (givenGuestID:GuestID,updateFunction:UpdateGuest)  => {
+    const newGuests = guests.map((guest) => guest.guestID === givenGuestID? updateFunction(guest):guest);
+  setGuests(newGuests)
+  }
 
   // Footer properties
   const activeCount = todos.filter(todo => !todo.completed).length
@@ -69,7 +76,7 @@ const App = (): JSX.Element => {
 
   const handleConfirm:HandleConfirm = (id:GuestID):void => {
     const newGuests:ListOfGuests = guests.map(guest => {
-      guest.confirmed = (guest.guestID === id? !guest.confirmed :guest.confirmed)
+      guest.attendance = (guest.guestID === id? !guest.attendance :guest.attendance)
       return guest
     });
     setGuests(newGuests);
@@ -82,8 +89,8 @@ const App = (): JSX.Element => {
 
   
   return (
-    <>
-      
+    <UpdateGuestContext.Provider value={setGuest}>
+      <HeroSection></HeroSection>
       {/* <Todos
         todos = {filteredTodos}
         onToggleComplete = {handleCompleted}
@@ -104,7 +111,7 @@ const App = (): JSX.Element => {
         completedCount={completedCount}
         handleFilterChange={handleFilterChange}
     />*/}
-    </>
+    </UpdateGuestContext.Provider>
 
   )
 }

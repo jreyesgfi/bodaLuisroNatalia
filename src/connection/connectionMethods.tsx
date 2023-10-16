@@ -4,7 +4,13 @@ import axios from 'axios';
 
 // ----------------------------------------------------------------
 export const submitData = (guests:ListOfGuests): void => {
+    // check that is confirmed
+    const confirmedGuests = guests.map((guest) => {
+        guest.confirmed = true;
+        return guest
+    })
 
+    // define the structure of the data
     const data = {
         Guests:JSON.stringify(guests),
         Method: postDataMethod
@@ -37,13 +43,17 @@ export const receiveData = (groupID: GuestType['groupID'], callback: (data:Guest
             const arrayParsedData = rows.map((row:string) => row.split('\t'));
             const objectParsedData = arrayParsedData.map((row:string)=> {
                 const guest: GuestType = {
-                    firstName:row[0],
-                    lastName1:row[1],
-                    lastName2:row[2],
-                    confirmed:row[3] === "No" ? false : true,
-                    peopleCount:Number(row[4]),
-                    groupID:row[5],
-                    guestID:row[6]
+                        guestID: row[0],
+                        groupID : row[1],
+                        firstName: row[2],
+                        lastName1: row[3],
+                        lastName2: row[4],
+                        confirmed: row[5] === "No" ? false : true,
+                        attendance: row[6] === "No" ? false : true,
+                        peopleCount: Number(row[7])||0,
+                        bus: row[8] === "No" ? false : true,
+                        allergies: row[9] === "No" ? false : true,
+                        allergiesList: row[10]?.split(',')||[],
                 }
                 return guest;
             });

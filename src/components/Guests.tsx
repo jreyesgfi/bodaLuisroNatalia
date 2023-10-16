@@ -14,15 +14,18 @@ export const Guests: React.FC<Props> = ({ guests, handleConfirm }) => {
                 return (
                     <Guest
                         key={guest.guestID}
+                        guestID={guest.guestID}
+                        groupID={guest.groupID}
                         firstName={guest.firstName}
                         lastName1={guest.lastName1}
                         lastName2={guest.lastName2}
                         confirmed={guest.confirmed}
+                        attendance={guest.attendance}
                         peopleCount={guest.peopleCount}
-                        groupID={guest.groupID}
-                        guestID={guest.guestID}
+                        bus={guest.bus}
+                        allergies={guest.allergies}
+                        allergiesList={guest.allergiesList}
                         handleConfirm={handleConfirm}
-
                     />
                 )
 
