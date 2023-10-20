@@ -1,35 +1,64 @@
-import { ListOfGuests, GuestID, HandleConfirm } from "../types"
+import { useContext } from "react";
+import { UpdateGuestContext } from "../App";
+import { ListOfGuests, HandleChange, UpdateGuest } from "../types"
 import { Guest } from "./Guest"
 
 
 interface Props {
     guests: ListOfGuests
-    handleConfirm: HandleConfirm
 }
 
-export const Guests: React.FC<Props> = ({ guests, handleConfirm }) => {
+export const Guests: React.FC<Props> = ({ guests }) => {
+
+    // Define the handle functions
+    const setGuest = useContext(UpdateGuestContext);
+    const handleInputChange: HandleChange = (e, guestID) => {
+        const updateGuest: UpdateGuest = (guest) => {
+            guest.extraGuestsNum = Number(e?.target?.value) || 0;
+            return guest
+        }
+        setGuest(guestID, updateGuest);
+    }
+
     return (
         <>
-            {guests.length >0 && guests.map((guest) => {
-                return (
-                    <Guest
-                        key={guest.guestID}
-                        guestID={guest.guestID}
-                        groupID={guest.groupID}
-                        firstName={guest.firstName}
-                        lastName1={guest.lastName1}
-                        lastName2={guest.lastName2}
-                        confirmed={guest.confirmed}
-                        attendance={guest.attendance}
-                        peopleCount={guest.peopleCount}
-                        bus={guest.bus}
-                        allergies={guest.allergies}
-                        allergiesList={guest.allergiesList}
-                        handleConfirm={handleConfirm}
+            {guests.length > 0 &&
+                <>
+                    {guests.map((guest) => {
+                        return (
+                            <Guest
+                                key={guest.guestID}
+                                guestID={guest.guestID}
+                                groupID={guest.groupID}
+                                firstName={guest.firstName}
+                                lastName1={guest.lastName1}
+                                lastName2={guest.lastName2}
+                                confirmed={guest.confirmed}
+                                attendance={guest.attendance}
+                                extraGuestsNum={guest.extraGuestsNum}
+                                bus={guest.bus}
+                                allergies={guest.allergies}
+                                allergiesList={guest.allergiesList}
+                            />
+                        )
+                    })}
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <p>¿Acompañantes extra?</p>
+                    <input
+                        className="toggle"
+                        type="number"
+                        min="0" max="2"
+                        value={guests[0].extraGuestsNum}
+                        onChange={(e) => {
+                            guests.forEach((guest) => {
+                                handleInputChange(e, guest.guestID)
+                            });
+                        }}
                     />
-                )
-
-            })}
+                </>
+            }
         </>
     )
 

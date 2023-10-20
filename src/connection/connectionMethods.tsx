@@ -50,7 +50,7 @@ export const receiveData = (groupID: GuestType['groupID'], callback: (data:Guest
                         lastName2: row[4],
                         confirmed: row[5] === "No" ? false : true,
                         attendance: row[6] === "No" ? false : true,
-                        peopleCount: Number(row[7])||0,
+                        extraGuestsNum: Number(row[7])||0,
                         bus: row[8] === "No" ? false : true,
                         allergies: row[9] === "No" ? false : true,
                         allergiesList: row[10]?.split(',')||[],

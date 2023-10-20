@@ -13,7 +13,6 @@ export type TodoFunction = (id: TodoId) => void
 
 export type FilterValue = typeof TODO_FILTERS[keyof typeof TODO_FILTERS]
 
-
 // Guest Data
 export type GuestID = string;
 export type allergie = string;
@@ -26,7 +25,7 @@ export interface GuestType {
   lastName2: string,
   confirmed: boolean,
   attendance: boolean,
-  peopleCount: number
+  extraGuestsNum: number
   bus: boolean,
   allergies: boolean,
   allergiesList?: allergie[],

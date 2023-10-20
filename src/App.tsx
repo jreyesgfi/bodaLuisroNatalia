@@ -49,6 +49,7 @@ const App = (): JSX.Element => {
     return true 
   })
 
+
   const handleRemove = (id: TodoId): void => {
     const newTodos = todos.filter(todo => todo.id !== id)
     setTodos(newTodos)
@@ -74,14 +75,6 @@ const App = (): JSX.Element => {
     setGuests(data);
   }
 
-  const handleConfirm:HandleConfirm = (id:GuestID):void => {
-    const newGuests:ListOfGuests = guests.map(guest => {
-      guest.attendance = (guest.guestID === id? !guest.attendance :guest.attendance)
-      return guest
-    });
-    setGuests(newGuests);
-  }
-
   // First load of the data
   useEffect(()=>{
     receiveData('2',handleNewData);
@@ -101,7 +94,6 @@ const App = (): JSX.Element => {
       <br/>
       <ConfirmationSection
         guests={guests}
-        handleConfirm={handleConfirm}
       ></ConfirmationSection>
       {/*
       <button onClick={(e)=>{receiveData('2',handleNewData)}}>Receive</button>
