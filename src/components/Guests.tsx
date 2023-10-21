@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UpdateGuestContext } from "../App";
+import { questionExtraGuestsText } from "../assets/texts/guestText";
 import { ListOfGuests, HandleChange, UpdateGuest } from "../types"
 import { Guest } from "./Guest"
 
@@ -45,15 +46,15 @@ export const Guests: React.FC<Props> = ({ guests }) => {
                     <br></br>
                     <br></br>
                     <br></br>
-                    <p>¿Acompañantes extra?</p>
+                    <p>{questionExtraGuestsText}</p>
                     <input
                         className="toggle"
                         type="number"
                         min="0" max="2"
                         value={guests[0].extraGuestsNum}
-                        onChange={(e) => {
+                        onChange={() => {
                             guests.forEach((guest) => {
-                                handleInputChange(e, guest.guestID)
+                                handleInputChange(guest.guestID)
                             });
                         }}
                     />

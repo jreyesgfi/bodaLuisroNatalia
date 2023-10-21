@@ -15,7 +15,7 @@ export type FilterValue = typeof TODO_FILTERS[keyof typeof TODO_FILTERS]
 
 // Guest Data
 export type GuestID = string;
-export type allergie = string;
+export type AllergieType = string;
 
 export interface GuestType {
   guestID: GuestID,
@@ -28,12 +28,12 @@ export interface GuestType {
   extraGuestsNum: number
   bus: boolean,
   allergies: boolean,
-  allergiesList?: allergie[],
+  allergiesList?: AllergieType[],
 }
 
 export type ListOfGuests = GuestType[];
 
 // Handle Functions
 export type UpdateGuest = (guest:GuestType)=>GuestType;
-export type HandleChange = (e:React.ChangeEvent<HTMLInputElement>,guestID:GuestID) => void;
-export type HandleConfirm = (id: GuestID) => void;
+export type HandleChange = (guestID:GuestID) => void;
+export type HandleNewAllergy = (id: GuestID, allergyTitle:AllergieType) => void;

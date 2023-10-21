@@ -2,8 +2,9 @@ import { useContext } from "react"
 import styled from 'styled-components';
 import { UpdateGuestContext } from "../App";
 import { commonAllergiesList } from "../assets/allergies";
+import { questionAllergiesText, questionAssistanceText, questionBusText } from "../assets/texts/guestText";
 import { globalColors } from "../theme/globalStyles";
-import { HandleChange, UpdateGuest, type GuestType } from "../types"
+import { HandleChange, HandleNewAllergy, UpdateGuest, type GuestType } from "../types"
 
 
 
@@ -28,7 +29,7 @@ export const Guest: React.FC<Props> =
         const setGuest = useContext(UpdateGuestContext);
 
 
-        const handleConfirm: HandleChange = (e, guestID) => {
+        const handleConfirm: HandleChange = (guestID) => {
             const updateGuest: UpdateGuest = (guest) => {
                 guest.attendance = !guest.attendance;
                 return guest
@@ -36,16 +37,30 @@ export const Guest: React.FC<Props> =
             setGuest(guestID, updateGuest);
         }
 
-        const handleBus: HandleChange = (e, guestID) => {
+        const handleBus: HandleChange = (guestID) => {
             const updateGuest: UpdateGuest = (guest) => {
                 guest.bus = !guest.bus;
                 return guest
             }
             setGuest(guestID, updateGuest);
         }
-        const handleAllergies: HandleChange = (e, guestID) => {
+        const handleAllergies: HandleChange = (guestID) => {
             const updateGuest: UpdateGuest = (guest) => {
                 guest.allergies = !guest.allergies;
+                return guest
+            }
+            setGuest(guestID, updateGuest);
+        }
+        const handleNewAllergy: HandleNewAllergy = (guestID,allergyName) => {
+            const updateGuest: UpdateGuest = (guest) => {
+                // if it isn't yet
+                const position = guest.allergiesList?.indexOf(allergyName) || -1;
+                if (position === -1) {
+                    guest.allergiesList?.push(allergyName);
+                }
+                else {
+                    guest.allergiesList?.splice(position,1)
+                }
                 return guest
             }
             setGuest(guestID, updateGuest);
@@ -55,26 +70,26 @@ export const Guest: React.FC<Props> =
                 <h3>
                     <b><i>{firstName} {lastName1} {lastName2}</i></b>
                 </h3>
-                <p>¿Asistirás?</p>
+                <p>{questionAssistanceText}</p>
                 <input
                     className="toggle"
                     type="checkbox"
                     checked={attendance}
-                    onChange={(e) => { handleConfirm(e, guestID) }}
+                    onChange={() => { handleConfirm(guestID) }}
                 />
-                <p>¿Se necesita autobús?</p>
+                <p>{questionBusText}</p>
                 <input
                     className="toggle"
                     type="checkbox"
                     checked={bus}
-                    onChange={(e) => { handleBus(e, guestID) }}
+                    onChange={() => { handleBus(guestID) }}
                 />
-                <p>¿Alguna alergia alimentaria?</p>
+                <p>{questionAllergiesText}</p>
                 <input
                     className="toggle"
                     type="checkbox"
                     checked={allergies}
-                    onChange={(e) => { handleAllergies(e, guestID) }}
+                    onChange={() => { handleAllergies(guestID) }}
                 />
                 {allergies === true &&
                     <ul>
@@ -84,8 +99,8 @@ export const Guest: React.FC<Props> =
                                 <input
                                     className="toggle"
                                     type="checkbox"
-                                    checked={allergies}
-                                    onChange={(e) => { }}
+                                    checked={allergiesList?.indexOf(allergy.title)!==-1}
+                                    onChange={() => {handleNewAllergy(guestID,allergy.title) }}
                                 />
                                 <SmallIcon src={allergy.src} alt={allergy.title}></SmallIcon>
                                 &nbsp;&nbsp;&nbsp;{allergy.title}

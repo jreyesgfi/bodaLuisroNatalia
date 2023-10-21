@@ -1,4 +1,4 @@
-import { mainTitleText } from '../assets/texts';
+import { mainTitleText } from '../assets/texts/mainText';
 import { Section } from '../theme/globalStyles';
 
 export const HeroSection: React.FC =
