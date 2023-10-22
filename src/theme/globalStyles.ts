@@ -1,70 +1,70 @@
-import styled, {createGlobalStyle} from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const globalColors = {
-    dark:{
-        primary:'#3b1d0d',
-        second:'#235367'
-    },
-    light:{
-        primary:'#fcf9ee',
-        second:'#effafc',
-		white:'#fdfdff'
-    },
-    grey:{
-        primary:'#B3B1AA',
-        light:'#d3d5d7',
-        dark:'#5f6368',
-    },
-    color:{
-        primary:'#7f4421',
-        second:'#b2e5ef',
-        third:'#E6CE1D',
-		light:'#FDEC00'
-    },
-	primary:{
-		100:'#f6eecf',
-		200:'#e3c566',
-		300:'#e3c566',
-		400:'#dcb043',
-		500:'#d3942d',
-		600:'#bb7424',
-		700:'#9b5522',
-		800:'#7f4421',
-		900:'#69391e'
+	dark: {
+		primary: '#3b1d0d',
+		second: '#235367'
 	},
-	sencondary:{
-		100:'#d6f2f7',
-		200:'#b2e5ef',
-		300:'#7dd1e3',
-		400:'#40b4d0',
-		500:'#2597b5',
-		600:'#217a99',
-		700:'#21637d',
-		800:'#235367',
-		900:'#224657'
+	light: {
+		primary: '#fcf9ee',
+		second: '#effafc',
+		white: '#fdfdff'
 	},
-    transparent:{
-        dark:'#3E4463cc',
-		dark2:'#3E446399',
-        light:'rgba(252, 255, 255, 0.961)',
-		light2:'rgba(252, 255, 255, 0.561)',
-        primaryColor:'#D4DB0022',
-		secondColor:'#005C5355',
-		grey:'#B3B1AA44',
-		red:'#ac2f2f55',
-		full:'#ffffff00'
-    },
-    green:{
-        primary:'#aed05e',
-		light:'#EBF4D8'
+	grey: {
+		primary: '#B3B1AA',
+		light: '#d3d5d7',
+		dark: '#5f6368',
+	},
+	color: {
+		primary: '#7f4421',
+		second: '#b2e5ef',
+		third: '#E6CE1D',
+		light: '#FDEC00'
+	},
+	primary: {
+		100: '#f6eecf',
+		200: '#e3c566',
+		300: '#e3c566',
+		400: '#dcb043',
+		500: '#d3942d',
+		600: '#bb7424',
+		700: '#9b5522',
+		800: '#7f4421',
+		900: '#69391e'
+	},
+	sencondary: {
+		100: '#d6f2f7',
+		200: '#b2e5ef',
+		300: '#7dd1e3',
+		400: '#40b4d0',
+		500: '#2597b5',
+		600: '#217a99',
+		700: '#21637d',
+		800: '#235367',
+		900: '#224657'
+	},
+	transparent: {
+		dark: '#3E4463cc',
+		dark2: '#3E446399',
+		light: 'rgba(252, 255, 255, 0.961)',
+		light2: 'rgba(252, 255, 255, 0.561)',
+		primaryColor: '#D4DB0022',
+		secondColor: '#005C5355',
+		grey: '#B3B1AA44',
+		red: '#ac2f2f55',
+		full: '#ffffff00'
+	},
+	green: {
+		primary: '#aed05e',
+		light: '#EBF4D8'
 
-    },
-    red:{
-        primary:'#ac2f2f',
-		light:'#F7E1E1',
-    },
-	blue:{
-		primary:'#83DAFD',
+	},
+	red: {
+		primary: '#ac2f2f',
+		light: '#F7E1E1',
+	},
+	blue: {
+		primary: '#83DAFD',
 		light: '#DAF4FE'
 	}
 }
@@ -114,14 +114,14 @@ interface TextItf {
 	fontSize?: string;
 	weight?: string;
 	spacing?: string;
-	font?:string;
+	font?: string;
 }
 
 export const movilSize = '550px';
 export const mediumSize = '800px';
 export const minimumSize = '360px';
 export const WaitingContainer = styled.div<{ loading: number }>`
-	visibility: ${({ loading }) => (loading==1?'hidden':'visible')}
+	visibility: ${({ loading }) => (loading == 1 ? 'hidden' : 'visible')}
 `
 
 export const Container = styled.div`
@@ -139,9 +139,9 @@ export const MainHeading = styled.h1<InversedElementItf>`
 	font-family: primary-light;
 	margin: 0;
 	padding-bottom:0;
-	color: ${({ inverse }) => (inverse ? 
-        globalColors.dark.primary : 
-        globalColors.light.primary)};
+	color: ${({ inverse }) => (inverse ?
+		globalColors.dark.primary :
+		globalColors.light.primary)};
 	width: fit-content;
 	height:fit-content;
 	letter-spacing: 4px;
@@ -163,9 +163,9 @@ export const Heading = styled.h2<HeadingInterface>`
 	margin: ${({ margin }) => (margin ? margin : '')};
 	margin-bottom: ${({ mb }) => (mb ? mb : '0.5rem')};
 	margin-top: ${({ mt }) => (mt ? mt : '')};
-	color: ${({ inverse }) => (inverse ? 
-        globalColors.dark.primary : 
-        globalColors.light.primary)};
+	color: ${({ inverse }) => (inverse ?
+		globalColors.dark.primary :
+		globalColors.light.primary)};
 	letter-spacing: 0.4rem;
 	line-height: 1.4;
 	display: inline-block;
@@ -187,9 +187,9 @@ export const NameHeading = styled.h3<HeadingInterface>`
 	margin: ${({ margin }) => (margin ? margin : '')};
 	margin-bottom: ${({ mb }) => (mb ? mb : '0.5rem')};
 	margin-top: ${({ mt }) => (mt ? mt : '')};
-	color: ${({ inverse }) => (inverse ? 
-        globalColors.dark.primary : 
-        globalColors.light.primary)};
+	color: ${({ inverse }) => (inverse ?
+		globalColors.dark.primary :
+		globalColors.light.primary)};
 	letter-spacing: 0.4rem;
 	line-height: 1.4;
 	display: block;
@@ -203,7 +203,7 @@ export const NameHeading = styled.h3<HeadingInterface>`
 		display: block;
 	}
 `;
-interface TextWrapperItf extends LocatedElementItf, TextItf, ResponsiveElementItf, InversedElementItf{
+interface TextWrapperItf extends LocatedElementItf, TextItf, ResponsiveElementItf, InversedElementItf {
 
 }
 export const TextWrapper = styled.span<TextWrapperItf>`
@@ -223,7 +223,7 @@ export const Page = styled.div`
 	overflow-y:scroll;
 	height:100vh;
 `
-interface Section extends LocatedElementItf, LocatedElementItf, InversedElementItf, ResponsiveElementItf{
+interface Section extends LocatedElementItf, LocatedElementItf, InversedElementItf, ResponsiveElementItf {
 
 }
 export const Section = styled.section<Section>`
@@ -234,8 +234,8 @@ export const Section = styled.section<Section>`
 	overflow-y: hidden;
 	margin: ${({ margin }) => (margin ? margin : '')};
 	background: ${({ inverse }) => (inverse ?
-        globalColors.light.primary : 
-        globalColors.dark.primary)};
+		globalColors.light.primary :
+		globalColors.dark.primary)};
 	position: ${({ position }) => (position ? position : 'relative')};
 	width: ${({ width }) => (width ? width : 'auto')};
 	min-width: ${({ minWidth }) => (minWidth ? minWidth : minimumSize)};
@@ -251,7 +251,7 @@ export const Section = styled.section<Section>`
 /*padding-bottom: ${({ bottomWave}) => (bottomWave ? 0 : '')};
 	margin-bottom: ${({ bottomWave}) => (bottomWave ? 0 : '')};*/
 
-interface ContainerItf extends LocatedElementItf, ResponsiveElementItf{
+interface ContainerItf extends LocatedElementItf, ResponsiveElementItf {
 	justify: string;
 	align: string;
 	gap: string;
@@ -331,31 +331,31 @@ export const Button = styled.button`
 `;
 
 export const Text = styled.p<TextWrapperItf>`
-    color:${({inverse})=>inverse?globalColors.dark.primary:globalColors.light.primary};
-    width:${({width})=>width?width:'auto'};
-	font-size:${({fontSize})=>fontSize?fontSize:'12pt'};
+    color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};
+    width:${({ width }) => width ? width : 'auto'};
+	font-size:${({ fontSize }) => fontSize ? fontSize : '16pt'};
 	user-select: none;
 	max-width: 45vw;
-	font-family:${({font})=>font?font:'primary-light'};
+	font-family:${({ font }) => font ? font : 'primary-light'};
 	display: inline-block;
     @media screen and (max-width: 800px) {
 		max-width: 80vw;
-		width:${({smWidth})=>smWidth?smWidth:'auto'};
+		width:${({ smWidth }) => smWidth ? smWidth : 'auto'};
 	}
 `;
 export const Image = styled.img`
 	object-fit:cover;
-	max-width:${({width})=>width?width:'45vw'};
-	max-height:${({height})=>height?height:'60vh'};
+	max-width:${({ width }) => width ? width : '45vw'};
+	max-height:${({ height }) => height ? height : '60vh'};
 	@media screen and (max-width: ${mediumSize}) {
-		max-width:${({width})=>width?width:'60vw'};
-		max-height:${({height})=>height?height:'40vh'};
+		max-width:${({ width }) => width ? width : '60vw'};
+		max-height:${({ height }) => height ? height : '40vh'};
 		margin:0 auto;
 	}
 `
 export const CenterWrapper = styled.div<ContainerItf>`
 	position:absolute;
-	inset:${({inset})=>inset?inset:'10vh 0 0 0'};
+	inset:${({ inset }) => inset ? inset : '10vh 0 0 0'};
 	width:95%;
 	height:${({ height }) => (height ? height : 'fit-content')};
 	margin:auto;
@@ -363,7 +363,14 @@ export const CenterWrapper = styled.div<ContainerItf>`
 	flex-wrap: wrap;
 	gap:1.5rem;
 	justify-content:space-around;
-	
 `;
+
+export const Icon = styled.svg`
+	fill: none;
+	stroke: white;
+	stroke-width: 2px;
+`;
+
+
 
 export default GlobalStyles;

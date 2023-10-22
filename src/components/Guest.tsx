@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { UpdateGuestContext } from "../App";
 import { commonAllergiesList } from "../assets/allergies";
 import { questionAllergiesText, questionAssistanceText, questionBusText } from "../assets/texts/guestText";
-import { globalColors, Heading, NameHeading, Text } from "../theme/globalStyles";
+import { Checkbox } from "../theme/Checkbox";
+import {NameHeading, Text } from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy, UpdateGuest, type GuestType } from "../types"
 
 
@@ -51,7 +52,7 @@ export const Guest: React.FC<Props> =
             }
             setGuest(guestID, updateGuest);
         }
-        const handleNewAllergy: HandleNewAllergy = (guestID,allergyName) => {
+        const handleNewAllergy: HandleNewAllergy = (guestID, allergyName) => {
             const updateGuest: UpdateGuest = (guest) => {
                 // if it isn't yet
                 const position = guest.allergiesList?.indexOf(allergyName) || -1;
@@ -59,7 +60,7 @@ export const Guest: React.FC<Props> =
                     guest.allergiesList?.push(allergyName);
                 }
                 else {
-                    guest.allergiesList?.splice(position,1)
+                    guest.allergiesList?.splice(position, 1)
                 }
                 return guest
             }
@@ -70,27 +71,32 @@ export const Guest: React.FC<Props> =
                 <NameHeading inverse={true}>
                     <b><i>{firstName} {lastName1} {lastName2}</i></b>
                 </NameHeading>
-                <Text inverse={true}>{questionAssistanceText}</Text>
-                <input
-                    className="toggle"
-                    type="checkbox"
-                    checked={attendance}
-                    onChange={() => { handleConfirm(guestID) }}
-                />
-                <Text inverse={true}>{questionBusText}</Text>
-                <input
-                    className="toggle"
-                    type="checkbox"
-                    checked={bus}
-                    onChange={() => { handleBus(guestID) }}
-                />
-                <Text inverse={true}>{questionAllergiesText}</Text>
-                <input
-                    className="toggle"
-                    type="checkbox"
-                    checked={allergies}
-                    onChange={() => { handleAllergies(guestID) }}
-                />
+                <label>
+                    <Text inverse={true}>{questionAssistanceText}</Text>
+                    <Checkbox
+                        checked={attendance}
+                        onChange={() => { handleConfirm(guestID) }}
+                    />
+                </label>
+                <label>
+                    <Text inverse={true}>{questionBusText}</Text>
+                    <input
+                        className="toggle"
+                        type="checkbox"
+                        checked={bus}
+                        onChange={() => { handleBus(guestID) }}
+                    />
+                </label>
+                <label>
+                    <Text inverse={true}>{questionAllergiesText}</Text>
+                    <input
+                        className="toggle"
+                        type="checkbox"
+                        checked={allergies}
+                        onChange={() => { handleAllergies(guestID) }}
+                    />
+                </label>
+
                 {allergies === true &&
                     <ul>
 
@@ -99,8 +105,8 @@ export const Guest: React.FC<Props> =
                                 <input
                                     className="toggle"
                                     type="checkbox"
-                                    checked={allergiesList?.indexOf(allergy.title)!==-1}
-                                    onChange={() => {handleNewAllergy(guestID,allergy.title) }}
+                                    checked={allergiesList?.indexOf(allergy.title) !== -1}
+                                    onChange={() => { handleNewAllergy(guestID, allergy.title) }}
                                 />
                                 <SmallIcon src={allergy.src} alt={allergy.title}></SmallIcon>
                                 <Text inverse={true}>&nbsp;&nbsp;&nbsp;{allergy.title}</Text>
