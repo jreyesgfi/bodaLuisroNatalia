@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UpdateGuestContext } from "../App";
 import { questionExtraGuestsText } from "../assets/texts/guestText";
-import { ListOfGuests, HandleChange, UpdateGuest } from "../types"
+import { ListOfGuests, HandleChange, UpdateGuest, HandleNumberChange } from "../types"
 import { Guest } from "./Guest"
 
 
@@ -13,7 +13,7 @@ export const Guests: React.FC<Props> = ({ guests }) => {
 
     // Define the handle functions
     const setGuest = useContext(UpdateGuestContext);
-    const handleInputChange: HandleChange = (e, guestID) => {
+    const handleInputChange: HandleNumberChange = (e, guestID) => {
         const updateGuest: UpdateGuest = (guest) => {
             guest.extraGuestsNum = Number(e?.target?.value) || 0;
             return guest
@@ -52,9 +52,9 @@ export const Guests: React.FC<Props> = ({ guests }) => {
                         type="number"
                         min="0" max="2"
                         value={guests[0].extraGuestsNum}
-                        onChange={() => {
+                        onChange={(e) => {
                             guests.forEach((guest) => {
-                                handleInputChange(guest.guestID)
+                                handleInputChange(e,guest.guestID)
                             });
                         }}
                     />

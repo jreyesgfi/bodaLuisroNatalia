@@ -1,4 +1,4 @@
-import './App.css'
+import './theme/globalFonts.css'
 import { createContext, useEffect, useState } from 'react'
 import { Todos } from './components/Todos'
 import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, UpdateGuest } from './types'

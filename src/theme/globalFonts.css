@@ -1,0 +1,26 @@
+/*fonts*/
+@font-face { 
+    font-family: primary-light;
+    src: url('../public/assets/fonts/pinion/PinyonScript-Regular.ttf')
+}
+@font-face { 
+    font-family: primary-normal;
+    src: url('../public/assets/fonts/BitterPro-Light.ttf')
+}
+@font-face { 
+    font-family: primary-bold;
+    src: url('../public/assets/fonts/BitterPro-Bold.ttf')
+}
+@font-face { 
+    font-family: primary-extrabold;
+    src: url('../public/assets/fonts/BitterPro-ExtraBold.ttf')
+}
+@font-face {
+    font-family: primary-semibold;
+    src: url('../public/assets/fonts/BitterPro-SemiBold.ttf')
+}
+@font-face {
+    font-family: curvy;
+    src: url('../public/assets/fonts/Fasthand-Regular.ttf')
+}
+

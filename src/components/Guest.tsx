@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { UpdateGuestContext } from "../App";
 import { commonAllergiesList } from "../assets/allergies";
 import { questionAllergiesText, questionAssistanceText, questionBusText } from "../assets/texts/guestText";
-import { globalColors } from "../theme/globalStyles";
+import { globalColors, Heading, NameHeading, Text } from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy, UpdateGuest, type GuestType } from "../types"
 
 
@@ -67,24 +67,24 @@ export const Guest: React.FC<Props> =
         }
         return (
             <>
-                <h3>
+                <NameHeading inverse={true}>
                     <b><i>{firstName} {lastName1} {lastName2}</i></b>
-                </h3>
-                <p>{questionAssistanceText}</p>
+                </NameHeading>
+                <Text inverse={true}>{questionAssistanceText}</Text>
                 <input
                     className="toggle"
                     type="checkbox"
                     checked={attendance}
                     onChange={() => { handleConfirm(guestID) }}
                 />
-                <p>{questionBusText}</p>
+                <Text inverse={true}>{questionBusText}</Text>
                 <input
                     className="toggle"
                     type="checkbox"
                     checked={bus}
                     onChange={() => { handleBus(guestID) }}
                 />
-                <p>{questionAllergiesText}</p>
+                <Text inverse={true}>{questionAllergiesText}</Text>
                 <input
                     className="toggle"
                     type="checkbox"
@@ -103,7 +103,7 @@ export const Guest: React.FC<Props> =
                                     onChange={() => {handleNewAllergy(guestID,allergy.title) }}
                                 />
                                 <SmallIcon src={allergy.src} alt={allergy.title}></SmallIcon>
-                                &nbsp;&nbsp;&nbsp;{allergy.title}
+                                <Text inverse={true}>&nbsp;&nbsp;&nbsp;{allergy.title}</Text>
                             </li>
                         )}
                     </ul>

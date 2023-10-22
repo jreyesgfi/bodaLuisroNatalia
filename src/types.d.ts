@@ -36,4 +36,5 @@ export type ListOfGuests = GuestType[];
 // Handle Functions
 export type UpdateGuest = (guest:GuestType)=>GuestType;
 export type HandleChange = (guestID:GuestID) => void;
+export type HandleNumberChange = (e:React.ChangeEvent<HTMLInputElement>,guestID:GuestID) => void;
 export type HandleNewAllergy = (id: GuestID, allergyTitle:AllergieType) => void;
