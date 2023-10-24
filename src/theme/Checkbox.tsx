@@ -2,9 +2,11 @@ import styled, { css, keyframes } from "styled-components";
 import { globalColors, Icon } from "./globalStyles";
 
 const checkAnimation = keyframes`
-    to {
-        stroke-dashoffset: 0;
-    }
+0% { stroke-dashoffset: 30; }
+10% { stroke-dashoffset: 30; }
+35% { stroke-dashoffset: 18;}
+50% { stroke-dashoffset: 18; }
+100% { stroke-dashoffset: 0; }
 `;
 
 // Checkbox
@@ -42,17 +44,17 @@ height: 16px;
 ${props => props.checked ? checkedStyles : uncheckedStyles};
 border-radius: 3px;
 transition: all 0.3s;
-${Icon}{
-    visibility: ${props => props.checked ? 'visible' : 'hidden'}
+
+svg path {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 0;
+    stroke-width: 3px;
+    fill: none;
+    animation:${({ checked }) =>
+    checked ? css`${checkAnimation} 0.7s linear 1` : "none"};
 }
-${Icon} path {
-    visibility: ${props => props.checked ? 'visible' : 'hidden'}
-    stroke-dasharray: 500;
-    stroke-dashoffset: 500;
-    animation-name: ${checkAnimation};
-    animation-duration: 8s;
-    animation-iteration-count: infinite;
-  }
+
+stroke: ${globalColors.light.second}; // Add this here
 `;
 
 const CheckboxContainer = styled.div`
@@ -63,10 +65,10 @@ const CheckboxContainer = styled.div`
 export const Checkbox: React.FC<CheckBoxItf> = ({ checked, onChange, ...props}) => (
 	<CheckboxContainer>
 	  <HiddenCheckbox checked={checked} onChange={onChange} {...props} />
-	  <StyledCheckbox checked={checked}>
-        <Icon viewBox="0 0 24 24">
-            <polyline points="20 6 9 17 4 12" />
-        </Icon>
+	  <StyledCheckbox checked={checked} >
+        <svg viewBox="0 0 22 18">
+            <path d="M1 6.85L8.09677 14L21 1" />
+        </svg>
       </StyledCheckbox>
 	</CheckboxContainer>
   )
