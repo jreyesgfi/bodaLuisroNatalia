@@ -293,42 +293,8 @@ export const Column = styled.div<ContainerItf>`
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
 `;
-export const Button = styled.button`
-    border-radius: 4px;
-	background-color:${globalColors.blue.light};
-	white-space: nowrap;
-	padding: 10px 20px;
-	font-size: 16px;
-	color: ${globalColors.dark.primary};
-	outline: none;
-	border: 2px solid ${globalColors.light.primary};
-	cursor: pointer;
-	overflow: hidden;
-	position: relative;
-	user-select: none;
-	&:before {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		z-index: -1;
-		transition: all 0.6s ease;
-		width: 100%;
-		height: 0%;
-		transform: translate(-50%, -50%) rotate(45deg);
-	}
-	&:hover:before {
-		height: 500%;
-		background-color: ${globalColors.dark.primary};
-	}
-	&:hover {
-		background-color: ${globalColors.transparent.full};
-		color: ${globalColors.light.primary};
-		border:2px solid ${globalColors.light.primary};
-		
-	}
-`;
+
+
 
 export const Text = styled.p<TextWrapperItf>`
     color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};

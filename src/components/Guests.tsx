@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { UpdateGuestContext } from "../App";
-import { questionExtraGuestsText } from "../assets/texts/guestText";
 import { ListOfGuests, HandleChange, UpdateGuest, HandleNumberChange } from "../types"
 import { Guest } from "./Guest"
 
@@ -46,6 +45,7 @@ export const Guests: React.FC<Props> = ({ guests }) => {
                     <br></br>
                     <br></br>
                     <br></br>
+                    
                     {/* <p>{questionExtraGuestsText}</p>
                     <input
                         className="toggle"

@@ -7,6 +7,8 @@ import { Checkbox } from "../theme/components/Checkbox";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
 import { NameHeading, Text } from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy, UpdateGuest, type GuestType } from "../types"
+import { Question } from "./Question";
+import { answerAssistanceText1, answerAssistanceText2, questionExtraGuestsText } from "../assets/texts/guestText";
 
 
 
@@ -72,13 +74,14 @@ export const Guest: React.FC<Props> =
                 <NameHeading inverse={true}>
                     <b><i>{firstName} {lastName1} {lastName2}</i></b>
                 </NameHeading>
-                <label>
-                    <Checkbox
-                        checked={attendance}
-                        onChange={() => { handleConfirm(guestID) }}
-                    />
-                    <Text inverse={true}>{questionAssistanceText}</Text>
-                </label>
+                {<Question
+                    questionText={questionAssistanceText}
+                    answerButtonList={[
+                        {text: answerAssistanceText1},
+                        {text: answerAssistanceText2}
+                    ]}
+                    handleSelection={() => {handleConfirm(guestID)}}/>
+                }
                 <label>
                     <Checkbox
                         checked={bus}
