@@ -1,19 +1,20 @@
 import styled, { css, keyframes } from "styled-components";
-import { globalColors, Icon } from "./globalStyles";
+import { globalColors, Icon } from "../globalStyles";
 
 const checkAnimation = keyframes`
 0% { stroke-dashoffset: 30; }
 10% { stroke-dashoffset: 30; }
-35% { stroke-dashoffset: 18;}
+40% { stroke-dashoffset: 18;}
 50% { stroke-dashoffset: 18; }
+80% { stroke-dashoffset: 5; }
 100% { stroke-dashoffset: 0; }
 `;
 
 // Checkbox
 interface CheckBoxItf {
 	checked: boolean;
-    props?: any;
-    onChange?: (value: any) => void;
+  props?: any;
+  onChange?: (guestID: any, titleValue:any) => void;
 }
 const checkedStyles = css`
     border: 2px solid ${globalColors.sencondary[200]};
@@ -24,7 +25,7 @@ const uncheckedStyles = css`
     background:${globalColors.transparent};
 `
 
-const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })<CheckBoxItf>`
 	border: 0;
 	clip: rect(0 0 0 0);
 	clippath: inset(50%);
@@ -51,10 +52,10 @@ svg path {
     stroke-width: 3px;
     fill: none;
     animation:${({ checked }) =>
-    checked ? css`${checkAnimation} 0.7s linear 1` : "none"};
+    checked ? css`${checkAnimation} 0.3s linear 1` : "none"};
 }
 
-stroke: ${globalColors.light.second}; // Add this here
+stroke: ${globalColors.light.primary}; // Add this here
 `;
 
 const CheckboxContainer = styled.div`

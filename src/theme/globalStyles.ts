@@ -6,7 +6,7 @@ export const globalColors = {
 		second: '#235367'
 	},
 	light: {
-		primary: '#fcf9ee',
+		primary: '#fdfdff',
 		second: '#effafc',
 		white: '#fdfdff'
 	},

@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { UpdateGuestContext } from "../App";
 import { commonAllergiesList } from "../assets/allergies";
 import { questionAllergiesText, questionAssistanceText, questionBusText } from "../assets/texts/guestText";
-import { Checkbox } from "../theme/Checkbox";
-import {NameHeading, Text } from "../theme/globalStyles";
+import { Checkbox } from "../theme/components/Checkbox";
+import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
+import { NameHeading, Text } from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy, UpdateGuest, type GuestType } from "../types"
 
 
@@ -72,49 +73,37 @@ export const Guest: React.FC<Props> =
                     <b><i>{firstName} {lastName1} {lastName2}</i></b>
                 </NameHeading>
                 <label>
-                    <Text inverse={true}>{questionAssistanceText}</Text>
                     <Checkbox
                         checked={attendance}
                         onChange={() => { handleConfirm(guestID) }}
                     />
+                    <Text inverse={true}>{questionAssistanceText}</Text>
                 </label>
                 <label>
-                    <Text inverse={true}>{questionBusText}</Text>
-                    <input
-                        className="toggle"
-                        type="checkbox"
+                    <Checkbox
                         checked={bus}
                         onChange={() => { handleBus(guestID) }}
                     />
+                    <Text inverse={true}>{questionBusText}</Text>
                 </label>
                 <label>
-                    <Text inverse={true}>{questionAllergiesText}</Text>
-                    <input
-                        className="toggle"
-                        type="checkbox"
+                    <Checkbox
                         checked={allergies}
                         onChange={() => { handleAllergies(guestID) }}
                     />
+                    <Text inverse={true}>{questionAllergiesText}</Text>
                 </label>
 
                 {allergies === true &&
-                    <ul>
-
-                        {commonAllergiesList.map((allergy, i) =>
-                            <li key={i}>
-                                <input
-                                    className="toggle"
-                                    type="checkbox"
-                                    checked={allergiesList?.indexOf(allergy.title) !== -1}
-                                    onChange={() => { handleNewAllergy(guestID, allergy.title) }}
-                                />
-                                <SmallIcon src={allergy.src} alt={allergy.title}></SmallIcon>
-                                <Text inverse={true}>&nbsp;&nbsp;&nbsp;{allergy.title}</Text>
-                            </li>
-                        )}
-                    </ul>
-
+                    <MultiOptionSelector 
+                        listGiven={commonAllergiesList}
+                        checked={(allergyTitle)=>{
+                            return(allergiesList?.indexOf(allergyTitle) !== -1)
+                            }}
+                        handleClick={(allergyTitle)=>{handleNewAllergy(guestID, allergyTitle)}}
+                            />
                 }
+                
             </>
         )
     }

@@ -46,7 +46,7 @@ export const Guests: React.FC<Props> = ({ guests }) => {
                     <br></br>
                     <br></br>
                     <br></br>
-                    <p>{questionExtraGuestsText}</p>
+                    {/* <p>{questionExtraGuestsText}</p>
                     <input
                         className="toggle"
                         type="number"
@@ -57,7 +57,7 @@ export const Guests: React.FC<Props> = ({ guests }) => {
                                 handleInputChange(e,guest.guestID)
                             });
                         }}
-                    />
+                    /> */}
                 </>
             }
         </>
