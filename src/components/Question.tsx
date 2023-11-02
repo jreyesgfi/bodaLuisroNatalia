@@ -10,10 +10,13 @@ interface QuestionWrapperItf {
     difStages: number;
 }
 const QuestionWrapper = styled.div<QuestionWrapperItf>`
-transition: opacity 0.7s;
-opacity: ${({ difStages }) => (difStages < 0 ? 0 : 1 - (0.2 * difStages))};
-padding-bottom: 10px;
-border-bottom: ${({ difStages }) => (difStages>0? `1px solid ${globalColors.sencondary[400]}`:'')};
+  transition: transform 0s, opacity 0.7s, max-height 1.3s;
+  overflow: hidden;
+  opacity: ${({ difStages }) => (difStages < 0 ? 0 : 1 - 0.4 * difStages)};
+  padding-bottom: 10px;
+  border-bottom: ${({ difStages }) =>
+    difStages > 0 ? `1px solid ${globalColors.sencondary[400]}` : ''};
+  max-height: ${({ difStages }) => (difStages > 1 ? '0px' : '1000px')};
 `;
 
 interface Props {
