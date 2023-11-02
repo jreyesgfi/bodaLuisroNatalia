@@ -12,10 +12,10 @@ interface Props {
 
 // checked and not checked styles
 const checkedStyles = css`
-    border: 2px solid ${globalColors.sencondary[400]};
+    border: 1px solid ${globalColors.sencondary[400]};
 `
 const uncheckedStyles = css`
-    border: 2px solid ${globalColors.dark.primary};
+    border: 1px solid ${globalColors.dark.primary};
 `
 
 // Styled components
@@ -23,7 +23,7 @@ const SmallIcon = styled.img`
 	width: 2rem;
 `;
 const ListItem = styled.div<{ selected:boolean }>`
-    margin: 8pt 0;
+    margin: 16pt 0;
     padding: 0 8pt;
     border-radius: 8px;
     width: 300px;

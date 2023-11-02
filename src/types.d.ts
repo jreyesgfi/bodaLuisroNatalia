@@ -45,3 +45,5 @@ export interface OptionButtonItf {
   text: string;
   iconSrc?: string;
 }
+
+//export type NumButtonSelected = number|null;

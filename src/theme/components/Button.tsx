@@ -7,14 +7,21 @@ const checkedStyles = css`
     background-color:${globalColors.sencondary[400]};
     color: ${globalColors.light.primary};
 `
+
+const highlightedStyles = css`
+    border: 1px solid ${globalColors.sencondary[400]};
+    color: ${globalColors.sencondary[400]};
+    background-color: ${globalColors.light.primary};
+`
 const uncheckedStyles = css`
     border: 1px solid ${globalColors.light.primary};
-    background-color: ${globalColors.light.primary};
+    background-color: ${globalColors.grey.light};
 `
 
 
-interface ButtonItf {
+export interface ButtonItf {
 	highlighted?: boolean;
+    selected?: boolean;
 }
 const ListItem = styled.div<{ selected:boolean }>`
     margin: 8pt 0;
@@ -25,7 +32,11 @@ const ListItem = styled.div<{ selected:boolean }>`
     ${({selected}) => (selected===true ? checkedStyles : uncheckedStyles)};
 `;
 export const CustomButton = styled.button<ButtonItf>`
-	${({highlighted}) => (highlighted===true ? checkedStyles : uncheckedStyles)};
+	${({selected, highlighted}) => {
+        if (selected===true){return checkedStyles}
+        if(highlighted===true){return highlightedStyles} 
+        return uncheckedStyles
+    }};
     border-radius: 8px;
     margin: 8pt 4pt;
     padding: 0 8pt;
@@ -58,6 +69,5 @@ export const CustomButton = styled.button<ButtonItf>`
 		background-color: ${globalColors.sencondary['200']};
 		color: ${globalColors.light.primary};
 		border:1px solid ${globalColors.light.primary};
-		
 	}
 `;

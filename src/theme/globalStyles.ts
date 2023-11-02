@@ -6,13 +6,13 @@ export const globalColors = {
 		second: '#235367'
 	},
 	light: {
-		primary: '#fdfdff',
+		primary: '#ffffff',
 		second: '#effafc',
 		white: '#fdfdff'
 	},
 	grey: {
-		primary: '#B3B1AA',
-		light: '#d3d5d7',
+		primary: '#C3C1CA',
+		light: '#f6f6fA',
 		dark: '#5f6368',
 	},
 	color: {

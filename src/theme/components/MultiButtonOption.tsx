@@ -1,52 +1,82 @@
 import styled, { css } from 'styled-components';
-import { globalColors, Text } from "../globalStyles";
-import { OptionButtonItf } from "../../types";
-import { useState } from "react";
-import { CustomButton } from './Button';
-
+import { globalColors, Text } from '../globalStyles';
+import { OptionButtonItf } from '../../types';
+import { useState } from 'react';
+import { ButtonItf, CustomButton } from './Button';
 
 interface Props {
-    buttonList:OptionButtonItf[];
-    handleSelection: (value:string|null)=>void;
+    activeStage: boolean;
+    buttonList: OptionButtonItf[];
+    handleSelection: (value: string | null) => void;
 }
 
-// checked and not checked styles
 const checkedStyles = css`
-    border: 2px solid ${globalColors.sencondary[400]};
-`
+  border: 2px solid ${globalColors.sencondary[400]};
+`;
 const uncheckedStyles = css`
-    border: 2px solid ${globalColors.dark.primary};
-`
-
-// Styled components
-const SmallIcon = styled.img`
-	width: 2rem;
+  border: 2px solid ${globalColors.dark.primary};
 `;
 
+const SmallIcon = styled.img`
+  width: 2rem;
+`;
 
-export const MultiButtonOption: React.FC<Props> = ({buttonList, handleSelection }) => {
-    const [selectedState, setSelectedState] = useState<number|null>(-1);
-    
-    const handleClick = (buttonIndex:number,buttonText:string) => {
-        var selectedIndex:number|null = buttonIndex;
-        var selectedText:string|null = buttonText;
-        // check if it was already selected
-        if (selectedState===buttonIndex){
-            selectedIndex = null;
-            selectedText = null;
-        }
-        setSelectedState(selectedIndex);
-        handleSelection(selectedText);
-    }
-    return(
-    <div>
-        {buttonList.map((buttonData,i) =>(
-            <CustomButton
-                key = {i}
-                onClick={()=>{handleClick(i,buttonData.text)}}
-                highlighted={i===selectedState}>
-                {buttonData.text}
-            </CustomButton>
-        ))}
-    </div>)
+const OptionButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: left;
+  margin:0;
+  padding:0;
+`;
+
+interface OptionButton extends ButtonItf {
+    activeStage: boolean;
+    index: number;
 }
+const OptionButton = styled(CustomButton) <OptionButton>`
+width: 180px;
+margin: 0; 
+transition: transform 1s, opacity 0.5s;
+  transform: ${({ selected, activeStage, index }) => (!activeStage && selected? 
+    `translateX(calc(-${index * (180+ 5)}px))`: 'translateX(0%)')};
+        
+  opacity: ${({ selected, activeStage }) => (activeStage ? 1:(selected ? 1 : 0))};
+`;
+
+export const MultiButtonOption: React.FC<Props> = ({
+    activeStage,
+    buttonList,
+    handleSelection,
+}) => {
+    const [selectedState, setSelectedState] = useState<number | null>(null);
+
+    const handleClick = (buttonIndex: number, buttonText: string) => {
+        if (!activeStage) {return}
+        const selectedIndex = selectedState === buttonIndex ? null : buttonIndex;
+        setSelectedState(selectedIndex);
+        handleSelection(selectedIndex !== null ? buttonText : null);
+    };
+
+    return (
+        <OptionButtonWrapper>
+            {buttonList.map((buttonData, i) => {
+                const lastElement = i === buttonList.length - 1;
+
+                return (
+                    <OptionButton
+                        key={i}
+                        onClick={() => {
+                            handleClick(i, buttonData.text);
+                        }}
+                        index={i}
+                        selected={i === selectedState}
+                        highlighted={lastElement}
+                        activeStage={activeStage}
+                    >
+                        {buttonData.text}
+                    </OptionButton>
+                );
+            })}
+        </OptionButtonWrapper>
+    );
+};
