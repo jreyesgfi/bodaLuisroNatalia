@@ -26,7 +26,8 @@ export interface GuestType {
   confirmed: boolean,
   attendance: boolean,
   extraGuestsNum: number
-  bus: boolean,
+  busGo: boolean,
+  busBack: boolean,
   allergies: boolean,
   allergiesList?: AllergieType[],
 }
@@ -35,7 +36,8 @@ export type ListOfGuests = GuestType[];
 
 // Handle Functions
 export type UpdateGuest = (guest:GuestType)=>GuestType;
-export type HandleChange = (guestID:GuestID) => void;
+export type HandleChange = (guestID:GuestID, value: typeof GuestType[keyof GuestType]) => void;
+export type HandleSelection = (guestID:GuestID, property:keyof GuestType, value: typeof GuestType[property]) => void;
 export type HandleNumberChange = (e:React.ChangeEvent<HTMLInputElement>,guestID:GuestID) => void;
 export type HandleNewAllergy = (id: GuestID, allergyTitle:AllergieType) => void;
 

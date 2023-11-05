@@ -1,9 +1,10 @@
 import { MultiButtonOption } from "../theme/components/MultiButtonOption";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { OptionButtonItf } from "../types";
 import { CustomButton } from "../theme/components/Button";
 import { Text, globalColors } from "../theme/globalStyles";
 import styled, { css } from 'styled-components';
+import { RoundButton, RoundButtonIcon } from "../theme/components/Icon";
 
 
 type DifStages = number;
@@ -48,7 +49,7 @@ const nextStageStyle = css`
     opacity:0;
 `;
 
-const TakeBackButton = styled.span`
+const TakeBackButton = styled(RoundButton)`
     position: absolute;
     background-color: ${globalColors.light.primary};
     padding: 4px;
@@ -59,7 +60,7 @@ const TakeBackButton = styled.span`
     cursor: pointer;
     z-index:50;
 `;
-const TakeBackIcon = styled.img`
+const TakeBackIcon = styled(RoundButtonIcon)`
     width: 2rem;
     position: absolute;
     transform: rotate(-180deg);
@@ -94,27 +95,16 @@ const QuestionWrapper = styled.div<QuestionWrapperItf>`
 
 
 interface Props {
+    children?: ReactNode;
     difStages: number;
     questionText: string;
     answerButtonList: OptionButtonItf[];
-    handleSelection: (value: string | null) => void;
+    handleSelection: (value: number | null) => void;
     handleBack: ()=>void;
 }
 
-export const Question: React.FC<Props> = ({ handleBack, difStages, questionText, answerButtonList, handleSelection }) => {
-    const [selectedState, setSelectedState] = useState<number | null>(-1);
+export const Question: React.FC<Props> = ({ children, handleBack, difStages, questionText, answerButtonList, handleSelection }) => {
 
-    const handleClick = (buttonIndex: number, buttonText: string) => {
-        var selectedIndex: number | null = buttonIndex;
-        var selectedText: string | null = buttonText;
-        // check if it was already selected
-        if (selectedState === buttonIndex) {
-            selectedIndex = null;
-            selectedText = null;
-        }
-        setSelectedState(selectedIndex);
-        handleSelection(selectedText);
-    }
     return (
         <QuestionWrapper
             difStages={difStages}>
@@ -124,8 +114,9 @@ export const Question: React.FC<Props> = ({ handleBack, difStages, questionText,
                 buttonList={answerButtonList}
                 handleSelection={handleSelection}
             />
+            {children}
             <TakeBackButton
-                onClick={()=>{handleBack();console.log('click')}}
+                onClick={()=>{if(difStages >0){handleBack()}}}
             >
                 <TakeBackIcon
                     src='../assets/icons/drawnArrow.svg'

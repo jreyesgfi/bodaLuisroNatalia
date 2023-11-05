@@ -7,7 +7,7 @@ import { ButtonItf, CustomButton } from './Button';
 interface Props {
     activeStage: boolean;
     buttonList: OptionButtonItf[];
-    handleSelection: (value: string | null) => void;
+    handleSelection: (state: number| null) => void;
 }
 
 const checkedStyles = css`
@@ -54,7 +54,7 @@ export const MultiButtonOption: React.FC<Props> = ({
         if (!activeStage) {return}
         const selectedIndex = selectedState === buttonIndex ? null : buttonIndex;
         setSelectedState(selectedIndex);
-        handleSelection(selectedIndex !== null ? buttonText : null);
+        handleSelection(selectedIndex);
     };
 
     return (

@@ -6,7 +6,7 @@ import { answersAllergiesText, answersAssistanceText, answersBusText, questionAl
 import { Checkbox } from "../theme/components/Checkbox";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
 import { NameHeading, Text } from "../theme/globalStyles";
-import { HandleChange, HandleNewAllergy, UpdateGuest, type GuestType } from "../types"
+import { HandleChange, HandleNewAllergy, HandleSelection, UpdateGuest, type GuestType } from "../types"
 import { Question } from "./Question";
 import { questionExtraGuestsText } from "../assets/texts/guestText";
 
@@ -27,7 +27,7 @@ interface Props extends GuestType {
 export const Guest: React.FC<Props> =
     ({
         guestID, firstName, lastName1, lastName2,
-        attendance, extraGuestsNum, bus, allergies, allergiesList }) => {
+        attendance, extraGuestsNum, busGo, busBack, allergies, allergiesList }) => {
 
 
         // Define the states
@@ -36,31 +36,35 @@ export const Guest: React.FC<Props> =
         // Define the handle functions
         const setGuest = useContext(UpdateGuestContext);
 
-        const nextStage = () => { setStageNum(stageNum + 1) }
+        const nextStage = () => { 
+            setStageNum(stageNum + 1) 
+        }
         const previousStage = () => { setStageNum(stageNum - 1) }
-
-        const handleConfirm: HandleChange = (guestID) => {
-            const updateGuest: UpdateGuest = (guest) => {
-                guest.attendance = !guest.attendance;
+        const handleSelection: HandleSelection =(guestID, property, state) => {
+            const updateGuest: UpdateGuest = (guest:GuestType) => {
+                guest[property] = state;
                 return guest
             }
             setGuest(guestID, updateGuest);
             nextStage();
         }
-
-        const handleBus: HandleChange = (guestID) => {
-            const updateGuest: UpdateGuest = (guest) => {
-                guest.bus = !guest.bus;
-                return guest
-            }
-            setGuest(guestID, updateGuest);
+        const handleConfirm: HandleChange = (guestID, rawState) => {
+            
+            if (rawState === null){return}
+            const state = answersAssistanceText[rawState].value;
+            handleSelection(guestID, 'attendance', state);
         }
-        const handleAllergies: HandleChange = (guestID) => {
-            const updateGuest: UpdateGuest = (guest) => {
-                guest.allergies = !guest.allergies;
-                return guest
-            }
-            setGuest(guestID, updateGuest);
+
+        const handleBus: HandleChange = (guestID, rawState) => {
+            if (rawState === null){return}
+            const state = answersBusText[rawState].value;
+            handleSelection(guestID, 'busGo', state[0]);
+            handleSelection(guestID, 'busBack', state[1]);
+        }
+        const handleAllergies: HandleChange = (guestID,rawState) => {
+            if (rawState === null){return}
+            const state = answersAllergiesText[rawState].value;
+            handleSelection(guestID, 'allergies', state);
         }
         const handleNewAllergy: HandleNewAllergy = (guestID, allergyName) => {
             const updateGuest: UpdateGuest = (guest) => {
@@ -85,36 +89,28 @@ export const Guest: React.FC<Props> =
                     difStages={stageNum - 0}
                     questionText={questionAssistanceText}
                     answerButtonList={
-                        answersAssistanceText.map((answer: string) => ({ text: answer }))
+                        answersAssistanceText.map((answer) => ({ text: answer.text }))
                     }
-                    handleSelection={() => { handleConfirm(guestID) }}
+                    handleSelection={(state) => { handleConfirm(guestID,state) }}
                     handleBack ={()=> {previousStage()}} />
                     
                 <Question
                     difStages={stageNum - 1}
                     questionText={questionBusText}
                     answerButtonList={
-                        answersBusText.map((answer: string) => ({ text: answer }))
+                        answersBusText.map((answer) => ({ text: answer.text }))
                     }
-                    handleSelection={() => { handleConfirm(guestID) }} 
+                    handleSelection={(state) => { handleBus(guestID,state) }} 
                     handleBack ={()=> {previousStage()}}/>
                 <Question
                     difStages={stageNum - 2}
                     questionText={questionAllergiesText}
                     answerButtonList={
-                        answersAllergiesText.map((answer: string) => ({ text: answer }))
+                        answersAllergiesText.map((answer) => ({ text: answer.text }))
                     }
-                    handleSelection={() => { handleConfirm(guestID) }} 
-                    handleBack ={()=> {previousStage()}}/>
-                <label>
-                    <Checkbox
-                        checked={allergies}
-                        onChange={() => { handleAllergies(guestID) }}
-                    />
-                    <Text inverse={true}>{questionAllergiesText}</Text>
-                </label>
-
-                {allergies === true &&
+                    handleSelection={(state) => { handleAllergies(guestID,state) }} 
+                    handleBack ={()=> {previousStage()}}>
+                    {allergies === true &&
                     <MultiOptionSelector
                         listGiven={commonAllergiesList}
                         checked={(allergyTitle) => {
@@ -122,7 +118,10 @@ export const Guest: React.FC<Props> =
                         }}
                         handleClick={(allergyTitle) => { handleNewAllergy(guestID, allergyTitle) }}
                     />
-                }
+                }    
+                </Question>
+
+                
 
             </>
         )

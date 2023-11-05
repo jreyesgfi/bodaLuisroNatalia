@@ -36,8 +36,9 @@ const App = (): JSX.Element => {
   
   const [guests, setGuests] = useState<ListOfGuests>([]);
   const setGuest = (givenGuestID:GuestID,updateFunction:UpdateGuest)  => {
+    console.log(updateFunction(guests[0]))
     const newGuests = guests.map((guest) => guest.guestID === givenGuestID? updateFunction(guest):guest);
-  setGuests(newGuests)
+    setGuests(newGuests)
   }
 
   // Footer properties

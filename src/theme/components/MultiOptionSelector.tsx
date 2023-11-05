@@ -20,34 +20,41 @@ const uncheckedStyles = css`
 
 // Styled components
 const SmallIcon = styled.img`
+    position:absolute;
 	width: 2rem;
 `;
 const ListItem = styled.div<{ selected:boolean }>`
-    margin: 16pt 0;
+    margin: 16pt 8pt;
     padding: 0 8pt;
     border-radius: 8px;
-    width: 300px;
     transition: all 0.3s;
     ${({selected}) => (selected===true ? checkedStyles : uncheckedStyles)};
 `;
-export const MultiOptionSelector: React.FC<Props> = ({listGiven, checked, handleClick }) => (
-    <ul>
 
+const MultiOptionWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: left;
+    align-items: center;
+`;
+export const MultiOptionSelector: React.FC<Props> = ({listGiven, checked, handleClick }) => (
+    <MultiOptionWrapper>
         {listGiven?.map((element,i) =>{
             const checkedValue:boolean = checked(element);
             return(
                 <ListItem key={i} selected={checkedValue}>
                     <label>
+                        <SmallIcon src={element.src} alt={element.title}></SmallIcon>
+                        &nbsp; &nbsp;&nbsp;
                         <Checkbox
                             checked={checkedValue}
                             onChange={() => { handleClick(element) }}
                         />
-                        <SmallIcon src={element.src} alt={element.title}></SmallIcon>
-                        <Text inverse={true}>&nbsp; &nbsp;&nbsp;{element.title}</Text>
+                        <Text inverse={true}>&nbsp;{element.title}</Text>
                     </label>
 
                 </ListItem>
             )}
         )}
-    </ul>
+    </MultiOptionWrapper>
 )
