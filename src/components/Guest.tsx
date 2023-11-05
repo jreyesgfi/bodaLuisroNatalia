@@ -87,21 +87,25 @@ export const Guest: React.FC<Props> =
                     answerButtonList={
                         answersAssistanceText.map((answer: string) => ({ text: answer }))
                     }
-                    handleSelection={() => { handleConfirm(guestID) }} />
+                    handleSelection={() => { handleConfirm(guestID) }}
+                    handleBack ={()=> {previousStage()}} />
+                    
                 <Question
                     difStages={stageNum - 1}
                     questionText={questionBusText}
                     answerButtonList={
                         answersBusText.map((answer: string) => ({ text: answer }))
                     }
-                    handleSelection={() => { handleConfirm(guestID) }} />
+                    handleSelection={() => { handleConfirm(guestID) }} 
+                    handleBack ={()=> {previousStage()}}/>
                 <Question
                     difStages={stageNum - 2}
                     questionText={questionAllergiesText}
                     answerButtonList={
                         answersAllergiesText.map((answer: string) => ({ text: answer }))
                     }
-                    handleSelection={() => { handleConfirm(guestID) }} />
+                    handleSelection={() => { handleConfirm(guestID) }} 
+                    handleBack ={()=> {previousStage()}}/>
                 <label>
                     <Checkbox
                         checked={allergies}

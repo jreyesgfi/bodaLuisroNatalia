@@ -3,30 +3,105 @@ import { useState } from "react";
 import { OptionButtonItf } from "../types";
 import { CustomButton } from "../theme/components/Button";
 import { Text, globalColors } from "../theme/globalStyles";
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
+type DifStages = number;
 interface QuestionWrapperItf {
-    difStages: number;
+    difStages: DifStages;
 }
-const QuestionWrapper = styled.div<QuestionWrapperItf>`
-  transition: transform 0s, opacity 0.7s, max-height 1.3s;
-  overflow: hidden;
-  opacity: ${({ difStages }) => (difStages < 0 ? 0 : 1 - 0.4 * difStages)};
-  padding-bottom: 10px;
-  border-bottom: ${({ difStages }) =>
-    difStages > 0 ? `1px solid ${globalColors.sencondary[400]}` : ''};
-  max-height: ${({ difStages }) => (difStages > 1 ? '0px' : '1000px')};
+
+
+const sizesDict = {
+    button: 'calc(2rem + 2px)',
+    icon: '2rem',
+    wrapper: 'auto'
+};
+const transformDict = {
+    button: 'translate(-50%, 50%);',
+    icon: 'rotate(180deg);',
+    wrapper: ''
+}
+
+interface CSSInterface {
+    difStages: DifStages;
+    element: keyof typeof sizesDict;
+}
+// checked and not checked styles
+const onTheStageStyle = ({difStages, element}:CSSInterface) => css`
+    width: ${sizesDict[element]};
+    height: ${sizesDict[element]};
+    opacity:${1 - 0.5 * (difStages||0)};
+    transform: ${transformDict[element]};
+    max-height: ${difStages >1? '0px':'500px'};
+    ${element==='wrapper'?
+    `border-bottom:1px solid ${globalColors.sencondary[400]};`:
+    ``}
+    
+    
+`
+
+const nextStageStyle = css`
+    width: 0px;
+    height: 0px;
+    max-height: 0px;
+    opacity:0;
 `;
+
+const TakeBackButton = styled.span`
+    position: absolute;
+    background-color: ${globalColors.light.primary};
+    padding: 4px;
+    left: 50%;
+    bottom: 0px;
+    border-radius: 50%;
+    border: 1px solid ${globalColors.sencondary[400]};
+    cursor: pointer;
+    z-index:50;
+`;
+const TakeBackIcon = styled.img`
+    width: 2rem;
+    position: absolute;
+    transform: rotate(-180deg);
+`;
+const QuestionWrapper = styled.div<QuestionWrapperItf>`
+    position: relative;
+    overflow: visible;
+    padding-bottom: 10px;
+
+    transition: transform 0s, opacity 0.7s, max-height 1.3s;
+    ${({ difStages }) => (difStages >= 0 ? 
+                onTheStageStyle({difStages:difStages,element:"wrapper"})
+                :nextStageStyle)
+            };
+
+        ${TakeBackButton}{
+            transition: transform 0.5s, height 0.5s, width 0.5s;
+            ${({ difStages }) => (difStages > 0 ? 
+                onTheStageStyle({difStages:difStages-1,element:"button"})
+                :nextStageStyle)
+            };
+        }
+        ${TakeBackIcon}{
+            transition: transform 0s, opacity 0.3s, height 0.5s, width 0.5s;
+            ${({ difStages }) => (difStages > 0 ? 
+                onTheStageStyle({difStages:difStages-1,element:"icon"})
+                :nextStageStyle)
+            };
+        }
+    `;
+
+
 
 interface Props {
     difStages: number;
     questionText: string;
     answerButtonList: OptionButtonItf[];
     handleSelection: (value: string | null) => void;
+    handleBack: ()=>void;
 }
 
-export const Question: React.FC<Props> = ({ difStages, questionText, answerButtonList, handleSelection }) => {
+export const Question: React.FC<Props> = ({ handleBack, difStages, questionText, answerButtonList, handleSelection }) => {
     const [selectedState, setSelectedState] = useState<number | null>(-1);
 
     const handleClick = (buttonIndex: number, buttonText: string) => {
@@ -45,9 +120,18 @@ export const Question: React.FC<Props> = ({ difStages, questionText, answerButto
             difStages={difStages}>
             <Text inverse={true}>{questionText}</Text>
             <MultiButtonOption
-                activeStage={difStages===0}
+                activeStage={difStages === 0}
                 buttonList={answerButtonList}
                 handleSelection={handleSelection}
             />
+            <TakeBackButton
+                onClick={()=>{handleBack();console.log('click')}}
+            >
+                <TakeBackIcon
+                    src='../assets/icons/drawnArrow.svg'
+                />
+            </TakeBackButton>
+
+
         </QuestionWrapper>)
 }
