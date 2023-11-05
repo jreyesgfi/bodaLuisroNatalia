@@ -14,7 +14,15 @@ export const answersBusText = [
 export const questionAllergiesText = '¿Alguna alergia alimentaria?';
 export const answersAllergiesText = [
     {text:'No, ninguna', value:false},
-    {text:'Sí, las siguientes:',value:true}];
+    {text:'Sí',value:true}];
 
+export const questionAllergiesDone = ''
+export const answerAllergiesDone = [
+        {text:'Siguiente',value:true}];
+
+export const questionFinishGuest = 'Perfecto, invitado registrado'
+export const answersFinishGuest = [
+    {text:'Volver atrás', value:false},
+    {text:'Continuar',value:true}];
 
 export const questionExtraGuestsText = '¿Algún acompañante extra?';

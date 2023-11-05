@@ -61,6 +61,7 @@ stroke: ${globalColors.light.primary}; // Add this here
 const CheckboxContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
+  background-color: ${globalColors.light.primary};
 `;
 
 export const Checkbox: React.FC<CheckBoxItf> = ({ checked, onChange, ...props}) => (

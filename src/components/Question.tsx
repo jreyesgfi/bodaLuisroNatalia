@@ -4,7 +4,7 @@ import { OptionButtonItf } from "../types";
 import { CustomButton } from "../theme/components/Button";
 import { Text, globalColors } from "../theme/globalStyles";
 import styled, { css } from 'styled-components';
-import { RoundButton, RoundButtonIcon } from "../theme/components/Icon";
+import { RoundIconWrapper, RoundIconImage } from "../theme/components/Icon";
 
 
 type DifStages = number;
@@ -49,7 +49,7 @@ const nextStageStyle = css`
     opacity:0;
 `;
 
-const TakeBackButton = styled(RoundButton)`
+const TakeBackButton = styled(RoundIconWrapper)`
     position: absolute;
     background-color: ${globalColors.light.primary};
     padding: 4px;
@@ -60,7 +60,7 @@ const TakeBackButton = styled(RoundButton)`
     cursor: pointer;
     z-index:50;
 `;
-const TakeBackIcon = styled(RoundButtonIcon)`
+const TakeBackIcon = styled(RoundIconImage)`
     width: 2rem;
     position: absolute;
     transform: rotate(-180deg);

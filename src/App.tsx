@@ -80,7 +80,6 @@ const App = (): JSX.Element => {
   useEffect(()=>{
     receiveData('2',handleNewData);
   },[])
-
   
   return (
     <UpdateGuestContext.Provider value={setGuest}>

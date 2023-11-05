@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { globalColors } from '../globalStyles';
 
-export const RoundButton = styled.span`
+export const RoundIconWrapper = styled.span`
     position: absolute;
     background-color: ${globalColors.light.primary};
     padding: 4px;
@@ -10,7 +10,7 @@ export const RoundButton = styled.span`
     cursor: pointer;
     z-index:50;
 `;
-export const RoundButtonIcon = styled.img`
+export const RoundIconImage = styled.img`
     width: 2rem;
     position: absolute;
     z-index:50;
