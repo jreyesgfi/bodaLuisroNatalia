@@ -5,7 +5,7 @@ import { Guest } from "./Guest"
 
 
 interface Props {
-    guests: ListOfGuests
+    guests: ListOfGuests;
 }
 
 export const Guests: React.FC<Props> = ({ guests }) => {
@@ -36,7 +36,8 @@ export const Guests: React.FC<Props> = ({ guests }) => {
                                 confirmed={guest.confirmed}
                                 attendance={guest.attendance}
                                 extraGuestsNum={guest.extraGuestsNum}
-                                bus={guest.bus}
+                                busGo={guest.busGo}
+                                busBack={guest.busBack}
                                 allergies={guest.allergies}
                                 allergiesList={guest.allergiesList}
                             />

@@ -87,7 +87,7 @@ const GlobalStyles = createGlobalStyle`
 
 `;
 interface InversedElementItf {
-	inverse: boolean;
+	inverse?: boolean;
 }
 
 interface LocatedElementItf {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { UpdateGuestContext } from "../App";
 import { commonAllergiesList } from "../assets/allergies";
 import { answersAllergiesText, answersAssistanceText, answersBusText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAssistanceText, questionBusText, questionFinishGuest, answersFinishGuest } from "../assets/texts/guestText";
-import { SubmitDataContext } from "../sections/ConfirmationSection";
+import { ChangeGuestContext } from "../sections/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
 import { NameHeading} from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy, HandleSelection, UpdateGuest, type GuestType } from "../types"
@@ -31,7 +31,7 @@ export const Guest: React.FC<Props> =
 
         // Define the handle functions
         const setGuest = useContext(UpdateGuestContext);
-        const triggerSubmitData = useContext(SubmitDataContext);
+        const changeGuest = useContext(ChangeGuestContext);
 
         const nextStage = () => {
             setStageNum(stageNum + 1)
@@ -84,9 +84,13 @@ export const Guest: React.FC<Props> =
             const state = answersFinishGuest[rawState].value;
             if (state === true) { 
                 nextStage();
-                triggerSubmitData();
+                changeGuest(true);
             }
             else { previousStage();}
+        }
+        const handleReturnToGuest = () => {
+            changeGuest(false);
+            previousStage();
         }
        
         return (
@@ -150,7 +154,7 @@ export const Guest: React.FC<Props> =
                         answersFinishGuest.map((answer) => ({ text: answer.text }))
                     }
                     handleSelection={(value) => { handleFinished(value) }}
-                    handleBack={() => { previousStage() }}>
+                    handleBack={() => { handleReturnToGuest() }}>
                 </Question>
             
 
