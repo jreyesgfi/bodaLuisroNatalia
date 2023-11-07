@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { globalColors } from '../globalStyles';
 
-export const RoundIconWrapper = styled.span`
+export const RoundIconWrapper = styled.div`
     position: absolute;
     background-color: ${globalColors.light.primary};
     padding: 4px;

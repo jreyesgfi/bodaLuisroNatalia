@@ -31,6 +31,7 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 	clippath: inset(50%);
 	height: 1px;
 	margin: -1px;
+	overflow: hidden;
 	padding: 0;
 	position: absolute;
 	white-space: nowrap;
@@ -65,11 +66,10 @@ const CheckboxContainer = styled.div`
 
 export const Checkbox: React.FC<CheckBoxItf> = ({ checked, handleOnChange, ...props}) => (
 	<CheckboxContainer>
-	  <HiddenCheckbox onChange={()=>{
-      console.log('click');
+	  <HiddenCheckbox />
+	  <StyledCheckbox checked={checked} onClick={()=>{
       handleOnChange();}
-    }/>
-	  <StyledCheckbox checked={checked} >
+    }>
         <svg viewBox="0 0 22 18">
             <path d="M1 6.85L8.09677 14L21 1" />
         </svg>

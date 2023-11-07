@@ -67,14 +67,14 @@ export const Guest: React.FC<Props> =
         const handleNewAllergy: HandleNewAllergy = (guestID, allergyName) => {
             const updateGuest: UpdateGuest = (guest) => {
                 // if it isn't yet
+                const guestCopy = {...guest}
                 const position = guest.allergiesList?.indexOf(allergyName) || -1;
                 if (position === -1) {
-                    guest.allergiesList?.push(allergyName);
+                    console.log('hi')
+                    guestCopy.allergiesList?.push(allergyName);
                 }
-                else {
-                    guest.allergiesList?.splice(position, 1)
-                }
-                return guest
+                
+                return guestCopy
             }
             setGuest(guestID, updateGuest);
         }
@@ -140,7 +140,7 @@ export const Guest: React.FC<Props> =
                                 checked={(allergyTitle) => {
                                     return (allergiesList?.indexOf(allergyTitle) !== -1)
                                 }}
-                                handleClick={(allergyTitle) => { handleNewAllergy(guestID, allergyTitle) }}
+                                handleClick={(allergyTitle) => {handleNewAllergy(guestID, allergyTitle) }}
                             />
                         }
                         

@@ -65,16 +65,15 @@ const OtherArea = styled(AreaText)`
 export const MultiOptionSelector: React.FC<Props> = ({ listGiven, checked, handleClick }) => (
     <MultiOptionWrapper>
         {listGiven?.map((element, i) => {
-            const checkedValue: boolean = checked(element);
             return (
-                <ListItem key={i} selected={checkedValue} onClick={()=>{console.log('hi');handleClick(element.title)}}>
+                <ListItem key={i} selected={checked(element)} >
                         <SmallIconWrapper>
                             <SmallIcon src={element.src} alt={element.title}></SmallIcon>
                         </SmallIconWrapper>
                         <OptionCheckbox>
                             <Checkbox
-                                checked={checkedValue}
-                                handleOnChange={() => { console.log('Click') }}// we should check this
+                                checked={checked(element.title)}
+                                handleOnChange={() => { handleClick(element.title)}}// we should check this
                             />
                         </OptionCheckbox>
 
