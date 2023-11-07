@@ -185,8 +185,8 @@ export const NameHeading = styled.h3<HeadingInterface>`
 	font-family: primary-light, sans-serif;
 	user-select: none;
 	margin: ${({ margin }) => (margin ? margin : '')};
-	margin-bottom: ${({ mb }) => (mb ? mb : '0.5rem')};
-	margin-top: ${({ mt }) => (mt ? mt : '')};
+	margin-bottom: ${({ mb }) => (mb ? mb : '0')};
+	margin-top: ${({ mt }) => (mt ? mt : '16px')};
 	color: ${({ inverse }) => (inverse ?
 		globalColors.dark.primary :
 		globalColors.light.primary)};
@@ -308,6 +308,16 @@ export const Text = styled.p<TextWrapperItf>`
 		max-width: 80vw;
 		width:${({ smWidth }) => smWidth ? smWidth : 'auto'};
 	}
+`;
+
+export const AreaText = styled.input<TextWrapperItf>`
+	color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};
+	width:${({ width }) => width ? width : 'auto'};
+	font-size:${({ fontSize }) => fontSize ? fontSize : '16pt'};
+	user-select: none;
+	max-width: 45vw;
+	font-family:${({ font }) => font ? font : 'primary-light'};
+	display: inline-block;
 `;
 export const Image = styled.img`
 	object-fit:cover;

@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react';
 import { Guests } from '../components/Guests'
 import { GuestsProguessBar } from '../components/GuestsProgressBar';
+import { NextBackGuestControl } from '../components/Next&BackGuest';
 import { submitData} from '../connection/connectionMethods';
 import { Section } from '../theme/globalStyles';
 import { ListOfGuests } from '../types'
@@ -18,7 +19,7 @@ export const ConfirmationSection: React.FC<Props> =
         }
         return (
             <ChangeGuestContext.Provider value={changeGuest}>
-                <Section inverse={true}>
+                <Section inverse={true} height='85vh' margin='0 2.5vw;'>
                 <GuestsProguessBar
                     numStages={guests.length}
                     currentStage={currentGuestNum-1}
@@ -26,9 +27,11 @@ export const ConfirmationSection: React.FC<Props> =
                 />  
                 <Guests
                     guests={guests}
+                    currentGuestNum={currentGuestNum}
                 />
-                <br /><br /><br /><br /><br />
-                <button onClick={(e) => { submitData(guests) }}>Submit</button>
+                <NextBackGuestControl
+                        changeGuest={changeGuest}
+                    />
             </Section>
             </ChangeGuestContext.Provider>
             

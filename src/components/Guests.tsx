@@ -1,53 +1,66 @@
 import { useContext } from "react";
+import styled from "styled-components";
 import { UpdateGuestContext } from "../App";
-import { ListOfGuests, HandleChange, UpdateGuest, HandleNumberChange } from "../types"
+import { ChangeGuestContext } from "../sections/ConfirmationSection";
+import { ListOfGuests, UpdateGuest, HandleNumberChange } from "../types"
 import { Guest } from "./Guest"
+import { NextBackGuestControl } from "./Next&BackGuest";
 
+
+// styled components
+const GlobalContainer = styled.div`
+    overflow: hidden;
+    max-height: 80vh;
+    display: flex;
+`;
+const GuestsWrapper = styled.div<{ currentPosition: number }>`
+    display: flex;
+    transition: transform 1s;
+    transform: ${({ currentPosition }) => (`translateX(-${currentPosition}vw)`)};
+`;
+
+const GuestWrapper = styled.div`
+    width: 95vw;
+`;
 
 interface Props {
     guests: ListOfGuests;
+    currentGuestNum: number;
 }
 
-export const Guests: React.FC<Props> = ({ guests }) => {
+export const Guests: React.FC<Props> = ({ guests, currentGuestNum }) => {
 
     // Define the handle functions
-    const setGuest = useContext(UpdateGuestContext);
-    const handleInputChange: HandleNumberChange = (e, guestID) => {
-        const updateGuest: UpdateGuest = (guest) => {
-            guest.extraGuestsNum = Number(e?.target?.value) || 0;
-            return guest
-        }
-        setGuest(guestID, updateGuest);
-    }
+    const changeGuest = useContext(ChangeGuestContext);
 
     return (
-        <>
+        <GlobalContainer>
+
             {guests.length > 0 &&
-                <>
-                    {guests.map((guest) => {
-                        return (
-                            <Guest
-                                key={guest.guestID}
-                                guestID={guest.guestID}
-                                groupID={guest.groupID}
-                                firstName={guest.firstName}
-                                lastName1={guest.lastName1}
-                                lastName2={guest.lastName2}
-                                confirmed={guest.confirmed}
-                                attendance={guest.attendance}
-                                extraGuestsNum={guest.extraGuestsNum}
-                                busGo={guest.busGo}
-                                busBack={guest.busBack}
-                                allergies={guest.allergies}
-                                allergiesList={guest.allergiesList}
-                            />
-                        )
-                    })}
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    
-                    {/* <p>{questionExtraGuestsText}</p>
+                    <GuestsWrapper currentPosition={(currentGuestNum - 1) * 95}>
+                        {guests.map((guest) => {
+                            return (
+                                <GuestWrapper>
+                                    <Guest
+                                        key={guest.guestID}
+                                        guestID={guest.guestID}
+                                        groupID={guest.groupID}
+                                        firstName={guest.firstName}
+                                        lastName1={guest.lastName1}
+                                        lastName2={guest.lastName2}
+                                        confirmed={guest.confirmed}
+                                        attendance={guest.attendance}
+                                        extraGuestsNum={guest.extraGuestsNum}
+                                        busGo={guest.busGo}
+                                        busBack={guest.busBack}
+                                        allergies={guest.allergies}
+                                        allergiesList={guest.allergiesList}
+                                    />
+                                </GuestWrapper>
+
+                            )
+                        })}
+                        {/* <p>{questionExtraGuestsText}</p>
                     <input
                         className="toggle"
                         type="number"
@@ -59,9 +72,9 @@ export const Guests: React.FC<Props> = ({ guests }) => {
                             });
                         }}
                     /> */}
-                </>
+                    </GuestsWrapper>
             }
-        </>
+        </GlobalContainer>
     )
 
 }

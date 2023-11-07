@@ -36,8 +36,8 @@ const onTheStageStyle = ({difStages, element}:CSSInterface) => css`
     transform: ${transformDict[element]};
     max-height: ${difStages >1? '0px':'500px'};
     ${element==='wrapper'?
-    `border-bottom:1px solid ${globalColors.sencondary[400]};`:
-    ``}
+    `border-bottom:1px solid ${globalColors.sencondary[400]};
+    `:``}
     
     
 `
@@ -65,12 +65,12 @@ const TakeBackIcon = styled(RoundIconImage)`
     position: absolute;
     transform: rotate(-180deg);
 `;
+
 const QuestionWrapper = styled.div<QuestionWrapperItf>`
     position: relative;
     overflow: visible;
-    padding-bottom: 10px;
-
-    transition: transform 0s, opacity 0.7s, max-height 1.3s;
+    padding-bottom:${({ difStages }) => (difStages > 1 ? '0px':'10px')};
+    transition: transform 0s, opacity 0.7s, max-height 1.3s, padding 0.7s;
     ${({ difStages }) => (difStages >= 0 ? 
                 onTheStageStyle({difStages:difStages,element:"wrapper"})
                 :nextStageStyle)
@@ -108,7 +108,9 @@ export const Question: React.FC<Props> = ({ children, handleBack, difStages, que
     return (
         <QuestionWrapper
             difStages={difStages}>
-            <Text inverse={true}>{questionText}</Text>
+            <Text inverse={true}>
+                {questionText}
+            </Text>
             <MultiButtonOption
                 activeStage={difStages === 0}
                 buttonList={answerButtonList}
