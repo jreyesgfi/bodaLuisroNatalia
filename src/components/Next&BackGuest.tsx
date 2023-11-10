@@ -14,6 +14,8 @@ const ButtonsWrapper = styled.div`
     position: absolute;
     width: 100%;
     bottom: 0;
+    background-color:${globalColors.light.white};
+    z-index:100;
 `;
 
 interface OptionButton {

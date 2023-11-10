@@ -19,6 +19,7 @@ export const answersAllergiesText = [
 export const questionAllergiesDone = ''
 export const answerAllergiesDone = [
         {text:'Siguiente',value:true}];
+export const otherAllergyText = '¿Otra alergia distinta?'
 
 export const questionFinishGuest = 'Perfecto, invitado registrado'
 export const answersFinishGuest = [

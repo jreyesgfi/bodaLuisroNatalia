@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import styled from 'styled-components';
 import { UpdateGuestContext } from "../App";
 import { commonAllergiesList } from "../assets/allergies";
-import { answersAllergiesText, answersAssistanceText, answersBusText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAssistanceText, questionBusText, questionFinishGuest, answersFinishGuest } from "../assets/texts/guestText";
+import { answersAllergiesText, answersAssistanceText, answersBusText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAssistanceText, questionBusText, questionFinishGuest, answersFinishGuest, otherAllergyText } from "../assets/texts/guestText";
 import { ChangeGuestContext } from "../sections/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
 import { NameHeading} from "../theme/globalStyles";
@@ -23,7 +23,7 @@ interface Props extends GuestType {
 export const Guest: React.FC<Props> =
     ({
         guestID, firstName, lastName1, lastName2,
-        attendance, extraGuestsNum, busGo, busBack, allergies, allergiesList }) => {
+        attendance, extraGuestsNum, busGo, busBack, allergies, allergiesList, otherAllergy }) => {
 
 
         // Define the states
@@ -64,16 +64,26 @@ export const Guest: React.FC<Props> =
             const state = answersAllergiesText[rawState].value;
             handleSelection(guestID, 'allergies', state);
         }
+        
         const handleNewAllergy: HandleNewAllergy = (guestID, allergyName) => {
             const updateGuest: UpdateGuest = (guest) => {
                 // if it isn't yet
                 const guestCopy = {...guest}
                 const position = guest.allergiesList?.indexOf(allergyName) || -1;
                 if (position === -1) {
-                    console.log('hi')
                     guestCopy.allergiesList?.push(allergyName);
+                    return guestCopy
                 }
-                
+                //else
+                guestCopy.allergiesList?.splice(position);
+                return guestCopy
+            }
+            setGuest(guestID, updateGuest);
+        }
+        const handleOtherAllergy: HandleChange = (guestID,otherAllergy) => {
+            const updateGuest: UpdateGuest = (guest) => {
+                const guestCopy = {...guest}
+                guestCopy.otherAllergy = otherAllergy;
                 return guestCopy
             }
             setGuest(guestID, updateGuest);
@@ -141,6 +151,8 @@ export const Guest: React.FC<Props> =
                                     return (allergiesList?.indexOf(allergyTitle) !== -1)
                                 }}
                                 handleClick={(allergyTitle) => {handleNewAllergy(guestID, allergyTitle) }}
+                                otherOption={otherAllergyText}
+                                handleOtherOption={(newAllergy)=>{handleOtherAllergy(guestID, newAllergy)}}
                             />
                         }
                         

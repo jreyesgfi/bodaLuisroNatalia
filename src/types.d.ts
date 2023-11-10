@@ -30,6 +30,7 @@ export interface GuestType {
   busBack: boolean,
   allergies: boolean,
   allergiesList?: AllergieType[],
+  otherAllergy: string
 }
 
 export type ListOfGuests = GuestType[];

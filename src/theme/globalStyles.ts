@@ -318,6 +318,8 @@ export const AreaText = styled.input<TextWrapperItf>`
 	max-width: 45vw;
 	font-family:${({ font }) => font ? font : 'primary-light'};
 	display: inline-block;
+	border-radius: 8px;
+	border: 1px solid ${globalColors.dark.primary};
 `;
 export const Image = styled.img`
 	object-fit:cover;

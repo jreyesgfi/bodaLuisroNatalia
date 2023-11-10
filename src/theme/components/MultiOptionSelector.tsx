@@ -2,6 +2,8 @@ import { Checkbox } from "./Checkbox"
 import styled, { css } from 'styled-components';
 import { AreaText, globalColors, Text } from "../globalStyles";
 import { RoundIconImage, RoundIconWrapper } from "./Icon";
+import { ChangeEvent, useState } from "react";
+import { HandleChange } from "../../types";
 
 type ElementType = any;
 interface Props {
@@ -9,6 +11,8 @@ interface Props {
     checked: (element: ElementType) => boolean;
     handleClick: (element: ElementType) => void;
     src?: string;
+    otherOption?: string;
+    handleOtherOption?: (guestID: string) => void;
 }
 
 // checked and not checked styles
@@ -25,6 +29,8 @@ const MultiOptionWrapper = styled.div`
     flex-wrap: wrap; 
     justify-content: left;
     align-items: center;
+    overflow-y: auto;
+    max-height: 34vh;
 `;
 const ListItem = styled.span<{ selected: boolean }>`
     box-sizing: content-box;
@@ -54,15 +60,22 @@ const SmallIcon = styled(RoundIconImage)`
 `;
 
 const OptionLabel = styled(Text)`
-    margin-left: 1rem;
     margin: 4px 0 4px 1rem;
 `;
 
 const OtherArea = styled(AreaText)`
-
+    margin: 32px 0 4px 4px;
+    padding-left: 16px;
 `;
 
-export const MultiOptionSelector: React.FC<Props> = ({ listGiven, checked, handleClick }) => (
+export const MultiOptionSelector: React.FC<Props> = ({ listGiven, checked, handleClick, otherOption, handleOtherOption }) => {
+    const [otherOptionValue, setOtherOptionValue] = useState<string>('');
+    const handleOtherOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setOtherOptionValue(value);
+        handleOtherOption?.(value);
+      };
+    return(
     <MultiOptionWrapper>
         {listGiven?.map((element, i) => {
             return (
@@ -84,6 +97,15 @@ export const MultiOptionSelector: React.FC<Props> = ({ listGiven, checked, handl
             )
         }
         )}
-        <OtherArea inverse={true}></OtherArea>
+        {otherOption &&
+            <OtherArea
+            inverse={true}
+            placeholder={otherOption}
+            maxLength={20}
+            value={otherOptionValue}
+            onChange={handleOtherOptionChange}  
+            />
+        }
+        
     </MultiOptionWrapper>
-)
+)}
