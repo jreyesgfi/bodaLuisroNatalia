@@ -22,6 +22,7 @@ interface OptionButton {
 
 }
 const OptionButton = styled(CustomButton) <OptionButton>`
+    
 `;
 
 interface Props {
@@ -35,10 +36,16 @@ export const NextBackGuestControl: React.FC<Props> = ({possibleTakeBack, possibl
     return (
         <ButtonsWrapper>
             <OptionButton
-                onClick={() => changeGuest(false)}
+                onClick={() => {
+                    if(possibleTakeBack === true){changeGuest(false)}
+                }}
+                highlighted= {possibleTakeBack === true}
             >{backGuestText}</OptionButton>
             <OptionButton
-                onClick={() => changeGuest(true)}
+                onClick={() => {
+                    if(possibleNext === true){changeGuest(true)}
+                }}
+                highlighted= {possibleNext === true}
             >{nextGuestText}</OptionButton>
         </ButtonsWrapper>)
 }

@@ -63,9 +63,10 @@ const OptionLabel = styled(Text)`
     margin: 4px 0 4px 1rem;
 `;
 
-const OtherArea = styled(AreaText)`
+const OtherArea = styled(AreaText)<{activated:boolean}>`
     margin: 32px 0 4px 4px;
     padding-left: 16px;
+    border: ${({activated})=>`1px solid ${activated===true?globalColors.sencondary[400] : globalColors.dark.primary}`}
 `;
 
 export const MultiOptionSelector: React.FC<Props> = ({ listGiven, checked, handleClick, otherOption, handleOtherOption }) => {
@@ -100,6 +101,7 @@ export const MultiOptionSelector: React.FC<Props> = ({ listGiven, checked, handl
         {otherOption &&
             <OtherArea
             inverse={true}
+            activated={otherOptionValue!=''}
             placeholder={otherOption}
             maxLength={20}
             value={otherOptionValue}

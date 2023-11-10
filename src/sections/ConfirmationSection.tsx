@@ -12,8 +12,10 @@ export const ChangeGuestContext = createContext<any>(null);
 export const ConfirmationSection: React.FC<Props> =
     ({guests}) => {
         const [currentGuestNum, setCurrentGuestNum] = useState<number>(1);
+        const [lastGuestChecked, setLastGuestChecked] = useState<number>(0);
         const triggerSubmitData = ()=>{submitData(guests)};
         const changeGuest = (next?:boolean) =>{
+            if (currentGuestNum > lastGuestChecked+1) { setLastGuestChecked(currentGuestNum-1);}
             setCurrentGuestNum(currentGuestNum + (next===false?-1:1));
             triggerSubmitData();
         }
@@ -31,6 +33,8 @@ export const ConfirmationSection: React.FC<Props> =
                 />
                 <NextBackGuestControl
                         changeGuest={changeGuest}
+                        possibleNext={currentGuestNum <= lastGuestChecked}
+                        possibleTakeBack={currentGuestNum > 1}
                     />
             </Section>
             </ChangeGuestContext.Provider>

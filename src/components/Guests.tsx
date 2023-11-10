@@ -55,6 +55,7 @@ export const Guests: React.FC<Props> = ({ guests, currentGuestNum }) => {
                                         busBack={guest.busBack}
                                         allergies={guest.allergies}
                                         allergiesList={guest.allergiesList}
+                                        otherAllergy={guest.otherAllergy}
                                     />
                                 </GuestWrapper>
 
