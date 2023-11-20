@@ -43,6 +43,7 @@ export const CustomButton = styled.button<ButtonItf>`
 	white-space: nowrap;
 	padding: 10px 20px;
 	font-size: 16px;
+	font-family: FreeMono, monospace;
 	outline: none;
 	transform: all 0.3s;
 	cursor: pointer;

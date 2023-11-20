@@ -136,7 +136,7 @@ export const Container = styled.div`
 `;
 export const MainHeading = styled.h1<InversedElementItf>`
     font-size: 48px;
-	font-family: primary-light;
+	font-family: FreeMono, monospace;
 	margin: 0;
 	padding-bottom:0;
 	color: ${({ inverse }) => (inverse ?
@@ -158,7 +158,7 @@ interface HeadingInterface extends InversedElementItf, LocatedElementItf, TextIt
 
 export const Heading = styled.h2<HeadingInterface>`
 	font-size: ${({ fontSize }) => (fontSize ? fontSize : 'clamp(1.2rem, 4.8vw, 3.6rem)')};
-	font-family: primary-bold, sans-serif;
+	font-family: primary-bold, monospace;
 	user-select: none;
 	margin: ${({ margin }) => (margin ? margin : '')};
 	margin-bottom: ${({ mb }) => (mb ? mb : '0.5rem')};
@@ -299,7 +299,7 @@ export const Column = styled.div<ContainerItf>`
 export const Text = styled.p<TextWrapperItf>`
     color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};
     width:${({ width }) => width ? width : 'auto'};
-	font-size:${({ fontSize }) => fontSize ? fontSize : '16pt'};
+	font-size:${({ fontSize }) => fontSize ? fontSize : '20pt'};
 	user-select: none;
 	max-width: 45vw;
 	font-family:${({ font }) => font ? font : 'primary-light'};

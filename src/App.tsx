@@ -7,7 +7,7 @@ import { Footer } from './components/Footer'
 import { receiveData, submitData } from './connection/connectionMethods'
 import { ConfirmationSection } from './sections/ConfirmationSection'
 import { HeroSection } from './sections/HeroSection'
-
+import styled from 'styled-components';
 
 
 const mockTodos = [
@@ -27,26 +27,37 @@ const mockTodos = [
     completed: false
   }
 ]
+
+const GlobalWrapper = styled.div`
+overflow: hidden;
+height: 98vh;
+width: 98vw;
+padding: 0;
+margin: 0;
+scroll: auto;
+`;
+
 // intialize the context
 export const UpdateGuestContext = createContext<any>(null);
 
 const App = (): JSX.Element => {
   const [todos, setTodos] = useState(mockTodos)
   const [filterSelected, setFilterSelected] = useState<FilterValue>(TODO_FILTERS.ALL)
-  
+
   const [guests, setGuests] = useState<ListOfGuests>([]);
-  const setGuest = (givenGuestID:GuestID,updateFunction:UpdateGuest)  => {
-    const newGuests = guests.map((guest) => guest.guestID === givenGuestID? updateFunction(guest):guest);
+  const setGuest = (givenGuestID: GuestID, updateFunction: UpdateGuest) => {
+    console.log('hi');
+    const newGuests = guests.map((guest) => guest.guestID === givenGuestID ? updateFunction(guest) : guest);
     setGuests(newGuests)
   }
 
   // Footer properties
   const activeCount = todos.filter(todo => !todo.completed).length
   const completedCount = todos.length - activeCount
-  const filteredTodos = todos.filter(todo =>{
-    if (filterSelected===TODO_FILTERS.ACTIVE){return !todo.completed}
-    if (filterSelected === TODO_FILTERS.COMPLETED){return todo.completed}
-    return true 
+  const filteredTodos = todos.filter(todo => {
+    if (filterSelected === TODO_FILTERS.ACTIVE) { return !todo.completed }
+    if (filterSelected === TODO_FILTERS.COMPLETED) { return todo.completed }
+    return true
   })
 
 
@@ -67,34 +78,37 @@ const App = (): JSX.Element => {
     setTodos(newTodos)
   }
 
-  const handleFilterChange = (filter:FilterValue):void =>{
+  const handleFilterChange = (filter: FilterValue): void => {
     setFilterSelected(filter)
   }
 
-  const handleNewData = (data:ListOfGuests):void => {
+  const handleNewData = (data: ListOfGuests): void => {
     setGuests(data);
   }
 
   // First load of the data
-  useEffect(()=>{
-    receiveData('2',handleNewData);
-  },[])
-  
+  useEffect(() => {
+    receiveData('2', handleNewData);
+  }, [])
+
+
   return (
-    <UpdateGuestContext.Provider value={setGuest}>
-      <HeroSection></HeroSection>
-      {/* <Todos
+    <GlobalWrapper>
+      <UpdateGuestContext.Provider value={setGuest}>
+
+        <HeroSection></HeroSection>
+        {/* <Todos
         todos = {filteredTodos}
         onToggleComplete = {handleCompleted}
         onRemoveTodo = {handleRemove}
       /> 
       <h2>{FILTERS_BUTTONS[0].key}</h2>
       */}
-      <br/>
-      <ConfirmationSection
-        guests={guests}
-      ></ConfirmationSection>
-      {/*
+        <br />
+        <ConfirmationSection
+          guests={guests}
+        ></ConfirmationSection>
+        {/*
       <button onClick={(e)=>{receiveData('2',handleNewData)}}>Receive</button>
       <Footer
         filterSelected={filterSelected}
@@ -102,8 +116,10 @@ const App = (): JSX.Element => {
         completedCount={completedCount}
         handleFilterChange={handleFilterChange}
     />*/}
-    </UpdateGuestContext.Provider>
 
+
+      </UpdateGuestContext.Provider>
+    </GlobalWrapper>
   )
 }
 
