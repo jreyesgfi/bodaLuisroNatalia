@@ -75,7 +75,7 @@ export const Guest: React.FC<Props> =
                     return guestCopy
                 }
                 //else
-                guestCopy.allergiesList?.splice(position);
+                guestCopy.allergiesList?.splice(position,1);
                 return guestCopy
             }
             setGuest(guestID, updateGuest);

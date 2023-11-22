@@ -37,9 +37,7 @@ const onTheStageStyle = ({difStages, element}:CSSInterface) => css`
     max-height: ${difStages >1? '0px':'500px'};
     ${element==='wrapper'?
     `border-bottom:1px solid ${globalColors.sencondary[400]};
-    `:``}
-    
-    
+    `:``}  
 `
 
 const nextStageStyle = css`

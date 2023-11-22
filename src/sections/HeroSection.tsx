@@ -2,15 +2,20 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { dateText, initialButtonText, introductionText1_2, introductionText1_1, introductionText2, introductionText3, mainTitleText, purposeText } from '../assets/texts/mainText';
 import { CustomButton } from '../theme/components/Button';
-import { globalColors, MainHeading, Section, Text } from '../theme/globalStyles';
+import { LateralBigImage } from '../theme/components/LateralBigImage';
+import { ParallaxContainer } from '../theme/components/ParallaxContainer';
+import { globalColors, Image, MainHeading, Section, Text } from '../theme/globalStyles';
+
+
+
+
 
 // checked and not checked styles
 const activeStyles = css`
-    transform: translateY(0%);
     max-height: 1000px;
 `
-const unactiveStyles = css`
-    transform: translateY(-120%);
+
+const unactiveStyles = (level:number) => css`
     max-height: 0px;
 `
 
@@ -49,7 +54,7 @@ const HeroSectionWrapper = styled(Section) <HeroWrapperItf>`
     width: 100vw;   
     position: relative;
     transition:  transform 1s, max-height 1.3s ease-out;
-    ${({ active }) => (active === true ? activeStyles : unactiveStyles)}
+    ${({ active }) => (active === true ? activeStyles : unactiveStyles(1))}
 `;
 
 
@@ -64,7 +69,7 @@ export const HeroSection: React.FC =
                     <IntroductionText inverse={true}>
                         {introductionText1_1}
                         <HighlightedText inverse={true}>
-                        <u>{purposeText}</u>
+                        {purposeText}
                         </HighlightedText>
                         {introductionText1_2}
                     </IntroductionText>
@@ -81,7 +86,12 @@ export const HeroSection: React.FC =
                         onClick={() => { handleClick() }}
                     >{initialButtonText}</CustomButton>
                 </TextWrapper>
-
+                <ParallaxContainer active={activeState}>
+                    <Image src="../../public/assets/images/testSmall.svg" level={2}/>
+                    <Image src="../../public/assets/images/testSmall2.svg" level={2}/>
+                    <Image src="../../public/assets/images/testSmall3.svg" level={3}/>
+                </ParallaxContainer>
+                <LateralBigImage src="../../public/assets/images/test1.png"/>
             </HeroSectionWrapper>
         )
     }
