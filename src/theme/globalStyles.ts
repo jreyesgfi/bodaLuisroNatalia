@@ -243,7 +243,6 @@ export const Section = styled.section<Section>`
 	height: ${({ height }) => (height ? height : 'auto')};
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
-	
 	@media screen and (max-width: ${mediumSize}) {
 		padding: ${({ smPadding }) => (smPadding ? smPadding : '0')};
 	}

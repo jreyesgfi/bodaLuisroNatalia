@@ -15,8 +15,8 @@ const activeStyles = css`
     max-height: 1000px;
 `
 
-const unactiveStyles = (level:number) => css`
-    max-height: 0px;
+const unactiveStyles = (level: number) => css`
+    max-height: 1000px;
 `
 
 
@@ -57,41 +57,56 @@ const HeroSectionWrapper = styled(Section) <HeroWrapperItf>`
     ${({ active }) => (active === true ? activeStyles : unactiveStyles(1))}
 `;
 
+const StyledImage = styled.img`
+    max-height: 50px;
+    max-width: 50px;
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    transition: transform 0.2s;
+`;
+
+
 
 export const HeroSection: React.FC =
     ({ }) => {
         const [activeState, setActiveState] = useState<boolean>(true);
         const handleClick = () => { setActiveState(false) }
         return (
-            <HeroSectionWrapper inverse={true} active={activeState}>
-                <TextWrapper>
-                    
-                    <IntroductionText inverse={true}>
-                        {introductionText1_1}
-                        <HighlightedText inverse={true}>
-                        {purposeText}
-                        </HighlightedText>
-                        {introductionText1_2}
-                    </IntroductionText>
-                    <MainHeading inverse={true}>{mainTitleText}</MainHeading>
-                    <IntroductionText inverse={true}>
-                    {introductionText2}
-                    <HighlightedText inverse={true}>
-                        <b>{dateText}</b>
-                    </HighlightedText>
-                    {introductionText3}
-                    </IntroductionText>
-                    <CustomButton
-                        selected={true}
-                        onClick={() => { handleClick() }}
-                    >{initialButtonText}</CustomButton>
-                </TextWrapper>
-                <ParallaxContainer active={activeState}>
-                    <Image src="../../public/assets/images/testSmall.svg" level={2}/>
-                    <Image src="../../public/assets/images/testSmall2.svg" level={2}/>
-                    <Image src="../../public/assets/images/testSmall3.svg" level={3}/>
-                </ParallaxContainer>
-                <LateralBigImage src="../../public/assets/images/test1.png"/>
-            </HeroSectionWrapper>
+            <ParallaxContainer active={activeState}
+                parallaxChildren2={[
+                    <StyledImage src="../../public/assets/images/testSmall.svg" />,
+                    <StyledImage src="../../public/assets/images/testSmall2.svg" />,
+                    <StyledImage src="../../public/assets/images/testSmall3.svg" />]}
+                parallaxChildren0={[
+                    <HeroSectionWrapper inverse={true} active={activeState}>
+
+                        <TextWrapper>
+
+                            <IntroductionText inverse={true}>
+                                {introductionText1_1}
+                                <HighlightedText inverse={true}>
+                                    {purposeText}
+                                </HighlightedText>
+                                {introductionText1_2}
+                            </IntroductionText>
+                            <MainHeading inverse={true}>{mainTitleText}</MainHeading>
+                            <IntroductionText inverse={true}>
+                                {introductionText2}
+                                <HighlightedText inverse={true}>
+                                    <b>{dateText}</b>
+                                </HighlightedText>
+                                {introductionText3}
+                            </IntroductionText>
+                            <CustomButton
+                                selected={true}
+                                onClick={() => { handleClick() }}
+                            >{initialButtonText}</CustomButton>
+                        </TextWrapper>
+                        <LateralBigImage src="../../public/assets/images/test1.png" />
+
+                    </HeroSectionWrapper>
+                ]}>
+            </ParallaxContainer>
         )
     }
