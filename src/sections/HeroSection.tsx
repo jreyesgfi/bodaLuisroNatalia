@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { dateText, initialButtonText, introductionText1_2, introductionText1_1, introductionText2, introductionText3, mainTitleText, purposeText } from '../assets/texts/mainText';
 import { CustomButton } from '../theme/components/Button';
 import { LateralBigImage } from '../theme/components/LateralBigImage';
 import { ParallaxContainer } from '../theme/components/ParallaxContainer';
+import { LevelContext } from '../theme/components/ProcessWizard';
 import { globalColors, Image, MainHeading, Section, Text } from '../theme/globalStyles';
+import { LevelContextItf } from '../types';
 
 
 
@@ -57,56 +59,43 @@ const HeroSectionWrapper = styled(Section) <HeroWrapperItf>`
     ${({ active }) => (active === true ? activeStyles : unactiveStyles(1))}
 `;
 
-const StyledImage = styled.img`
-    max-height: 50px;
-    max-width: 50px;
-    position: absolute;
-    top: 200px;
-    left: 200px;
-    transition: transform 0.2s;
-`;
-
-
-
 export const HeroSection: React.FC =
     ({ }) => {
         const [activeState, setActiveState] = useState<boolean>(true);
-        const handleClick = () => { setActiveState(false) }
+        const levelContext:LevelContextItf|undefined = useContext(LevelContext);
+        const handleClick = () => { 
+            setActiveState(false);
+            levelContext?.changeLevels?.['Section']?.(true);
+        }
         return (
-            <ParallaxContainer active={activeState}
-                parallaxChildren2={[
-                    <StyledImage src="../../public/assets/images/testSmall.svg" />,
-                    <StyledImage src="../../public/assets/images/testSmall2.svg" />,
-                    <StyledImage src="../../public/assets/images/testSmall3.svg" />]}
-                parallaxChildren0={[
-                    <HeroSectionWrapper inverse={true} active={activeState}>
 
-                        <TextWrapper>
+            <HeroSectionWrapper inverse={true} active={activeState}>
 
-                            <IntroductionText inverse={true}>
-                                {introductionText1_1}
-                                <HighlightedText inverse={true}>
-                                    {purposeText}
-                                </HighlightedText>
-                                {introductionText1_2}
-                            </IntroductionText>
-                            <MainHeading inverse={true}>{mainTitleText}</MainHeading>
-                            <IntroductionText inverse={true}>
-                                {introductionText2}
-                                <HighlightedText inverse={true}>
-                                    <b>{dateText}</b>
-                                </HighlightedText>
-                                {introductionText3}
-                            </IntroductionText>
-                            <CustomButton
-                                selected={true}
-                                onClick={() => { handleClick() }}
-                            >{initialButtonText}</CustomButton>
-                        </TextWrapper>
-                        <LateralBigImage src="../../public/assets/images/test1.png" />
+                <TextWrapper>
 
-                    </HeroSectionWrapper>
-                ]}>
-            </ParallaxContainer>
+                    <IntroductionText inverse={true}>
+                        {introductionText1_1}
+                        <HighlightedText inverse={true}>
+                            {purposeText}
+                        </HighlightedText>
+                        {introductionText1_2}
+                    </IntroductionText>
+                    <MainHeading inverse={true}>{mainTitleText}</MainHeading>
+                    <IntroductionText inverse={true}>
+                        {introductionText2}
+                        <HighlightedText inverse={true}>
+                            <b>{dateText}</b>
+                        </HighlightedText>
+                        {introductionText3}
+                    </IntroductionText>
+                    <CustomButton
+                        selected={true}
+                        onClick={() => { handleClick() }}
+                    >{initialButtonText}</CustomButton>
+                </TextWrapper>
+                <LateralBigImage src="../../public/assets/images/test1.png" />
+
+            </HeroSectionWrapper>
+
         )
     }

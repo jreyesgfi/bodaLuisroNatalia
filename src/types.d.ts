@@ -43,10 +43,16 @@ export type HandleNumberChange = (e:React.ChangeEvent<HTMLInputElement>,guestID:
 export type HandleNewAllergy = (id: GuestID, allergyTitle:AllergieType) => void;
 
 // Theme Components types
+export type ChildrenType = (ReactNode[] | ReactNode);
 export interface OptionButtonItf {
   id?: string;
   text: string;
   iconSrc?: string;
 }
-
+export type LevelDictType = { [level: string]:number};
+export type ChangeLevelsDictType = {[level:string]:((next:boolean)=>void)};
+export interface LevelContextItf {
+  levels: LevelDictType;
+  changeLevels: ChangeLevelsDictType;
+}
 //export type NumButtonSelected = number|null;

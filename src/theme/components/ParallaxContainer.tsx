@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
+import { ChildrenType } from "../../types";
 
 
 // checked and not checked styles
@@ -8,7 +9,7 @@ const activeStyles = css`
 `
 
 const unactiveStyles = (level: number) => css`
-    transform: translateY(-${120 / (level+(level+1))}%);
+    transform: translateY(-${100 * (1-(level/5))/(level+1)}%);
 `
 const permanentStyles = (level: number) => css`
     transition: transform ${1.5-level/3}s ease-in-out;
@@ -23,6 +24,7 @@ const ParallaxWrapper = styled.div<{ level: number; active: boolean }>`
     height: 100vh;
     position: absolute;
     ${({ level }) => (permanentStyles(level))};
+    z-index: ${({ level }) => (level === 0 ? '20': '')};
     >*{
         pointer-events: auto;
     }
@@ -44,11 +46,11 @@ interface ChildProps {
 
 interface ParallaxContainerProps {
     active: boolean;
-    parallaxChildren0?: ReactNode[];
-    parallaxChildren1?: ReactNode[];
-    parallaxChildren2?: ReactNode[];
-    parallaxChildren3?: ReactNode[];
-    children?: ReactNode[];// Accepts any ReactNode as children
+    parallaxChildren0?: ChildrenType;
+    parallaxChildren1?: ChildrenType;
+    parallaxChildren2?: ChildrenType;
+    parallaxChildren3?: ChildrenType;
+    children?: ChildrenType;// Accepts any ReactNode as children
 }
 
 // Component

@@ -234,7 +234,7 @@ export const Section = styled.section<Section>`
 	overflow-y: hidden;
 	margin: ${({ margin }) => (margin ? margin : '')};
 	background: ${({ inverse }) => (inverse ?
-		globalColors.light.primary :
+		globalColors.transparent.full :
 		globalColors.dark.primary)};
 	position: ${({ position }) => (position ? position : 'relative')};
 	width: ${({ width }) => (width ? width : 'auto')};
