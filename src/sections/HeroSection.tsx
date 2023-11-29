@@ -76,7 +76,7 @@ export const HeroSection: React.FC =
                     <IntroductionText inverse={true}>
                         {introductionText1_1}
                         <HighlightedText inverse={true}>
-                            {purposeText}
+                            <b>{purposeText}</b>
                         </HighlightedText>
                         {introductionText1_2}
                     </IntroductionText>

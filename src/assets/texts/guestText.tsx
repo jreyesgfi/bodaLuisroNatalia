@@ -16,6 +16,11 @@ export const answersAllergiesText = [
     {text:'No, ninguna', value:false},
     {text:'Sí',value:true}];
 
+export const questionHotelText = '¿Deseas dormir en el hotel?';
+export const answersHotelText = [
+        {text:'No', value:false},
+        {text:'Sí',value:true}];
+
 export const questionAllergiesDone = ''
 export const answerAllergiesDone = [
         {text:'Siguiente',value:true}];

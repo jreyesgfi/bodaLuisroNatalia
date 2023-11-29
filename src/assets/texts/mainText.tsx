@@ -1,5 +1,5 @@
 export const introductionText1_1 = 'Esta es la página de '
-export const purposeText = 'Confirmación de Aasistencia';
+export const purposeText = 'Confirmación de Asistencia';
 export const introductionText1_2 = ' al enlace matrimonial de'
 export const mainTitleText = 'LUIS RODRIGO & NATALIA';
 export const introductionText2 = 'que tendrá lugar el día'

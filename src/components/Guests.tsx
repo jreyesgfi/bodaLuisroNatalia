@@ -53,6 +53,7 @@ export const Guests: React.FC<Props> = ({ guests, currentGuestNum }) => {
                                         extraGuestsNum={guest.extraGuestsNum}
                                         busGo={guest.busGo}
                                         busBack={guest.busBack}
+                                        hotel = {guest.hotel}
                                         allergies={guest.allergies}
                                         allergiesList={guest.allergiesList}
                                         otherAllergy={guest.otherAllergy}

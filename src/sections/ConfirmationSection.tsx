@@ -21,7 +21,7 @@ export const ConfirmationSection: React.FC<Props> =
         }
         return (
             <ChangeGuestContext.Provider value={changeGuest}>
-                <Section inverse={true} height='85vh' margin='0 2.5vw;'>
+                <Section inverse={true} margin='16px 2.5vw;'>
                 <GuestsProguessBar
                     numStages={guests.length}
                     currentStage={currentGuestNum-1}

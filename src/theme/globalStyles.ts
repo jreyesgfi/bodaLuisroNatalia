@@ -240,7 +240,7 @@ export const Section = styled.section<Section>`
 	width: ${({ width }) => (width ? width : 'auto')};
 	min-width: ${({ minWidth }) => (minWidth ? minWidth : minimumSize)};
 	max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : 'auto')};
-	height: ${({ height }) => (height ? height : 'auto')};
+	height: ${({ height }) => (height ? height : '95%')};
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
 	@media screen and (max-width: ${mediumSize}) {

@@ -63,7 +63,9 @@ const TakeBackIcon = styled(RoundIconImage)`
     position: absolute;
     transform: rotate(-180deg);
 `;
-
+const ChildrenWrapper = styled.div`
+    min-height: fit-content;
+`;
 const QuestionWrapper = styled.div<QuestionWrapperItf>`
     position: relative;
     overflow: visible;
@@ -114,7 +116,8 @@ export const Question: React.FC<Props> = ({ children, handleBack, difStages, que
                 buttonList={answerButtonList}
                 handleSelection={handleSelection}
             />
-            {children}
+            <ChildrenWrapper>{children}
+            </ChildrenWrapper>
             <TakeBackButton
                 onClick={()=>{if(difStages >0){handleBack()}}}
             >

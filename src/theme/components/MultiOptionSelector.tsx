@@ -31,6 +31,7 @@ const MultiOptionWrapper = styled.div`
     align-items: center;
     overflow-y: auto;
     max-height: 34vh;
+    margin: 0 auto 20px;
 `;
 const ListItem = styled.span<{ selected: boolean }>`
     box-sizing: content-box;

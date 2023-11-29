@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import styled from 'styled-components';
 import { UpdateGuestContext } from "../App";
 import { commonAllergiesList } from "../assets/allergies";
-import { answersAllergiesText, answersAssistanceText, answersBusText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAssistanceText, questionBusText, questionFinishGuest, answersFinishGuest, otherAllergyText } from "../assets/texts/guestText";
+import { answersAllergiesText, answersAssistanceText, answersBusText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAssistanceText, questionBusText, questionFinishGuest, answersFinishGuest, otherAllergyText, questionHotelText, answersHotelText } from "../assets/texts/guestText";
 import { ChangeGuestContext } from "../sections/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
 import { NameHeading} from "../theme/globalStyles";
@@ -51,6 +51,13 @@ export const Guest: React.FC<Props> =
             if (rawState === null) { return }
             const state = answersAssistanceText[rawState].value;
             handleSelection(guestID, 'attendance', state);
+        }
+
+        const handleHotel: HandleChange = (guestID, rawState) => {
+
+            if (rawState === null) { return }
+            const state = answersHotelText[rawState].value;
+            handleSelection(guestID, 'hotel', state);
         }
 
         const handleBus: HandleChange = (guestID, rawState) => {
@@ -125,8 +132,19 @@ export const Guest: React.FC<Props> =
                     }
                     handleSelection={(state) => { handleBus(guestID, state) }}
                     handleBack={() => { previousStage() }} />
+                
                 <Question
                     difStages={stageNum - 2}
+                    questionText={questionHotelText}
+                    answerButtonList={
+                        answersHotelText.map((answer) => ({ text: answer.text }))
+                    }
+                    handleSelection={(state) => { handleHotel(guestID, state) }}
+                    handleBack={() => { previousStage() }}>
+
+                </Question>
+                <Question
+                    difStages={stageNum - 3}
                     questionText={questionAllergiesText}
                     answerButtonList={
                         answersAllergiesText.map((answer) => ({ text: answer.text }))
@@ -137,14 +155,14 @@ export const Guest: React.FC<Props> =
                 </Question>
                 {allergies === true && 
                     <Question
-                        difStages={stageNum - 3}
+                        difStages={stageNum - 4}
                         questionText={questionAllergiesDone}
                         answerButtonList={
                             answerAllergiesDone.map((answer) => ({ text: answer.text }))
                         }
                         handleSelection={() => { nextStage() }}
                         handleBack={() => { previousStage() }}>
-                        {stageNum ===3 &&
+                        {stageNum ===4 &&
                             <MultiOptionSelector
                                 listGiven={commonAllergiesList}
                                 checked={(allergyTitle) => {
@@ -160,7 +178,7 @@ export const Guest: React.FC<Props> =
                 }
                 
                 <Question
-                    difStages={stageNum - (allergies === true? 4:3)}
+                    difStages={stageNum - (allergies === true? 5:4)}
                     questionText={questionFinishGuest}
                     answerButtonList={
                         answersFinishGuest.map((answer) => ({ text: answer.text }))
