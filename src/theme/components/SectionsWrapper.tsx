@@ -24,9 +24,9 @@ export const SectionsWrapper: React.FC<Props> =
       <GlobalSectionWrapper>
         <ParallaxContainer active={currentSection === 1}
           parallaxChildren2={[
-            <DecorationImage src="../../public/assets/images/testSmall.svg" />,
-            <DecorationImage src="../../public/assets/images/testSmall2.svg" />,
-            <DecorationImage src="../../public/assets/images/testSmall3.svg" />
+            <DecorationImage key="1" src="../../public/assets/images/testSmall.svg" />,
+            <DecorationImage key="2" src="../../public/assets/images/testSmall2.svg" />,
+            <DecorationImage key="3" src="../../public/assets/images/testSmall3.svg" />
           ]}
           parallaxChildren0={
             sections

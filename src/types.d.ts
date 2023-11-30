@@ -25,7 +25,6 @@ export interface GuestType {
   lastName2: string,
   confirmed: boolean,
   attendance: boolean,
-  extraGuestsNum: number
   busGo: boolean,
   busBack: boolean,
   hotel: boolean,

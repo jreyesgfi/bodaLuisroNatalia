@@ -27,16 +27,29 @@ export const submitData = (guests:ListOfGuests): void => {
 };
 
 //----------------------------------------------------------------
-export const receiveData = (groupID: GuestType['groupID'], callback: (data:GuestType[])=>void): void => {
+export const receiveData = (callback: (data:GuestType[])=>void): void => {
     
+    // Get the URL parameters
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    
+    // Access groupID and token from the params object
+    const { groupID, token } = params;
+
     const data = {
         GroupID: groupID,
+        token: token,
         Method: getDataMethod
     }
+
+    // Log the values for demonstration
+    console.log('groupID:', groupID);
+    console.log('token:', token);
 
     // Send a POST request to allow the arguments providing
     axios.post(connectionUrl, data, connectionData)
         .then((response) => {
+            console.log(response)
             // Transform the data
             const text = response.data;
             const rows = text.split('\n');
@@ -48,12 +61,14 @@ export const receiveData = (groupID: GuestType['groupID'], callback: (data:Guest
                         firstName: row[2],
                         lastName1: row[3],
                         lastName2: row[4],
-                        confirmed: row[5] === "No" ? false : true,
-                        attendance: row[6] === "No" ? false : true,
-                        extraGuestsNum: Number(row[7])||0,
-                        bus: row[8] === "No" ? false : true,
-                        allergies: row[9] === "No" ? false : true,
-                        allergiesList: row[10]?.split(',')||[],
+                        confirmed: row[5] === "Yes",
+                        attendance: row[6] === "Yes",
+                        busGo: row[7] === "Yes",
+                        busBack: row[8] === "Yes",
+                        hotel: row[9] === "Yes",
+                        allergies: row[10] === "Yes",
+                        allergiesList: row[11] ? row[11].split(',') : [],
+                        otherAllergy: row[12],
                 }
                 return guest;
             });

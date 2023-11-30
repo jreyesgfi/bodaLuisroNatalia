@@ -96,7 +96,7 @@ const App = (): JSX.Element => {
 
   // First load of the data
   useEffect(() => {
-    receiveData('2', handleNewData);
+    receiveData(handleNewData);
     console.log(currentLevelContext);
   }, [])
 
@@ -109,8 +109,8 @@ const App = (): JSX.Element => {
           levelName='Section'>
           <SectionsWrapper 
             sections={[
-                <HeroSection></HeroSection>,
-                <ConfirmationSection guests={guests}></ConfirmationSection>
+                <HeroSection key="hero-section"></HeroSection>,
+                <ConfirmationSection key="confirmation-section" guests={guests}></ConfirmationSection>
             ]}/>
         </ProcessWizard>
       </UpdateGuestContext.Provider>
