@@ -50,7 +50,6 @@ export const Guests: React.FC<Props> = ({ guests, currentGuestNum }) => {
                                         lastName2={guest.lastName2}
                                         confirmed={guest.confirmed}
                                         attendance={guest.attendance}
-                                        extraGuestsNum={guest.extraGuestsNum}
                                         busGo={guest.busGo}
                                         busBack={guest.busBack}
                                         hotel = {guest.hotel}

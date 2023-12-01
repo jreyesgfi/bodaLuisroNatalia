@@ -76,14 +76,19 @@ const GlobalStyles = createGlobalStyle`
         box-sizing:border-box;
         margin:0;
         padding:0;
-		color:${globalColors.dark.primary};
         font-family: primary-normal, sans-serif;
 		font-display: auto;
+
+		margin-block-start: 0;
+		margin-block-end: 0;
 		text-align: left;
     	@media screen and (max-width: 800px) {
 			text-align: center;
 		}
     }
+	body {
+		overflow:hidden;
+	}
 
 `;
 interface InversedElementItf {
@@ -135,16 +140,17 @@ export const Container = styled.div`
 	}
 `;
 export const MainHeading = styled.h1<InversedElementItf>`
-    font-size: 48px;
-	font-family: FreeMono, monospace;
-	margin: 0;
+    font-size: 72pt;
+	font-family: primary-title, monospace;
+	font-weight: 100;
+	margin: 8px auto 16px;
 	padding-bottom:0;
 	color: ${({ inverse }) => (inverse ?
-		globalColors.dark.primary :
+		globalColors.sencondary[400] :
 		globalColors.light.primary)};
 	width: fit-content;
 	height:fit-content;
-	letter-spacing: 4px;
+	letter-spacing: 8px;
 	line-height: 1;
 	text-align: center;
 	user-select: none;
@@ -158,7 +164,7 @@ interface HeadingInterface extends InversedElementItf, LocatedElementItf, TextIt
 
 export const Heading = styled.h2<HeadingInterface>`
 	font-size: ${({ fontSize }) => (fontSize ? fontSize : 'clamp(1.2rem, 4.8vw, 3.6rem)')};
-	font-family: primary-bold, monospace;
+	font-family: primary-title, monospace;
 	user-select: none;
 	margin: ${({ margin }) => (margin ? margin : '')};
 	margin-bottom: ${({ mb }) => (mb ? mb : '0.5rem')};
@@ -180,15 +186,15 @@ export const Heading = styled.h2<HeadingInterface>`
 	}
 `;
 
-export const NameHeading = styled.h3<HeadingInterface>`
+export const NameHeading = styled(Heading)<HeadingInterface>`
 	font-size: ${({ fontSize }) => (fontSize ? fontSize : 'clamp(0.6rem, 3vw, 1.8rem)')};
-	font-family: primary-light, sans-serif;
+	font-family: primary-title, ;
 	user-select: none;
 	margin: ${({ margin }) => (margin ? margin : '')};
 	margin-bottom: ${({ mb }) => (mb ? mb : '0')};
 	margin-top: ${({ mt }) => (mt ? mt : '16px')};
 	color: ${({ inverse }) => (inverse ?
-		globalColors.dark.primary :
+		globalColors.sencondary[400] :
 		globalColors.light.primary)};
 	letter-spacing: 0.4rem;
 	line-height: 1.4;
@@ -298,10 +304,12 @@ export const Column = styled.div<ContainerItf>`
 export const Text = styled.p<TextWrapperItf>`
     color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};
     width:${({ width }) => width ? width : 'auto'};
-	font-size:${({ fontSize }) => fontSize ? fontSize : '20pt'};
+	font-size:${({ fontSize }) => fontSize ? fontSize : '14pt'};
+	line-height:1.5;
+	letter-spacing: 2px;
 	user-select: none;
 	max-width: 45vw;
-	font-family:${({ font }) => font ? font : 'primary-light'};
+	font-family:${({ font }) => font ? font : 'primary-body'};
 	display: inline-block;
     @media screen and (max-width: 800px) {
 		max-width: 80vw;

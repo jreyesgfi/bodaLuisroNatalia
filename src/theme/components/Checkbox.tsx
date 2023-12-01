@@ -40,8 +40,8 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 
 const StyledCheckbox = styled.div<{checked:boolean}>`
 display: inline-block;
-width: 16px;
-height: 16px;
+width: 20px;
+height: 20px;
 ${props => props.checked ? checkedStyles : uncheckedStyles};
 border-radius: 3px;
 transition: all 0.3s;

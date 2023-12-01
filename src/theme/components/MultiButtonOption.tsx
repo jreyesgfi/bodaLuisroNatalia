@@ -25,8 +25,10 @@ const OptionButtonWrapper = styled.div`
   display: flex;
   gap: 10px;
   justify-content: left;
+  align-items: center;
   margin:0;
   padding:0;
+  overflow-x: auto;
 `;
 
 interface OptionButton extends ButtonItf {
@@ -35,10 +37,11 @@ interface OptionButton extends ButtonItf {
 }
 const OptionButton = styled(CustomButton) <OptionButton>`
 width: 180px;
-margin: 0; 
+height: 48px;
+margin: 8px auto; 
 transition: transform 1s, opacity 0.5s;
   transform: ${({ selected, activeStage, index }) => (!activeStage && selected? 
-    `translateX(calc(-${index * (180+ 5)}px))`: 'translateX(0%)')};
+    `translateX(calc(-${index * (100)}% - ${index * (8)}px))`: 'translateX(0%)')};
         
   opacity: ${({ selected, activeStage }) => (activeStage ? 1:(selected ? 1 : 0))};
 `;

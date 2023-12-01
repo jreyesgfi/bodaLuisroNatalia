@@ -1,14 +1,14 @@
 /*fonts*/
 @font-face { 
-    font-family: primary-light;
+    font-family: primary-title;
     src: url('../public/assets/fonts/pinion/PinyonScript-Regular.ttf')
 }
 @font-face { 
-    font-family: primary-normal;
+    font-family: primary-body;
     src: url('../public/assets/fonts/BitterPro-Light.ttf')
 }
 @font-face { 
-    font-family: primary-bold;
+    font-family: primary-subtitle;
     src: url('../public/assets/fonts/BitterPro-Bold.ttf')
 }
 @font-face { 

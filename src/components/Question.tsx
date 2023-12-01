@@ -14,13 +14,13 @@ interface QuestionWrapperItf {
 
 
 const sizesDict = {
-    button: 'calc(2rem + 2px)',
-    icon: '2rem',
-    wrapper: 'auto'
+    button: ['100%' , '100%'],
+    icon: ['36pt', '36pt'],
+    wrapper: ['auto', 'auto']
 };
 const transformDict = {
-    button: 'translate(-50%, 50%);',
-    icon: 'rotate(180deg);',
+    button: '',
+    icon: 'translate(-50%) rotate(180deg);',
     wrapper: ''
 }
 
@@ -30,8 +30,8 @@ interface CSSInterface {
 }
 // checked and not checked styles
 const onTheStageStyle = ({difStages, element}:CSSInterface) => css`
-    width: ${sizesDict[element]};
-    height: ${sizesDict[element]};
+    width: ${sizesDict[element][1]};
+    height: ${sizesDict[element][0]};
     opacity:${1 - 0.5 * (difStages||0)};
     transform: ${transformDict[element]};
     max-height: ${difStages >1? '0px':'500px'};
@@ -49,25 +49,47 @@ const nextStageStyle = css`
 
 const TakeBackButton = styled(RoundIconWrapper)`
     position: absolute;
-    background-color: ${globalColors.light.primary};
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255,0) 100%);
     padding: 4px;
-    left: 50%;
+    width: 100%;
+    height: 0px;
+    border-radius:0px;
     bottom: 0px;
-    border-radius: 50%;
-    border: 1px solid ${globalColors.sencondary[400]};
+    border: none;
     cursor: pointer;
     z-index:50;
+    &:hover{
+        background:linear-gradient(to top, ${globalColors.sencondary[100]} 0%, rgba(255, 255, 255,0) 30%);
+    }
 `;
 const TakeBackIcon = styled(RoundIconImage)`
-    width: 2rem;
+    width: 36pt;
+    height: 0pt;
     position: absolute;
+    background: radial-gradient(
+        ellipse farthest-corner at center,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0)
+      );
+    border-radius: 50%;
+    left: 50%;
+    bottom: 4px;
     transform: rotate(-180deg);
 `;
 const ChildrenWrapper = styled.div`
+    display: block;
+    min-width: 90%;
     min-height: fit-content;
+`;
+const QuestionText = styled(Text)`
+    margin: auto 48px 16px 0;
 `;
 const QuestionWrapper = styled.div<QuestionWrapperItf>`
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 12px;
     overflow: visible;
     padding-bottom:${({ difStages }) => (difStages > 1 ? '0px':'10px')};
     transition: transform 0s, opacity 0.7s, max-height 1.3s, padding 0.7s;
@@ -77,7 +99,7 @@ const QuestionWrapper = styled.div<QuestionWrapperItf>`
             };
 
         ${TakeBackButton}{
-            transition: transform 0.5s, height 0.5s, width 0.5s;
+            transition: transform 0.5s, height 0.5s, background 0.3s;
             ${({ difStages }) => (difStages > 0 ? 
                 onTheStageStyle({difStages:difStages-1,element:"button"})
                 :nextStageStyle)
@@ -108,9 +130,9 @@ export const Question: React.FC<Props> = ({ children, handleBack, difStages, que
     return (
         <QuestionWrapper
             difStages={difStages}>
-            <Text inverse={true}>
-                {questionText}
-            </Text>
+            {questionText!=='' && <QuestionText inverse={true}>
+                 {questionText}
+            </QuestionText>}
             <MultiButtonOption
                 activeStage={difStages === 0}
                 buttonList={answerButtonList}

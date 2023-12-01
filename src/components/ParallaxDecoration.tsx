@@ -11,18 +11,21 @@ const Image = styled.img<ImageItf>`
     height: ${size}px;`)};
 
     position: absolute;
-    inset: ${({pos})=>(`${pos[1]*100}vh ${pos[0]*100}vw auto auto`)};
+    inset: ${({pos})=>(`${pos[1]*100}vh auto auto ${pos[0]*100}vw`)};
     margin: auto;
-    transition: transform 0.2s;
+    transition: transform 0.2s linear;
+    transition-delay: 0s;
 `;
 
 interface Props {
     src:string;
+    initialPos:number[];
+    initialSize:number;
 }
-export const DecorationImage: React.FC<Props> = ({src}) => { //change it to bring back all the html images properties
+export const DecorationImage: React.FC<Props> = ({src, initialPos, initialSize}) => { //change it to bring back all the html images properties
 
-    const [pos] = useState([0.9+Math.random()/4,Math.random()/2]);
-    const [size] = useState(500 - (1.15-pos[0])*1000);
+    const [pos] = useState<number[]>(initialPos);
+    const [size] = useState(initialSize);
    console.log(pos,size)
     return (
         <Image src={src} pos={pos} size={size}>

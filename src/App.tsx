@@ -1,5 +1,5 @@
 import './theme/globalFonts.css'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, Fragment, useContext, useEffect, useState } from 'react'
 import { Todos } from './components/Todos'
 import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, UpdateGuest } from './types'
 import { FILTERS_BUTTONS, TODO_FILTERS } from './consts'
@@ -12,6 +12,7 @@ import { ParallaxContainer } from './theme/components/ParallaxContainer'
 
 import { LevelContext, ProcessWizard } from './theme/components/ProcessWizard'
 import { SectionsWrapper } from './theme/components/SectionsWrapper'
+import GlobalStyles from './theme/globalStyles'
 
 
 const mockTodos = [
@@ -38,7 +39,7 @@ height: 98vh;
 width: 98vw;
 padding: 0;
 margin: 0;
-scroll: auto;
+scroll: none;
 `;
 
 // intialize the context
@@ -103,18 +104,22 @@ const App = (): JSX.Element => {
   console.log(currentLevelContext);
 
   return (
-    <GlobalWrapper>
-      <UpdateGuestContext.Provider value={setGuest}>
-        <ProcessWizard
-          levelName='Section'>
-          <SectionsWrapper 
-            sections={[
-                <HeroSection key="hero-section"></HeroSection>,
-                <ConfirmationSection key="confirmation-section" guests={guests}></ConfirmationSection>
-            ]}/>
-        </ProcessWizard>
-      </UpdateGuestContext.Provider>
-    </GlobalWrapper>
+    <Fragment>
+      <GlobalStyles />
+      <GlobalWrapper>
+        <UpdateGuestContext.Provider value={setGuest}>
+          <ProcessWizard
+            levelName='Section'>
+            <SectionsWrapper
+              sections={[
+                <HeroSection key={1}></HeroSection>,
+                <ConfirmationSection key={2} guests={guests}></ConfirmationSection>
+              ]} />
+          </ProcessWizard>
+        </UpdateGuestContext.Provider>
+      </GlobalWrapper>
+    </Fragment>
+
   )
 }
 

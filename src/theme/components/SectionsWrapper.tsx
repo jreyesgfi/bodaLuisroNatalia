@@ -10,6 +10,7 @@ import styled from "styled-components";
 const GlobalSectionWrapper = styled.div`
     width: 100vw;
     height: 100vh;
+    
 `;
 
 interface Props {
@@ -24,9 +25,10 @@ export const SectionsWrapper: React.FC<Props> =
       <GlobalSectionWrapper>
         <ParallaxContainer active={currentSection === 1}
           parallaxChildren2={[
-            <DecorationImage key="1" src="../../public/assets/images/testSmall.svg" />,
-            <DecorationImage key="2" src="../../public/assets/images/testSmall2.svg" />,
-            <DecorationImage key="3" src="../../public/assets/images/testSmall3.svg" />
+            <DecorationImage key="1" 
+            initialPos={[0,0.05]} initialSize={50}
+            src="../../public/assets/images/testSmall.svg" />
+            
           ]}
           parallaxChildren0={
             sections

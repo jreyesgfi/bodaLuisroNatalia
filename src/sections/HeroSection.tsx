@@ -23,11 +23,11 @@ const unactiveStyles = (level: number) => css`
 
 
 const TextWrapper = styled.div`
-    margin: auto 32px auto;
+    margin: auto 64px auto;
     display: block;
     position: absolute;
     inset: 0 auto 0;
-    height: 60vh;
+    height: 70vh;
     max-width: 600px;
     > *{
         text-align: left;
@@ -40,8 +40,9 @@ const IntroductionText = styled(Text)`
 `;
 
 const HighlightedText = styled(Text)`
-    font-size: 24pt;
-    margin: 0 8px;
+
+    font-size: 16pt;
+    color: ${globalColors.sencondary[400]};
 `;
 const PurposeText = styled(CustomButton)`
     font-family: primary-light, monospace;
@@ -58,6 +59,9 @@ const HeroSectionWrapper = styled(Section) <HeroWrapperItf>`
     transition:  transform 1s, max-height 1.3s ease-out;
     ${({ active }) => (active === true ? activeStyles : unactiveStyles(1))}
 `;
+const NextButton = styled(CustomButton)`
+    margin-top: 32px;
+`;
 
 export const HeroSection: React.FC =
     ({ }) => {
@@ -70,14 +74,15 @@ export const HeroSection: React.FC =
         return (
 
             <HeroSectionWrapper inverse={true} active={activeState}>
-
+                <LateralBigImage src="../../public/assets/images/test1.png" />
                 <TextWrapper>
-
+                    
                     <IntroductionText inverse={true}>
                         {introductionText1_1}
                         <HighlightedText inverse={true}>
                             <b>{purposeText}</b>
                         </HighlightedText>
+                        <br/>
                         {introductionText1_2}
                     </IntroductionText>
                     <MainHeading inverse={true}>{mainTitleText}</MainHeading>
@@ -88,12 +93,13 @@ export const HeroSection: React.FC =
                         </HighlightedText>
                         {introductionText3}
                     </IntroductionText>
-                    <CustomButton
+                    <NextButton
                         selected={true}
                         onClick={() => { handleClick() }}
-                    >{initialButtonText}</CustomButton>
+                    >{initialButtonText}
+                    </NextButton>
                 </TextWrapper>
-                <LateralBigImage src="../../public/assets/images/test1.png" />
+                
 
             </HeroSectionWrapper>
 
