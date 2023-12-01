@@ -9,7 +9,7 @@ interface ConnectionData extends AxiosRequestConfig
     redirect: RequestRedirect;
 }
 
-export const connectionUrl = 'https://script.google.com/macros/s/AKfycbw-K1YtBLN7UfeNo_WHpdpX7LE3Y-d7ozBA15tTACE0OK5_3CibeJltvmucImrTJxKd/exec';
+export const connectionUrl = 'https://script.google.com/macros/s/AKfycbyYeS7eVLiw5nmIRrIlilqrejlK7vQrhTDT7Dl0KqhnmTAnCnkMEb-xaNMXqrNz2_b3/exec';
 export const connectionData:ConnectionData = {
             headers: {'Content-type': 'application/x-www-form-urlencoded' },
             redirect: "follow"

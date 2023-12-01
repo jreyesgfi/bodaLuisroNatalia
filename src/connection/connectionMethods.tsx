@@ -4,6 +4,13 @@ import axios from 'axios';
 
 // ----------------------------------------------------------------
 export const submitData = (guests:ListOfGuests): void => {
+    // Get the URL parameters
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    
+    // Access groupID and token from the params object
+    const { groupID, token } = params;
+
     // check that is confirmed
     const confirmedGuests = guests.map((guest) => {
         guest.confirmed = true;
@@ -13,9 +20,11 @@ export const submitData = (guests:ListOfGuests): void => {
     // define the structure of the data
     const data = {
         Guests:JSON.stringify(guests),
+        GroupID: groupID,
+        token: token,
         Method: postDataMethod
     }
-    console.log(data);
+
     // Send a POST request with the data string to your Google Apps Script
     axios.post(connectionUrl, data, connectionData)
         .then(response => {
@@ -42,14 +51,9 @@ export const receiveData = (callback: (data:GuestType[])=>void): void => {
         Method: getDataMethod
     }
 
-    // Log the values for demonstration
-    console.log('groupID:', groupID);
-    console.log('token:', token);
-
     // Send a POST request to allow the arguments providing
     axios.post(connectionUrl, data, connectionData)
         .then((response) => {
-            console.log(response)
             // Transform the data
             const text = response.data;
             const rows = text.split('\n');

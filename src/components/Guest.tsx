@@ -23,7 +23,7 @@ interface Props extends GuestType {
 export const Guest: React.FC<Props> =
     ({
         guestID, firstName, lastName1, lastName2,
-        attendance, extraGuestsNum, busGo, busBack, allergies, allergiesList, otherAllergy }) => {
+        attendance, busGo, busBack, allergies, allergiesList, otherAllergy }) => {
 
 
         // Define the states
@@ -46,11 +46,15 @@ export const Guest: React.FC<Props> =
             setGuest(guestID, updateGuest);
             nextStage();
         }
+        
         const handleConfirm: HandleChange = (guestID, rawState) => {
 
             if (rawState === null) { return }
             const state = answersAssistanceText[rawState].value;
             handleSelection(guestID, 'attendance', state);
+            if (state === false) {
+                setStageNum(4);
+            }
         }
 
         const handleHotel: HandleChange = (guestID, rawState) => {
@@ -96,6 +100,10 @@ export const Guest: React.FC<Props> =
             setGuest(guestID, updateGuest);
         }
 
+        const returnBeginning = ()=>{
+            setStageNum(0);
+        }
+
         const handleFinished = (rawState:number|null)=>{
             if (rawState === null){ return}
             const state = answersFinishGuest[rawState].value;
@@ -103,11 +111,18 @@ export const Guest: React.FC<Props> =
                 nextStage();
                 changeGuest(true);
             }
-            else { previousStage();}
+            else { handleBack();}
         }
+        const handleBack = (toBeggining?:boolean)=>{
+            if (attendance === false || toBeggining === true){
+                return returnBeginning();
+                
+            }
+            return previousStage();
+        }
+
         const handleReturnToGuest = () => {
-            changeGuest(false);
-            previousStage();
+            returnBeginning();
         }
        
         return (
@@ -122,7 +137,7 @@ export const Guest: React.FC<Props> =
                         answersAssistanceText.map((answer) => ({ text: answer.text }))
                     }
                     handleSelection={(state) => { handleConfirm(guestID, state) }}
-                    handleBack={() => { previousStage() }} />
+                    handleBack={() => { handleBack() }} />
 
                 <Question
                     difStages={stageNum - 1}
@@ -131,7 +146,7 @@ export const Guest: React.FC<Props> =
                         answersBusText.map((answer) => ({ text: answer.text }))
                     }
                     handleSelection={(state) => { handleBus(guestID, state) }}
-                    handleBack={() => { previousStage() }} />
+                    handleBack={() => { handleBack() }} />
                 
                 <Question
                     difStages={stageNum - 2}
@@ -140,7 +155,7 @@ export const Guest: React.FC<Props> =
                         answersHotelText.map((answer) => ({ text: answer.text }))
                     }
                     handleSelection={(state) => { handleHotel(guestID, state) }}
-                    handleBack={() => { previousStage() }}>
+                    handleBack={() => { handleBack() }}>
 
                 </Question>
                 <Question
@@ -150,7 +165,7 @@ export const Guest: React.FC<Props> =
                         answersAllergiesText.map((answer) => ({ text: answer.text }))
                     }
                     handleSelection={(state) => { handleAllergies(guestID, state) }}
-                    handleBack={() => { previousStage() }}>
+                    handleBack={() => { handleBack() }}>
 
                 </Question>
                 {allergies === true && 
@@ -161,7 +176,7 @@ export const Guest: React.FC<Props> =
                             answerAllergiesDone.map((answer) => ({ text: answer.text }))
                         }
                         handleSelection={() => { nextStage() }}
-                        handleBack={() => { previousStage() }}>
+                        handleBack={() => { handleBack() }}>
                         {stageNum ===4 &&
                             <MultiOptionSelector
                                 listGiven={commonAllergiesList}
@@ -184,7 +199,9 @@ export const Guest: React.FC<Props> =
                         answersFinishGuest.map((answer) => ({ text: answer.text }))
                     }
                     handleSelection={(value) => { handleFinished(value) }}
-                    handleBack={() => { handleReturnToGuest() }}>
+                    handleBack={() => { 
+                        handleBack();
+                    }}>
                 </Question>
             
 
