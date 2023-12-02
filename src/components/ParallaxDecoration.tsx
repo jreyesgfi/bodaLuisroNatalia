@@ -26,7 +26,6 @@ export const DecorationImage: React.FC<Props> = ({src, initialPos, initialSize})
 
     const [pos] = useState<number[]>(initialPos);
     const [size] = useState(initialSize);
-   console.log(pos,size)
     return (
         <Image src={src} pos={pos} size={size}>
             

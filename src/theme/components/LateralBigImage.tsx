@@ -7,13 +7,13 @@ interface Props {
 
 
 const Image = styled.img<{left?:boolean}>`
+    object-fit: cover;
     position: absolute;
     max-width: max(600px, 98vw);
     max-height: 600px;
     width: 50%;
     margin: auto 24px;
     inset: 0 0 0 auto;
-    border: 1px solid black;
     inset: ${({left})=>(left===true?"0 auto 0 0":"0 0 0 auto")}
     
     @media (max-width: 600px) {

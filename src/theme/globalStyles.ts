@@ -140,10 +140,10 @@ export const Container = styled.div`
 	}
 `;
 export const MainHeading = styled.h1<InversedElementItf>`
-    font-size: 72pt;
+    font-size: 60pt;
 	font-family: primary-title, monospace;
 	font-weight: 100;
-	margin: 8px auto 16px;
+	margin: 16px auto 16px;
 	padding-bottom:0;
 	color: ${({ inverse }) => (inverse ?
 		globalColors.sencondary[400] :

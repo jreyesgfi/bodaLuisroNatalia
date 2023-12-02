@@ -23,11 +23,11 @@ const unactiveStyles = (level: number) => css`
 
 
 const TextWrapper = styled.div`
-    margin: auto 64px auto;
+    margin: auto 48px auto;
     display: block;
     position: absolute;
     inset: 0 auto 0;
-    height: 70vh;
+    height: 62vh;
     max-width: 600px;
     > *{
         text-align: left;
@@ -89,7 +89,7 @@ export const HeroSection: React.FC =
                     <IntroductionText inverse={true}>
                         {introductionText2}
                         <HighlightedText inverse={true}>
-                            <b>{dateText}</b>
+                            &nbsp;<b>{dateText}</b>&nbsp;
                         </HighlightedText>
                         {introductionText3}
                     </IntroductionText>

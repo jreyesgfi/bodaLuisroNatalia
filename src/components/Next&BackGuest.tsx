@@ -14,7 +14,7 @@ const ButtonsWrapper = styled.div`
     position: absolute;
     width: 100%;
     bottom: 0;
-    background-color:${globalColors.light.white};
+    background-color:${globalColors.transparent.full};
     z-index:100;
 `;
 

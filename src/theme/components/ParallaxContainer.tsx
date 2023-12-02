@@ -11,9 +11,10 @@ const activeStyles = css`
 const unactiveStyles = (level: number) => css`
     transform: translateY(-${100 * (1-(level/5))/(level+1)}%);
 `
+//transition: transform ${1.5-level/3}s;
 const permanentStyles = (level: number) => css`
-    transition: transform ${1.5-level/3}s ease-in-out;
-    transition-delay: ${level/10}s;
+    transition: transform 1.3s ease-in-out;
+    
 `;
 
 // Styled components
@@ -25,6 +26,7 @@ const ParallaxWrapper = styled.div<{ level: number; active: boolean }>`
     position: absolute;
     ${({ level }) => (permanentStyles(level))};
     z-index: ${({ level }) => (level === 0 ? '20': '')};
+    opacity: ${({ level }) => (`${1-level*0.3}`)};
     >*{
         pointer-events: auto;
     }

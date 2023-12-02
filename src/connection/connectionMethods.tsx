@@ -65,12 +65,12 @@ export const receiveData = (callback: (data:GuestType[])=>void): void => {
                         firstName: row[2],
                         lastName1: row[3],
                         lastName2: row[4],
-                        confirmed: row[5] === "Yes",
-                        attendance: row[6] === "Yes",
-                        busGo: row[7] === "Yes",
-                        busBack: row[8] === "Yes",
-                        hotel: row[9] === "Yes",
-                        allergies: row[10] === "Yes",
+                        confirmed: row[5] === "1",
+                        attendance: row[6] === "1",
+                        busGo: row[7] === "1",
+                        busBack: row[8] === "1",
+                        hotel: row[9] === "1",
+                        allergies: row[10] === "1",
                         allergiesList: row[11] ? row[11].split(',') : [],
                         otherAllergy: row[12],
                 }
@@ -78,7 +78,6 @@ export const receiveData = (callback: (data:GuestType[])=>void): void => {
             });
             
             // Use the retrieved data
-            console.log(objectParsedData); // Handle the parsed data here
             callback(objectParsedData);
         })
         .catch((error) => {

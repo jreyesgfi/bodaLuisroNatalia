@@ -26,9 +26,25 @@ export const SectionsWrapper: React.FC<Props> =
         <ParallaxContainer active={currentSection === 1}
           parallaxChildren2={[
             <DecorationImage key="1" 
-            initialPos={[0,0.05]} initialSize={50}
-            src="../../public/assets/images/testSmall.svg" />
-            
+            initialPos={[-0,0.05]} initialSize={50}
+            src="../../public/assets/images/testSmall.svg" />,
+            <DecorationImage key="2" 
+            initialPos={[-0.12,0.83]} initialSize={400}
+            src="../../public/assets/images/testSmall.svg" />,
+            <DecorationImage key="3" 
+            initialPos={[0.96,0.7]} initialSize={60}
+            src="../../public/assets/images/testSmall2.svg" />,
+            <DecorationImage key="4" 
+            initialPos={[0.8,0.12]} initialSize={40}
+            src="../../public/assets/images/testSmall3.svg" />
+          ]}
+          parallaxChildren3={[
+            <DecorationImage key="1" 
+            initialPos={[0.9,0.95]} initialSize={230}
+            src="../../public/assets/images/testSmall2.svg" />,
+            <DecorationImage key="2" 
+            initialPos={[0.9,0.1]} initialSize={60}
+            src="../../public/assets/images/testSmall.svg" />,
           ]}
           parallaxChildren0={
             sections
