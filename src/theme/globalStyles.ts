@@ -140,7 +140,7 @@ export const Container = styled.div`
 	}
 `;
 export const MainHeading = styled.h1<InversedElementItf>`
-    font-size: 60pt;
+    font-size: 60px;
 	font-family: primary-title, monospace;
 	font-weight: 100;
 	margin: 16px auto 16px;

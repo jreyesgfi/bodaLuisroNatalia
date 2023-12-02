@@ -1,8 +1,9 @@
 import { useContext, useState } from "react"
 import styled from 'styled-components';
-import { UpdateGuestContext } from "../App";
+
 import { commonAllergiesList } from "../assets/allergies";
 import { answersAllergiesText, answersAssistanceText, answersBusText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAssistanceText, questionBusText, questionFinishGuest, answersFinishGuest, otherAllergyText, questionHotelText, answersHotelText } from "../assets/texts/guestText";
+import { UpdateGuestContext } from "../pages/ConfirmationPage";
 import { ChangeGuestContext } from "../sections/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
 import { NameHeading} from "../theme/globalStyles";
