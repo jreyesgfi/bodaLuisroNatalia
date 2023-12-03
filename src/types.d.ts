@@ -44,6 +44,12 @@ export type HandleNewAllergy = (id: GuestID, allergyTitle:AllergieType) => void;
 
 // Theme Components types
 export type ChildrenType = (ReactNode[] | ReactNode);
+export interface ControlItf{
+  possibleTakeBack?: boolean;
+  possibleNext?: boolean;
+  changeGuest?: (next:boolean) => void;
+  children?: (ReactNode[] | ReactNode);
+}
 export interface OptionButtonItf {
   id?: string;
   text: string;

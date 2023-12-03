@@ -1,8 +1,11 @@
 
+import { ReactNode, useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { backGuestText, nextGuestText } from '../assets/texts/controlTexts';
 import { CustomButton } from '../theme/components/Button';
 import { globalColors } from '../theme/globalStyles';
+import { ChangeGuestContext } from '../sections/ConfirmationSection';
+import { ControlItf } from '../types';
 
 
 
@@ -25,25 +28,19 @@ const OptionButton = styled(CustomButton) <OptionButton>`
     
 `;
 
-interface Props {
-    possibleTakeBack?: boolean;
-    possibleNext?: boolean;
-    changeGuest: (next:boolean) => void;
-}
-
-export const NextBackGuestControl: React.FC<Props> = ({possibleTakeBack, possibleNext, changeGuest }) => {
-
+export const NextBackGuestControl: React.FC<ControlItf> = ({possibleTakeBack, possibleNext, changeGuest, children:children }) => {
     return (
         <ButtonsWrapper>
             <OptionButton
                 onClick={() => {
-                    if(possibleTakeBack === true){changeGuest(false)}
+                    if(possibleTakeBack === true){changeGuest?.(false)}
                 }}
                 highlighted= {possibleTakeBack === true}
             >{backGuestText}</OptionButton>
+            {children}
             <OptionButton
                 onClick={() => {
-                    if(possibleNext === true){changeGuest(true)}
+                    if(possibleNext === true){changeGuest?.(true)}
                 }}
                 highlighted= {possibleNext === true}
             >{nextGuestText}</OptionButton>
