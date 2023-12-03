@@ -22,6 +22,8 @@ const App = (): JSX.Element => {
         <BrowserRouter>
           <Routes>
             <Route index element={<ConfirmationPage></ConfirmationPage>}/>
+            <Route path="/home" element={<HomePage></HomePage>}/>
+            <Route path="/asistencia" element={<ConfirmationPage></ConfirmationPage>}/>
           </Routes>
         </BrowserRouter>
     </Fragment>

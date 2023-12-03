@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import { Guests } from '../components/Guests'
-import { GuestsProguessBar } from '../components/GuestsProgressBar';
+import { GuestsProgressWidget } from '../components/GuestsProgressWidget';
 import { NextBackGuestControl } from '../components/Next&BackGuest';
 import { submitData} from '../connection/connectionMethods';
 import { Section } from '../theme/globalStyles';
@@ -22,7 +22,7 @@ export const ConfirmationSection: React.FC<Props> =
         return (
             <ChangeGuestContext.Provider value={changeGuest}>
                 <Section inverse={true} margin='16px 2.5vw;'>
-                <GuestsProguessBar
+                <GuestsProgressWidget
                     numStages={guests.length}
                     currentStage={currentGuestNum-1}
                     guestsNames= {guests.map(guest => guest.firstName)}
@@ -31,11 +31,11 @@ export const ConfirmationSection: React.FC<Props> =
                     guests={guests}
                     currentGuestNum={currentGuestNum}
                 />
-                <NextBackGuestControl
+                {guests.length >1 && <NextBackGuestControl
                         changeGuest={changeGuest}
                         possibleNext={currentGuestNum <= lastGuestChecked}
                         possibleTakeBack={currentGuestNum > 1}
-                    />
+                    />}
             </Section>
             </ChangeGuestContext.Provider>
             

@@ -257,10 +257,10 @@ export const Section = styled.section<Section>`
 	margin-bottom: ${({ bottomWave}) => (bottomWave ? 0 : '')};*/
 
 interface ContainerItf extends LocatedElementItf, ResponsiveElementItf {
-	justify: string;
-	align: string;
-	gap: string;
-	wrap: string;
+	justify?: string;
+	align?: string;
+	gap?: string;
+	wrap?: string;
 }
 
 export const Row = styled.div<ContainerItf>`
@@ -349,6 +349,7 @@ export const CenterWrapper = styled.div<ContainerItf>`
 	gap:1.5rem;
 	justify-content:space-around;
 `;
+export const GeneralWrapper = styled.div<ContainerItf>``;
 
 export const Icon = styled.svg`
 `;
