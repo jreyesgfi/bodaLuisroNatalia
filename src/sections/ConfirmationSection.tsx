@@ -4,7 +4,7 @@ import { GuestsProgressWidget } from '../components/GuestsProgressWidget';
 import { NextBackGuestControl } from '../components/Next&BackGuest';
 import { submitData } from '../connection/connectionMethods';
 import { Section } from '../theme/globalStyles';
-import { ListOfGuests } from '../types'
+import { ControlPropsItf, ListOfGuests } from '../types'
 interface Props {
     guests: ListOfGuests;
 }
@@ -21,15 +21,17 @@ export const ConfirmationSection: React.FC<Props> =
             setCurrentGuestNum(currentGuestNum + (next === false ? -1 : 1));
             triggerSubmitData();
         }
-        interface ControlPropsItf {
-            changeGuest: (next?: boolean) => void;
-            possibleNext: boolean;
-            possibleTakeBack: boolean;
-          }
+        // interface ControlPropsItf {
+        //     ControlComponent
+        //     changeGuest: (next?: boolean) => void;
+        //     possibleNext: boolean;
+        //     possibleTakeBack: boolean;
+        //   }
           
           //...
           
           const controlProps: ControlPropsItf = {
+            ControlComponent: NextBackGuestControl,
             changeGuest,
             possibleNext: currentGuestNum <= lastGuestChecked,
             possibleTakeBack: currentGuestNum > 1  
@@ -47,7 +49,7 @@ export const ConfirmationSection: React.FC<Props> =
                     numStages={guests.length}
                     currentStage={currentGuestNum - 1}
                     guestsNames={guests.map(guest => guest.firstName)}
-                    Control={NextBackGuestControl}/>
+                    Control={controlProps}/>
                 </Section>
             </ChangeGuestContext.Provider>
 

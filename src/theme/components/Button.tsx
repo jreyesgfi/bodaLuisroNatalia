@@ -17,11 +17,21 @@ const uncheckedStyles = css`
     border: 1px solid ${globalColors.light.primary};
     background-color: ${globalColors.grey.light};
 `
+const hiddenStyles = css`
+	opacity: 0;
+`;
+
+const noneStyles = css`
+	border: 1px solid transparent;
+	background-color: ${globalColors.transparent.full}
+`;
 
 
 export interface ButtonItf {
 	highlighted?: boolean;
     selected?: boolean;
+	hidden_style?: boolean;
+	none_style?: boolean;
 }
 const ListItem = styled.div<{ selected:boolean }>`
     margin: 8pt 0;
@@ -32,9 +42,11 @@ const ListItem = styled.div<{ selected:boolean }>`
     ${({selected}) => (selected===true ? checkedStyles : uncheckedStyles)};
 `;
 export const CustomButton = styled.button<ButtonItf>`
-	${({selected, highlighted}) => {
+	${({selected, highlighted, hidden_style, none_style}) => {
         if (selected===true){return checkedStyles}
         if(highlighted===true){return highlightedStyles} 
+		if(hidden_style===true){return hiddenStyles}
+		if(none_style===true){return noneStyles} 
         return uncheckedStyles
     }};
     border-radius: 8px;

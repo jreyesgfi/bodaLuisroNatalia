@@ -33,22 +33,22 @@ const CurrentProgressLine = styled(ProgressLine)<{progressPercentage:number}>`
     z-index: 25;
 `;
 interface StageProps {
-    currentStage?: boolean;
+    current_stage?: boolean;
 }
 
 const GuestName = styled(Text) <StageProps>`
     margin: auto auto 0;
-    color: ${({ currentStage }) => (currentStage === true ? `${globalColors.sencondary[400]}` : `${globalColors.sencondary[200]}`)};
-    font-size: ${({ currentStage }) => (currentStage === true ? `14px` : `8px`)};
+    color: ${({ current_stage }) => (current_stage === true ? `${globalColors.sencondary[400]}` : `${globalColors.sencondary[200]}`)};
+    font-size: ${({ current_stage }) => (current_stage === true ? `14px` : `8px`)};
 `;
 
 
 const StageDot = styled.div<StageProps>`
-    width: ${({ currentStage }) => (currentStage === true ? `14px` : `8px`)};
-    height: ${({ currentStage }) => (currentStage === true ? `14px` : `8px`)};
+    width: ${({ current_stage }) => (current_stage === true ? `14px` : `8px`)};
+    height: ${({ current_stage }) => (current_stage === true ? `14px` : `8px`)};
     border-radius: 50%;
     margin: 0 auto;
-    background-color: ${({ currentStage }) => (currentStage === true ? `${globalColors.sencondary[400]}` : `${globalColors.sencondary[200]}`)};
+    background-color: ${({ current_stage }) => (current_stage === true ? `${globalColors.sencondary[400]}` : `${globalColors.sencondary[200]}`)};
     z-index: 50;
 `;
 
@@ -64,15 +64,15 @@ export const CustomProguessDots: React.FC<Props> = ({numStages, currentStage, la
     return(
         <ProgressDotsWrapper>
             {dots.map((stageNum,i) => (
-                <StageWrapper>
+                <StageWrapper key={i}>
                     {labels?.length !==0 &&
-                        <GuestName currentStage= {stageNum === currentStage}>
+                        <GuestName current_stage= {stageNum === currentStage}>
                             {labels?.[i]}
                         </GuestName>
                     }
                     <StageDot
                         key={i}
-                        currentStage = {stageNum === currentStage}
+                        current_stage = {stageNum === currentStage}
                     />
                     
                 </StageWrapper>

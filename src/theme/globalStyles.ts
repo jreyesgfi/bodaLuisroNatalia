@@ -86,8 +86,11 @@ const GlobalStyles = createGlobalStyle`
 			text-align: center;
 		}
     }
-	body {
+	html, body {
 		overflow:hidden;
+	}
+	body{
+		position: relative;
 	}
 
 `;
@@ -351,8 +354,11 @@ export const CenterWrapper = styled.div<ContainerItf>`
 `;
 export const GeneralWrapper = styled.div<ContainerItf>``;
 
-export const Icon = styled.svg`
+export const Icon = styled.img`
+	width: 2rem;
 `;
+
+
 
 
 
