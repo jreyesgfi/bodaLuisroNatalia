@@ -190,10 +190,11 @@ export const Heading = styled.h2<HeadingInterface>`
 `;
 
 export const NameHeading = styled(Heading)<HeadingInterface>`
-	font-size: ${({ fontSize }) => (fontSize ? fontSize : 'clamp(0.6rem, 3vw, 1.8rem)')};
-	font-family: primary-title, ;
+	font-size: ${({ fontSize }) => (fontSize ? fontSize : 'clamp(0.6rem, 20pt, 1.8rem)')};
+	font-family: primary-title;
 	user-select: none;
 	margin: ${({ margin }) => (margin ? margin : '')};
+	margin-left: ${({ mb }) => (mb ? mb : '0')};
 	margin-bottom: ${({ mb }) => (mb ? mb : '0')};
 	margin-top: ${({ mt }) => (mt ? mt : '16px')};
 	color: ${({ inverse }) => (inverse ?

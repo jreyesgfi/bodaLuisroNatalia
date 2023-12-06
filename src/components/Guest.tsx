@@ -129,7 +129,7 @@ export const Guest: React.FC<Props> =
         return (
             <>
                 <NameHeading inverse={true}>
-                    <b><i>{firstName} {lastName1} {lastName2}</i></b>
+                    <b>{firstName} {lastName1} {lastName2}</b>
                 </NameHeading>
                 <Question
                     difStages={stageNum - 0}

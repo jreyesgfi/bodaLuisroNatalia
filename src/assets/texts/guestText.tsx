@@ -5,10 +5,10 @@ export const answersAssistanceText = [
 
 export const questionBusText = '¿Necesitarás autobús de Ida/Vuelta?';
 export const answersBusText = [
-    {text:'No, ninguno',value:[false,false]},
-    {text:'Sí, ida',value:[true,false]},
-    {text:'Sí, vuelta',value:[false,true]},
-    {text:'Sí, ambos',value:[true,true]}];
+    {text:'No',value:[false,false]},
+    {text:'Ida',value:[true,false]},
+    {text:'Vuelta',value:[false,true]},
+    {text:'Ambos',value:[true,true]}];
 
 
 export const questionAllergiesText = '¿Alguna alergia alimentaria?';

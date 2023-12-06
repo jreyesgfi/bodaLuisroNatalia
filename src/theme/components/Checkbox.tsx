@@ -67,9 +67,7 @@ const CheckboxContainer = styled.div`
 export const Checkbox: React.FC<CheckBoxItf> = ({ checked, handleOnChange, ...props}) => (
 	<CheckboxContainer>
 	  <HiddenCheckbox />
-	  <StyledCheckbox checked={checked} onClick={()=>{
-      handleOnChange();}
-    }>
+	  <StyledCheckbox checked={checked}>
         <svg viewBox="0 0 22 18">
             <path d="M1 6.85L8.09677 14L21 1" />
         </svg>

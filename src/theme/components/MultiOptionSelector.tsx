@@ -32,6 +32,8 @@ const MultiOptionWrapper = styled.div`
     overflow-y: auto;
     max-height: 34vh;
     margin: 0 auto 20px;
+    padding: 8px;
+    background-color: ${globalColors.transparent.light2};
 `;
 const ListItem = styled.span<{ selected: boolean }>`
     box-sizing: content-box;
@@ -54,6 +56,9 @@ const OptionCheckbox = styled.div`
 const SmallIconWrapper = styled(RoundIconWrapper)`
     width: 2rem;
     height: 2rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
     transform: translateY(calc(-1rem - 10pt));
     border: none;
 `;
@@ -62,11 +67,14 @@ const SmallIcon = styled(RoundIconImage)`
 
 const OptionLabel = styled(Text)`
     margin: 4px 0 4px 1rem;
+    cursor: pointer;
 `;
 
 const OtherArea = styled(AreaText)<{activated:boolean}>`
     margin: 32px 0 4px 4px;
-    padding-left: 16px;
+    padding: 8px 0 8px 16px;
+    background-color: ${globalColors.transparent.full};
+    min-width: fit-content;
     border: ${({activated})=>`1px solid ${activated===true?globalColors.sencondary[400] : globalColors.dark.primary}`}
 `;
 
@@ -81,7 +89,10 @@ export const MultiOptionSelector: React.FC<Props> = ({ listGiven, checked, handl
     <MultiOptionWrapper>
         {listGiven?.map((element, i) => {
             return (
-                <ListItem key={i} selected={checked(element)} >
+                <ListItem
+                    key={i} 
+                    selected={checked(element)} 
+                    onClick={()=>{ handleClick(element.title)}}>
                         <SmallIconWrapper>
                             <SmallIcon src={element.src} alt={element.title}></SmallIcon>
                         </SmallIconWrapper>

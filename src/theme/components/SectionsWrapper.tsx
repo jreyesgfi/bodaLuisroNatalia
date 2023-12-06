@@ -29,7 +29,7 @@ export const SectionsWrapper: React.FC<Props> =
             initialPos={[-0,0.05]} initialSize={50}
             src="../../public/assets/images/testSmall.svg" />,
             <DecorationImage key="2" 
-            initialPos={[-0.12,0.83]} initialSize={400}
+            initialPos={[-0,0.83]} initialSize={400}
             src="../../public/assets/images/testSmall.svg" />,
             <DecorationImage key="3" 
             initialPos={[0.96,0.7]} initialSize={60}
