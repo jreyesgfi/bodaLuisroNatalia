@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import { commonAllergiesList } from "../assets/allergies";
 import { answersAllergiesText, answersAssistanceText, answersBusGoText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAssistanceText, questionBusText, questionFinishGuest, answersFinishGuest, otherAllergyText, questionHotelText, answersHotelText, questionBusTimeText, answersBusTimeText, answersBusBackText } from "../assets/texts/guestText";
-import { UpdateGuestContext } from "../pages/ConfirmationPage";
-import { ChangeGuestContext } from "../sections/ConfirmationSection";
+import { UpdateGuestContext } from "../pages/ConfirmationPage/ConfirmationPage";
+import { ChangeGuestContext } from "../pages/ConfirmationPage/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
-import { Column, NameHeading} from "../theme/globalStyles";
+import { Column, Heading, NameHeading} from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy,  UpdateGuest, type GuestType, HandleSelection, QuestionAnswerData, StageLabel } from "../types"
 import { Question } from "./Question";
 import { ProgressPercentageWidget } from "../theme/components/ProgressPercentage";
@@ -18,6 +18,8 @@ const GuestWrapper = styled.div`
     justify-content: left;
     max-width: calc(100vw - 48px);
     box-sizing: border-box;
+    position:relative;
+    justify-content: left;
 `;
 
 // Define the function and its props
@@ -80,15 +82,30 @@ export const Guest: React.FC<Props> =
         }
         interface OtherWidget {[key: string]: ReactNode;}
         const otherWidget:OtherWidget = {
-            allergiesList:(<MultiOptionSelector
-                listGiven={commonAllergiesList}
-                checked={(allergyTitle) => {
-                    return (allergiesList?.indexOf(allergyTitle) !== -1)
-                }}
-                handleClick={(allergyTitle) => {handleNewAllergy(guestID, allergyTitle) }}
-                otherOption={otherAllergyText}
-                handleOtherOption={(newAllergy)=>{handleOtherAllergy(guestID, newAllergy)}}
-            />)
+            allergiesList:(
+                <MultiOptionSelector
+                    listGiven={commonAllergiesList}
+                    checked={(allergyTitle) => {
+                        return (allergiesList?.indexOf(allergyTitle) !== -1)
+                    }}
+                    handleClick={(allergyTitle) => {handleNewAllergy(guestID, allergyTitle) }}
+                    otherOption={otherAllergyText}
+                    handleOtherOption={(newAllergy)=>{handleOtherAllergy(guestID, newAllergy)}}
+                />)
+        }
+
+        interface CustomFunction {[key: string]:HandleSelection;}
+        const customFunction:CustomFunction = {
+            busGo: (guestID, property, rawState, answers, flowChangerAnswers) =>{
+                handleBus(guestID, property, rawState, answers, flowChangerAnswers);
+            },
+            allergiesList: ()=>{
+                handleFlowChange('allergiesList',false);
+                nextStage();
+            },
+            finish: (guestID, property, rawState, answers, flowChangerAnswers)=>{
+                handleFinished(rawState);
+            }
         }
         
         const handleFinished = (rawState:number|null)=>{
@@ -121,15 +138,7 @@ export const Guest: React.FC<Props> =
             nextStage();
         }
 
-        interface CustomFunction {[key: string]:HandleSelection;}
-        const customFunction:CustomFunction = {
-            busGo: (guestID, property, rawState, answers, flowChangerAnswers) =>{
-                handleBus(guestID, property, rawState, answers, flowChangerAnswers);
-            },
-            finish: (guestID, property, rawState, answers, flowChangerAnswers)=>{
-                handleFinished(rawState);
-            }
-        }
+
 
         const handleFlowChange = (currentStageLabel: StageLabel, changed: boolean) => {
             setStagesFlow(prevStagesFlow => {
@@ -203,21 +212,20 @@ export const Guest: React.FC<Props> =
 
         return (
             <GuestWrapper>  
-                <NameHeading inverse={true}>
+                <Heading inverse={true}>
                     <b>{firstName} {lastName1} {lastName2}</b>
-                </NameHeading>
+                </Heading>
                 <ProgressPercentageWidget
                     numStages={fullFlow.length-1}
                     currentStage={progress}
                 />
                 {Object.entries(questionsAnswerData).map(
                     ([stage,stageData],i)=> {
-                        console.log()
+                        const difStages = stageNum - (stagesFlow.indexOf(stage as StageLabel)!==-1?
+                        stagesFlow.indexOf(stage as StageLabel):100);
                         return(<Question
                             key={i}
-                            difStages = {stageNum - (stagesFlow.indexOf(stage as StageLabel)!==-1?
-                                stagesFlow.indexOf(stage as StageLabel):100)
-                            }
+                            difStages = {difStages}
                             questionText = {stageData.question}
                             answerButtonList = {
                                 stageData.answers.map((answer)=>({text:answer.text}))
@@ -230,7 +238,7 @@ export const Guest: React.FC<Props> =
                             }}
                             handleBack={()=> {previousStage()}}
                         >
-                            {otherWidget[stage]}
+                            {difStages===0 && otherWidget[stage]}
                         </Question>)
                     }
                 )}

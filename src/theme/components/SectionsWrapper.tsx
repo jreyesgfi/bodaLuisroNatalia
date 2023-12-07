@@ -2,8 +2,8 @@ import { ReactNode, useContext } from 'react';
 import { ParallaxContainer } from './ParallaxContainer'
 import { LevelContext } from './ProcessWizard'
 import { DecorationImage } from '../../components/ParallaxDecoration'
-import { HeroSection } from '../../sections/HeroSection';
-import { ConfirmationSection } from '../../sections/ConfirmationSection';
+import { HeroSection } from '../../pages/ConfirmationPage/HeroSection';
+import { ConfirmationSection } from '../../pages/ConfirmationPage/ConfirmationSection';
 import { LevelContextItf, ListOfGuests } from '../../types';
 import styled from "styled-components";
 

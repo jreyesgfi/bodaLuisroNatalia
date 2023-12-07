@@ -1,4 +1,4 @@
-export const questionAssistanceText = '¿Contamos contigo?';
+export const questionAssistanceText = '¿Contamos contigo el 13 de Julio?';
 export const answersAssistanceText = [
     {text:'No podré asistir', value:false},
     {text:'Allí estaré',value:true}];

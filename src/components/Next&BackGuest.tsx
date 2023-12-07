@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { backGuestText, nextGuestText } from '../assets/texts/controlTexts';
 import { CustomButton } from '../theme/components/Button';
 import { Icon, globalColors } from '../theme/globalStyles';
-import { ChangeGuestContext } from '../sections/ConfirmationSection';
+import { ChangeGuestContext } from '../pages/ConfirmationPage/ConfirmationSection';
 import { ControlItf, ControlPropsItf } from '../types';
 import { ChangingShape } from '../theme/components/ChangingShape';
 

@@ -50,8 +50,8 @@ export const CustomButton = styled.button<ButtonItf>`
         return uncheckedStyles
     }};
     border-radius: 8px;
-    margin: 12px 8px;
-	padding: 8px;
+    margin: 12px 8px 12px 0;
+	padding: 12px 16px;
 	white-space: nowrap;
 	
 	font-size: 16px;

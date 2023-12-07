@@ -169,20 +169,22 @@ export const MainHeading = styled.h1<InversedElementItf>`
 	mt?:string;
 `;
 
+
 interface HeadingInterface extends InversedElementItf, LocatedElementItf, TextItf, ResponsiveElementItf {
 }
 
 export const Heading = styled.h2<HeadingInterface>`
-	font-size: ${({ fontSize }) => (fontSize ? fontSize : 'clamp(1.2rem, 4.8vw, 3.6rem)')};
+	font-size: ${({ fontSize }) => (fontSize ? fontSize : '22pt')};
 	font-family: primary-title, monospace;
+	text-align: left;
 	user-select: none;
 	margin: ${({ margin }) => (margin ? margin : '')};
-	margin-bottom: ${({ mb }) => (mb ? mb : '0.5rem')};
-	margin-top: ${({ mt }) => (mt ? mt : '')};
+	margin-bottom: ${({ mb }) => (mb ? mb : '0pt')};
+	margin-top: ${({ mt }) => (mt ? mt : '8pt')};
 	color: ${({ inverse }) => (inverse ?
-		globalColors.dark.primary :
+		globalColors.sencondary[400] :
 		globalColors.light.primary)};
-	letter-spacing: 0.4rem;
+	letter-spacing: 4pt;
 	line-height: 1.4;
 	display: inline-block;
 	width: ${({ width }) => (width ? width : '')};
@@ -195,6 +197,7 @@ export const Heading = styled.h2<HeadingInterface>`
 		display: block;
 	}
 `;
+
 
 export const NameHeading = styled(Heading)<HeadingInterface>`
 	font-size: ${({ fontSize }) => (fontSize ? fontSize : 'clamp(0.6rem, 20pt, 1.8rem)')};
@@ -315,19 +318,23 @@ export const Column = styled.div<ContainerItf>`
 export const Text = styled.p<TextWrapperItf>`
     color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};
     width:${({ width }) => width ? width : 'auto'};
-	font-size:${({ fontSize }) => fontSize ? fontSize : '14pt'};
+	font-size:${({ fontSize }) => fontSize ? fontSize : '13pt'};
 	line-height:1.5;
 	letter-spacing: 2px;
 	user-select: none;
 	max-width: 45vw;
 	font-family:${({ font }) => font ? font : 'primary-body'};
 	display: inline-block;
+	text-align: left;
     @media screen and (max-width: 800px) {
 		max-width: 80vw;
 		width:${({ smWidth }) => smWidth ? smWidth : 'auto'};
 	}
 `;
-
+export const Subtitle = styled(Text)`
+	font-size: 16pt;
+	letter-spacing: 4px;
+`;
 export const AreaText = styled.input<TextWrapperItf>`
 	color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};
 	width:${({ width }) => width ? width : 'auto'};

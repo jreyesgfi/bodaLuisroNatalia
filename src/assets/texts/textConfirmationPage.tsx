@@ -1,8 +1,9 @@
-export const introductionText1_1 = 'Esta es la página de '
+export const introductionText1_1 = 'Hemos llegado a la página de '
 export const purposeText = 'CONFIRMACIÓN DE ASISTENCIA ';
 export const introductionText1_2 = ' al enlace matrimonial de'
 export const mainTitleText = 'Luis Rodrigo y Natalia';
 export const introductionText2 = 'que tendrá lugar el día'
 export const dateText = '13 de Julio'
 export const introductionText3 = 'en la parroquia -----. Si deseas acudir confirma tu asistencia a continuación:'
+export const finalIntroductionText = 'Aquí, dejaremos todo preparado para recibirte con tan solo un par de preguntas.'
 export const initialButtonText = '¡Vamos a por ello!'

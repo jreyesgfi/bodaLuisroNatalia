@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 
-import { ChangeGuestContext } from "../sections/ConfirmationSection";
+import { ChangeGuestContext } from "../pages/ConfirmationPage/ConfirmationSection";
 import { ListOfGuests, UpdateGuest, HandleNumberChange } from "../types"
 import { Guest } from "./Guest"
 import { NextBackGuestControl } from "./Next&BackGuest";

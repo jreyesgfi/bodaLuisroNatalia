@@ -1,10 +1,10 @@
 import { createContext, useState } from 'react';
-import { Guests } from '../components/Guests'
-import { GuestsProgressWidget } from '../components/GuestsProgressWidget';
-import { NextBackGuestControl } from '../components/Next&BackGuest';
-import { submitData } from '../connection/connectionMethods';
-import { Section } from '../theme/globalStyles';
-import { ControlPropsItf, ListOfGuests } from '../types'
+import { Guests } from '../../components/Guests'
+import { GuestsProgressWidget } from '../../components/GuestsProgressWidget';
+import { NextBackGuestControl } from '../../components/Next&BackGuest';
+import { submitData } from '../../connection/connectionMethods';
+import { Section } from '../../theme/globalStyles';
+import { ControlPropsItf, ListOfGuests } from '../../types'
 interface Props {
     guests: ListOfGuests;
 }

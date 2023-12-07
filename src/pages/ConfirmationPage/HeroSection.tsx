@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { dateText, initialButtonText, introductionText1_2, introductionText1_1, introductionText2, introductionText3, mainTitleText, purposeText } from '../assets/texts/mainText';
-import { CustomButton } from '../theme/components/Button';
-import { LateralBigImage } from '../theme/components/LateralBigImage';
-import { ParallaxContainer } from '../theme/components/ParallaxContainer';
-import { LevelContext } from '../theme/components/ProcessWizard';
-import { globalColors, Image, MainHeading, Section, Text } from '../theme/globalStyles';
-import { LevelContextItf } from '../types';
+import { dateText, initialButtonText, introductionText1_2, introductionText1_1, introductionText2, introductionText3, mainTitleText, purposeText, finalIntroductionText } from '../../assets/texts/textConfirmationPage';
+import { CustomButton } from '../../theme/components/Button';
+import { LateralBigImage } from '../../theme/components/LateralBigImage';
+import { ParallaxContainer } from '../../theme/components/ParallaxContainer';
+import { LevelContext } from '../../theme/components/ProcessWizard';
+import { globalColors, Heading, Image, MainHeading, Section, Subtitle, Text } from '../../theme/globalStyles';
+import { LevelContextItf } from '../../types';
 
 
 
@@ -23,11 +23,11 @@ const unactiveStyles = (level: number) => css`
 
 
 const TextWrapper = styled.div`
-    margin: auto 48px auto;
+    margin: auto auto;
     display: block;
     position: absolute;
     inset: 0 auto 0;
-    height: 62vh;
+    height: 50%;
     max-width: 600px;
     > *{
         text-align: left;
@@ -39,10 +39,7 @@ const IntroductionText = styled(Text)`
 
 `;
 
-const HighlightedText = styled(Text)`
-
-    font-size: 16pt;
-    color: ${globalColors.sencondary[400]};
+const HighlightedText = styled(Heading)`
 `;
 const PurposeText = styled(CustomButton)`
     font-family: primary-light, monospace;
@@ -53,14 +50,14 @@ interface HeroWrapperItf {
     active: boolean;
 }
 const HeroSectionWrapper = styled(Section) <HeroWrapperItf>`
-    height: 100vh;
-    width: 100vw;   
+    height: 100%;
+    width: 100%;  
     position: relative;
     transition:  transform 1s, max-height 1.3s ease-out;
     ${({ active }) => (active === true ? activeStyles : unactiveStyles(1))}
 `;
 const NextButton = styled(CustomButton)`
-    margin-top: 32px;
+    margin-top: 48px;
 `;
 
 export const HeroSection: React.FC =
@@ -74,10 +71,29 @@ export const HeroSection: React.FC =
         return (
 
             <HeroSectionWrapper inverse={true} active={activeState}>
-                <LateralBigImage src="../../public/assets/images/test1.png" />
+                
                 <TextWrapper>
-                    
+                    <Subtitle inverse={true}>{introductionText1_1}</Subtitle>
                     <IntroductionText inverse={true}>
+                        <HighlightedText inverse={true}>
+                            <b>{purposeText}</b>
+                        </HighlightedText>
+                        {finalIntroductionText}
+                    </IntroductionText>
+                    <NextButton
+                        selected={true}
+                        onClick={() => { handleClick() }}
+                    >{initialButtonText}
+                    </NextButton>
+                </TextWrapper>
+                
+
+            </HeroSectionWrapper>
+
+        )
+    }
+/*
+<IntroductionText inverse={true}>
                         {introductionText1_1}
                         <HighlightedText inverse={true}>
                             <b>{purposeText}</b>
@@ -92,16 +108,4 @@ export const HeroSection: React.FC =
                             &nbsp;<b>{dateText}</b>&nbsp;
                         </HighlightedText>
                         {introductionText3}
-                    </IntroductionText>
-                    <NextButton
-                        selected={true}
-                        onClick={() => { handleClick() }}
-                    >{initialButtonText}
-                    </NextButton>
-                </TextWrapper>
-                
-
-            </HeroSectionWrapper>
-
-        )
-    }
+                    </IntroductionText>*/

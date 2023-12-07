@@ -1,15 +1,15 @@
-import { SectionsWrapper } from '../theme/components/SectionsWrapper'
-import { ConfirmationSection } from '../sections/ConfirmationSection'
-import { HeroSection } from '../sections/HeroSection'
+import { SectionsWrapper } from '../../theme/components/SectionsWrapper'
+import { ConfirmationSection } from './ConfirmationSection'
+import { HeroSection } from './HeroSection'
 
 import styled from 'styled-components';
 
 import { createContext, Fragment, useContext, useEffect, useState } from 'react'
-import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, UpdateGuest } from '../types'
-import { receiveData, submitData } from '../connection/connectionMethods'
+import { ListOfGuests, FilterValue, type TodoCompleted, type TodoId, GuestID, UpdateGuest } from '../../types'
+import { receiveData, submitData } from '../../connection/connectionMethods'
 
-import { LevelContext, ProcessWizard } from '../theme/components/ProcessWizard'
-import { GuestType } from '../types';
+import { LevelContext, ProcessWizard } from '../../theme/components/ProcessWizard'
+import { GuestType } from '../../types';
 
 const GlobalWrapper = styled.div`
 overflow: hidden;

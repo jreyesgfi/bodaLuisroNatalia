@@ -12,7 +12,7 @@ const ProgressDotsWrapper = styled.div`
     position: relative;
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 12px;
     justify-content: center;
 `;
 const ProgressLine = styled.div`
@@ -21,17 +21,7 @@ const ProgressLine = styled.div`
     margin: auto;
     border-radius: 4px;
 `;
-const BackgroundLine = styled(ProgressLine)`
-    width: 100%;
-    background-color: ${globalColors.sencondary[100]}
-`;
-const CurrentProgressLine = styled(ProgressLine)<{progressPercentage:number}>`
-    width: ${({ progressPercentage }) => (`${progressPercentage}%`) };
-    right: auto;
-    background-color: ${globalColors.sencondary[400]};
-    transition: width 0.5s;
-    z-index: 25;
-`;
+
 interface StageProps {
     current_stage?: boolean;
 }
@@ -39,7 +29,7 @@ interface StageProps {
 const GuestName = styled(Text) <StageProps>`
     margin: auto auto 0;
     color: ${({ current_stage }) => (current_stage === true ? `${globalColors.sencondary[400]}` : `${globalColors.sencondary[200]}`)};
-    font-size: ${({ current_stage }) => (current_stage === true ? `14px` : `8px`)};
+    font-size: ${({ current_stage }) => (current_stage === true ? `14pt` : `8pt`)};
 `;
 
 

@@ -12,7 +12,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { LevelContext, ProcessWizard } from './theme/components/ProcessWizard'
 import GlobalStyles from './theme/globalStyles'
 import { HomePage } from './pages/HomePage'
-import { ConfirmationPage } from './pages/ConfirmationPage'
+import { ConfirmationPage } from './pages/ConfirmationPage/ConfirmationPage'
 
 const App = (): JSX.Element => {
 

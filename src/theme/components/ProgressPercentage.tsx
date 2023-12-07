@@ -4,7 +4,9 @@ import { Text, globalColors } from "../globalStyles";
 
 const ProgressNumber = styled(Text)`
     color: ${globalColors.sencondary[400]};
-    font-size: 28pt;
+    font-size: 36pt;
+    width:100%;
+    text-align: right;
 `;
 
 interface Props {
