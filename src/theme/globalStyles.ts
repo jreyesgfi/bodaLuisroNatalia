@@ -174,13 +174,13 @@ interface HeadingInterface extends InversedElementItf, LocatedElementItf, TextIt
 }
 
 export const Heading = styled.h2<HeadingInterface>`
-	font-size: ${({ fontSize }) => (fontSize ? fontSize : '22pt')};
+	font-size: ${({ fontSize }) => (fontSize ? fontSize : '21pt')};
 	font-family: primary-title, monospace;
 	text-align: left;
 	user-select: none;
 	margin: ${({ margin }) => (margin ? margin : '')};
-	margin-bottom: ${({ mb }) => (mb ? mb : '0pt')};
-	margin-top: ${({ mt }) => (mt ? mt : '8pt')};
+	margin-bottom: ${({ mb }) => (mb ? mb : '16pt')};
+	margin-top: ${({ mt }) => (mt ? mt : '12pt')};
 	color: ${({ inverse }) => (inverse ?
 		globalColors.sencondary[400] :
 		globalColors.light.primary)};
@@ -332,8 +332,8 @@ export const Text = styled.p<TextWrapperItf>`
 	}
 `;
 export const Subtitle = styled(Text)`
-	font-size: 16pt;
-	letter-spacing: 4px;
+	font-size: 16.5pt;
+	letter-spacing: 2px;
 `;
 export const AreaText = styled.input<TextWrapperItf>`
 	color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};
