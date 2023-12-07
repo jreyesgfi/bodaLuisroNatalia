@@ -69,10 +69,11 @@ export const receiveData = (callback: (data:GuestType[])=>void): void => {
                         attendance: row[6] === "1",
                         busGo: row[7] === "1",
                         busBack: row[8] === "1",
-                        hotel: row[9] === "1",
-                        allergies: row[10] === "1",
-                        allergiesList: row[11] ? row[11].split(',') : [],
-                        otherAllergy: row[12],
+                        busTime: row[9],
+                        hotel: row[10] === "1",
+                        allergies: row[11] === "1",
+                        allergiesList: row[12] ? row[12].split(',') : [],
+                        otherAllergy: row[13],
                 }
                 return guest;
             });

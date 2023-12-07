@@ -179,13 +179,15 @@ export const Guest: React.FC<Props> =
             const updateGuest: UpdateGuest = (guest) => {
                 // if it isn't yet
                 const guestCopy = {...guest}
-                const position = guest.allergiesList?.indexOf(allergyName) || -1;
+                const position = guest.allergiesList?.indexOf(allergyName);
                 if (position === -1) {
                     guestCopy.allergiesList?.push(allergyName);
-                    return guestCopy
                 }
                 //else
-                guestCopy.allergiesList?.splice(position,1);
+                else if (position !== undefined) {
+                    guestCopy.allergiesList?.splice(position,1);
+                    
+                }
                 return guestCopy
             }
             setGuest(guestID, updateGuest);

@@ -27,6 +27,7 @@ export interface GuestType {
   attendance: boolean,
   busGo: boolean,
   busBack: boolean,
+  busTime: string,
   hotel: boolean,
   allergies: boolean,
   allergiesList?: AllergieType[],

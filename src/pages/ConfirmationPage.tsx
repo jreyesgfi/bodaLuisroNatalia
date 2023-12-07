@@ -25,6 +25,7 @@ export const ConfirmationPage: React.FC= () => {
       // States
   const [guests, setGuests] = useState<ListOfGuests>([]);
   const setGuest = (givenGuestID: GuestID, updateFunction: UpdateGuest) => {
+    console.log(updateFunction)
     const newGuests = guests.map((guest:GuestType) => guest.guestID === givenGuestID ? updateFunction(guest) : guest);
     setGuests(newGuests)
   }
