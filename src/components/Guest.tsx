@@ -6,17 +6,19 @@ import { answersAllergiesText, answersAssistanceText, answersBusGoText, answerAl
 import { UpdateGuestContext } from "../pages/ConfirmationPage";
 import { ChangeGuestContext } from "../sections/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
-import { NameHeading} from "../theme/globalStyles";
+import { Column, NameHeading} from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy,  UpdateGuest, type GuestType, HandleSelection, QuestionAnswerData, StageLabel } from "../types"
 import { Question } from "./Question";
 import { ProgressPercentageWidget } from "../theme/components/ProgressPercentage";
 
-// Styled components
-const SmallIcon = styled.img`
-	width: 2rem;
+
+
+//Define styled components
+const GuestWrapper = styled.div`
+    justify-content: left;
+    max-width: calc(100vw - 48px);
+    box-sizing: border-box;
 `;
-
-
 
 // Define the function and its props
 interface Props extends GuestType {
@@ -53,8 +55,6 @@ export const Guest: React.FC<Props> =
             }
           }, [stagesFlow]);
         
-        
-        
         interface NextStagesFlow {[key: string]: StageLabel[];}
         const nextStagesFlow:NextStagesFlow = {
             assistance: ['busGo','finish'],
@@ -64,8 +64,7 @@ export const Guest: React.FC<Props> =
             allergies: ['allergiesList','finish'],
             allergiesList: ['finish'],
             finish:['finish']
-        }
-        
+        }   
 
         interface QuestionsAnswerData {
             [key: string]: QuestionAnswerData;
@@ -131,8 +130,6 @@ export const Guest: React.FC<Props> =
                 handleFinished(rawState);
             }
         }
-
-
 
         const handleFlowChange = (currentStageLabel: StageLabel, changed: boolean) => {
             setStagesFlow(prevStagesFlow => {
@@ -203,7 +200,7 @@ export const Guest: React.FC<Props> =
         }
 
         return (
-            <>  
+            <GuestWrapper>  
                 <NameHeading inverse={true}>
                     <b>{firstName} {lastName1} {lastName2}</b>
                 </NameHeading>
@@ -238,6 +235,6 @@ export const Guest: React.FC<Props> =
             
 
 
-            </>
+            </GuestWrapper>
         )
     }

@@ -22,6 +22,8 @@ const SmallIcon = styled.img`
 `;
 
 const OptionButtonWrapper = styled.div`
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   gap: 10px;
   justify-content: left;
@@ -36,9 +38,10 @@ interface OptionButton extends ButtonItf {
     index: number;
 }
 const OptionButton = styled(CustomButton) <OptionButton>`
-width: 180px;
+flex: 1 1 120px;
 height: 48px;
-margin: 8px auto; 
+margin: 8px 0px;
+padding: 0 4pt;
 transition: transform 1s, opacity 0.5s;
   transform: ${({ selected, activeStage, index }) => (!activeStage && selected? 
     `translateX(calc(-${index * (100)}% - ${index * (8)}px))`: 'translateX(0%)')};

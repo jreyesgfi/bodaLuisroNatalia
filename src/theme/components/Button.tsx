@@ -35,7 +35,7 @@ export interface ButtonItf {
 }
 const ListItem = styled.div<{ selected:boolean }>`
     margin: 8pt 0;
-    padding: 0 8pt;
+    padding: 0 8px;
     border-radius: 8px;
     width: 300px;
     transition: all 0.3s;
@@ -50,10 +50,10 @@ export const CustomButton = styled.button<ButtonItf>`
         return uncheckedStyles
     }};
     border-radius: 8px;
-    margin: 8pt 4pt;
-    padding: 0 8pt;
+    margin: 12px 8px;
+	padding: 8px;
 	white-space: nowrap;
-	padding: 10px 20px;
+	
 	font-size: 16px;
 	font-family: primary-body;
 	outline: none;

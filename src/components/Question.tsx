@@ -87,6 +87,8 @@ const QuestionText = styled(Text)`
 `;
 const QuestionWrapper = styled.div<QuestionWrapperItf>`
     position: relative;
+    max-width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

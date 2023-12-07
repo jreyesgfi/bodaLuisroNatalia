@@ -17,7 +17,8 @@ const GuestsWrapper = styled.div<{ currentPosition: number }>`
     display: flex;
     transition: transform 1s;
     transform: ${({ currentPosition }) => (`translateX(-${currentPosition}vw)`)};
-`;
+    max-width: none;
+    `;
 
 const GuestWrapper = styled.div`
     width: 95vw;

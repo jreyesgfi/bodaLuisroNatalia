@@ -86,11 +86,18 @@ const GlobalStyles = createGlobalStyle`
 			text-align: center;
 		}
     }
+	div {
+		max-width:100%;
+		box-sizing: border-box;
+	}
 	html, body {
 		overflow:hidden;
 	}
 	body{
 		position: relative;
+	}
+	.customIcon{
+		fill: ${globalColors.sencondary[200]};
 	}
 
 `;
@@ -127,7 +134,7 @@ interface TextItf {
 
 export const movilSize = '550px';
 export const mediumSize = '800px';
-export const minimumSize = '360px';
+export const minimumSize = '300px';
 export const WaitingContainer = styled.div<{ loading: number }>`
 	visibility: ${({ loading }) => (loading == 1 ? 'hidden' : 'visible')}
 `
@@ -242,12 +249,12 @@ export const Section = styled.section<Section>`
 	user-select: none;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	margin: ${({ margin }) => (margin ? margin : '')};
+	margin: ${({ margin }) => (margin ? margin : '16px 24px')};
 	background: ${({ inverse }) => (inverse ?
 		globalColors.transparent.full :
 		globalColors.dark.primary)};
 	position: ${({ position }) => (position ? position : 'relative')};
-	width: ${({ width }) => (width ? width : 'auto')};
+	width: ${({ width }) => (width ? width : 'calc(100% - 48px)')};
 	min-width: ${({ minWidth }) => (minWidth ? minWidth : minimumSize)};
 	max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : 'auto')};
 	height: ${({ height }) => (height ? height : '95%')};
@@ -353,7 +360,10 @@ export const CenterWrapper = styled.div<ContainerItf>`
 	gap:1.5rem;
 	justify-content:space-around;
 `;
-export const GeneralWrapper = styled.div<ContainerItf>``;
+export const GeneralWrapper = styled.div<ContainerItf>`
+	max-width: 100%;
+	box-sizing:border-box;
+`;
 
 export const Icon = styled.img`
 	width: 2rem;
