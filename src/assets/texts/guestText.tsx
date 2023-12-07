@@ -3,12 +3,23 @@ export const answersAssistanceText = [
     {text:'No podré asistir', value:false},
     {text:'Allí estaré',value:true}];
 
-export const questionBusText = '¿Necesitarás autobús de Ida/Vuelta?';
-export const answersBusText = [
-    {text:'No',value:[false,false]},
-    {text:'Ida',value:[true,false]},
-    {text:'Vuelta',value:[false,true]},
-    {text:'Ambos',value:[true,true]}];
+export const questionBusText = '¿Utilizarás el autobús de Ida/Vuelta?';
+export const answersBusGoText = [
+    {text:'No',value:false},
+    {text:'Ida',value:true},
+    {text:'Vuelta',value:false},
+    {text:'Ambos',value:true}];
+export const answersBusBackText = [
+    {text:'No',value:false},
+    {text:'Ida',value:true},
+    {text:'Vuelta',value:false},
+    {text:'Ambos',value:true}];
+
+export const questionBusTimeText = '¿A que hora preferirías volverte?';
+export const answersBusTimeText = [
+    {text:'No lo se',value:'No se'},
+    {text:'21:00',value:'Pronto'},
+    {text:'01:00',value:'Tarde'}];
 
 
 export const questionAllergiesText = '¿Alguna alergia alimentaria?';

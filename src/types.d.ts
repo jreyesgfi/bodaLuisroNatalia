@@ -32,15 +32,9 @@ export interface GuestType {
   allergiesList?: AllergieType[],
   otherAllergy: string
 }
-
+type StageLabel = 'assistance' | 'busGo' | 'busBack' | 'busTime' | 'hotel' | 'allergies' | 'allergiesList' | 'finish';
 export type ListOfGuests = GuestType[];
 
-// Handle Functions
-export type UpdateGuest = (guest:GuestType)=>GuestType;
-export type HandleChange = (guestID:GuestID, value: typeof GuestType[keyof GuestType]) => void;
-export type HandleSelection = (guestID:GuestID, property:keyof GuestType, value: typeof GuestType[property]) => void;
-export type HandleNumberChange = (e:React.ChangeEvent<HTMLInputElement>,guestID:GuestID) => void;
-export type HandleNewAllergy = (id: GuestID, allergyTitle:AllergieType) => void;
 
 // Theme Components types
 export type ChildrenType = (ReactNode[] | ReactNode);
@@ -71,4 +65,25 @@ export interface LevelContextItf {
   levels: LevelDictType;
   changeLevels: ChangeLevelsDictType;
 }
+
+// Question / Answers
+type RawState = typeof GuestType[keyof GuestType];
+type Question = string;
+type Answers = { text: string; value: boolean; }[]| { text: string; value: string; }[];
+type FlowChangerAnswer = number[];
+interface QuestionAnswerData {
+  question: Question;
+  answers: Answers;
+  flowChangerAnswers: FlowChangerAnswer;
+};
+
+
+// Handle Functions
+export type UpdateGuest = (guest:GuestType)=>GuestType;
+export type HandleChange = (guestID:GuestID, value: typeof GuestType[keyof GuestType]) => void;
+export type HandleSelection = (guestID:GuestID, property:StageLabel, rawState: RawState, answers: Answers, flowChangerAnswers: FlowChangerAnswer) => void;
+export type HandleNumberChange = (e:React.ChangeEvent<HTMLInputElement>,guestID:GuestID) => void;
+export type HandleNewAllergy = (id: GuestID, allergyTitle:AllergieType) => void;
+
+
 //export type NumButtonSelected = number|null;

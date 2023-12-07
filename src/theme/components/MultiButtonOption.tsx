@@ -53,7 +53,7 @@ export const MultiButtonOption: React.FC<Props> = ({
 }) => {
     const [selectedState, setSelectedState] = useState<number | null>(null);
 
-    const handleClick = (buttonIndex: number, buttonText: string) => {
+    const handleClick = (buttonIndex: number) => {
         if (!activeStage) {return}
         const selectedIndex = selectedState === buttonIndex ? null : buttonIndex;
         setSelectedState(selectedIndex);
@@ -69,7 +69,7 @@ export const MultiButtonOption: React.FC<Props> = ({
                     <OptionButton
                         key={i}
                         onClick={() => {
-                            handleClick(i, buttonData.text);
+                            handleClick(i);
                         }}
                         index={i}
                         selected={i === selectedState}

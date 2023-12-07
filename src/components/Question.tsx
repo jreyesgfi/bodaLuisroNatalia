@@ -34,17 +34,18 @@ const onTheStageStyle = ({difStages, element}:CSSInterface) => css`
     height: ${sizesDict[element][0]};
     opacity:${1 - 0.5 * (difStages||0)};
     transform: ${transformDict[element]};
-    max-height: ${difStages >1? '0px':'500px'};
+    max-height: ${difStages ===0 ||difStages ===1 ? '500px': '0px'};
     ${element==='wrapper'?
     `border-bottom:1px solid ${globalColors.sencondary[400]};
     `:``}  
 `
 
 const nextStageStyle = css`
-    width: 0px;
+    width: 100%;
     height: 0px;
     max-height: 0px;
     opacity:0;
+    position:absolute;
 `;
 
 const TakeBackButton = styled(RoundIconWrapper)`
