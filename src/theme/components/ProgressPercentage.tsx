@@ -15,7 +15,6 @@ export const ProgressPercentageWidget: React.FC<Props> = ({numStages, currentSta
     return(
         <ProgressNumber>
             {Math.floor(currentStage / numStages * 100)}%
-            {currentStage}
         </ProgressNumber>
     )
 }

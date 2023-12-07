@@ -67,6 +67,7 @@ export interface LevelContextItf {
 }
 
 // Question / Answers
+type StageLabel = "assistance" | 'busGo' | 'busBack' | 'busTime' | 'hotel' | 'allergies' | 'allergiesList' | "finish";
 type RawState = typeof GuestType[keyof GuestType];
 type Question = string;
 type Answers = { text: string; value: boolean; }[]| { text: string; value: string; }[];

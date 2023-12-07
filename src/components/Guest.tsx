@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useState } from "react"
+import { ReactNode, useContext, useEffect, useState } from "react"
 import styled from 'styled-components';
 
 import { commonAllergiesList } from "../assets/allergies";
@@ -7,7 +7,7 @@ import { UpdateGuestContext } from "../pages/ConfirmationPage";
 import { ChangeGuestContext } from "../sections/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
 import { NameHeading} from "../theme/globalStyles";
-import { HandleChange, HandleNewAllergy,  UpdateGuest, type GuestType, HandleSelection, QuestionAnswerData } from "../types"
+import { HandleChange, HandleNewAllergy,  UpdateGuest, type GuestType, HandleSelection, QuestionAnswerData, StageLabel } from "../types"
 import { Question } from "./Question";
 import { ProgressPercentageWidget } from "../theme/components/ProgressPercentage";
 
@@ -29,18 +29,30 @@ export const Guest: React.FC<Props> =
 
         // Define the states
         const [stageNum, setStageNum] = useState<number>(0);
-        type StageLabel = "assistance" | 'busGo' | 'busBack' | 'busTime' | 'hotel' | 'allergies' | 'allergiesList' | "finish";
+        const [progress, setProgress] = useState<number>(0);
         
-        interface StagesFlow { [key:string]: number};
-        const [stagesFlow, setStagesFlow] = useState<StagesFlow>({
-            assistance: 0,
-            busGo: 1,
-            busTime: 1,
-            hotel: 2,
-            allergies: 3,
-            allergiesList: 3,
-            finish: 4
-        });
+        type StagesFlow = StageLabel[];
+        const [stagesFlow, setStagesFlow] = useState<StagesFlow>(
+            ['assistance']);
+        
+        const fullFlow = ['assistance','busGo','busTime','hotel','allergies','allergiesList','finish'];
+        useEffect(() => {
+            // Calculate the index of the last element in stagesFlow
+            const lastStageIndex = stagesFlow.length - 1;
+            console.log(stagesFlow[lastStageIndex]);
+            // If stagesFlow has elements
+            if (lastStageIndex >= 0) {
+              // Find the index of the last stage in the fullFlow array
+              const indexInFullFlow = fullFlow.indexOf(stagesFlow[lastStageIndex]);
+          
+              // If the last stage is found in fullFlow
+              if (indexInFullFlow !== -1) {
+                // Update the currentStage based on the index
+                setProgress(indexInFullFlow);
+              }
+            }
+          }, [stagesFlow]);
+        
         
         
         interface NextStagesFlow {[key: string]: StageLabel[];}
@@ -123,18 +135,10 @@ export const Guest: React.FC<Props> =
 
 
         const handleFlowChange = (currentStageLabel: StageLabel, changed: boolean) => {
-            const initialNextStage = nextStagesFlow[currentStageLabel as keyof NextStagesFlow][0];
-            const newNextStage = nextStagesFlow[currentStageLabel as keyof NextStagesFlow][1];
             setStagesFlow(prevStagesFlow => {
-                const updatedFlow = { ...prevStagesFlow };
-        
-                if (changed === true) {
-                    updatedFlow[newNextStage] = stageNum + 1;
-                    updatedFlow[initialNextStage] = 7;
-                } else {
-                    updatedFlow[initialNextStage] = stageNum + 1;
-                    updatedFlow[newNextStage] = 7;
-                }
+                const updatedFlow = [ ...prevStagesFlow];
+                const nextStage = nextStagesFlow[currentStageLabel][Number(changed)];
+                updatedFlow.push(nextStage);
                 return updatedFlow;
             });
         }
@@ -144,9 +148,16 @@ export const Guest: React.FC<Props> =
         const changeGuest = useContext(ChangeGuestContext);
 
         const nextStage = () => {
-            setStageNum(stageNum + 1)
+            setStageNum(stageNum + 1);
         }
-        const previousStage = () => { setStageNum(stageNum - 1) }
+        const previousStage = () => {
+            setStagesFlow(prevStagesFlow => {
+                const updatedFlow = [ ...prevStagesFlow]; 
+                updatedFlow.pop();
+                return updatedFlow;
+            });
+            setStageNum(stageNum - 1);
+        }
 
         const handleSelection: HandleSelection = (guestID, property, rawState, answers, flowChangerAnswers)=>{
             if (rawState === null) { return }
@@ -197,14 +208,17 @@ export const Guest: React.FC<Props> =
                     <b>{firstName} {lastName1} {lastName2}</b>
                 </NameHeading>
                 <ProgressPercentageWidget
-                    numStages={stagesFlow['finish']}
-                    currentStage={stageNum}
+                    numStages={fullFlow.length-1}
+                    currentStage={progress}
                 />
                 {Object.entries(questionsAnswerData).map(
                     ([stage,stageData],i)=> {
+                        console.log()
                         return(<Question
                             key={i}
-                            difStages = {stageNum -stagesFlow[stage]}
+                            difStages = {stageNum - (stagesFlow.indexOf(stage as StageLabel)!==-1?
+                                stagesFlow.indexOf(stage as StageLabel):100)
+                            }
                             questionText = {stageData.question}
                             answerButtonList = {
                                 stageData.answers.map((answer)=>({text:answer.text}))
