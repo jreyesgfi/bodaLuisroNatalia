@@ -33,7 +33,7 @@ export interface GuestType {
   allergiesList?: AllergieType[],
   otherAllergy: string
 }
-type StageLabel = 'assistance' | 'busGo' | 'busBack' | 'busTime' | 'hotel' | 'allergies' | 'allergiesList' | 'finish';
+type StageLabel = 'attendance' | 'busGo' | 'busBack' | 'busTime' | 'hotel' | 'allergies' | 'allergiesList' | 'finish';
 export type ListOfGuests = GuestType[];
 
 
@@ -43,14 +43,14 @@ export type ChildrenType = (ReactNode[] | ReactNode);
 export interface ControlItf{
   possibleTakeBack?: boolean;
   possibleNext?: boolean;
-  changeGuest?: (next:boolean) => void;
+  changeStage?: (next:boolean) => void;
   children?: (ReactNode[] | ReactNode);
 }
 export interface ControlPropsItf{
   ControlComponent: React.FC<ControlItf>;
   possibleTakeBack?: boolean;
   possibleNext?: boolean;
-  changeGuest: (next:boolean) => void;
+  changeStage: (next:boolean) => void;
   children?: (ReactNode[] | ReactNode);
 }
 

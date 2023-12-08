@@ -1,5 +1,5 @@
-export const questionAssistanceText = '¿Contamos contigo el 13 de Julio?';
-export const answersAssistanceText = [
+export const questionAttendanceText = '¿Contamos contigo el 13 de Julio?';
+export const answersAttendanceText = [
     {text:'No podré asistir', value:false},
     {text:'Allí estaré',value:true}];
 
@@ -11,8 +11,8 @@ export const answersBusGoText = [
     {text:'Ambos',value:true}];
 export const answersBusBackText = [
     {text:'No',value:false},
-    {text:'Ida',value:true},
-    {text:'Vuelta',value:false},
+    {text:'Ida',value:false},
+    {text:'Vuelta',value:true},
     {text:'Ambos',value:true}];
 
 export const questionBusTimeText = '¿A que hora preferirías volverte?';

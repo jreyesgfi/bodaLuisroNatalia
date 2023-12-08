@@ -2,28 +2,30 @@ import { ReactNode, useContext } from 'react';
 import { ParallaxContainer } from './ParallaxContainer'
 import { LevelContext } from './ProcessWizard'
 import { DecorationImage } from '../../components/ParallaxDecoration'
-import { HeroSection } from '../../pages/ConfirmationPage/HeroSection';
-import { ConfirmationSection } from '../../pages/ConfirmationPage/ConfirmationSection';
+import { HeroSection } from '../../pages/ConfirmationPage/sections/HeroSection';
+import { ConfirmationSection } from '../../pages/ConfirmationPage/sections/ConfirmationSection';
 import { LevelContextItf, ListOfGuests } from '../../types';
 import styled from "styled-components";
 
 const GlobalSectionWrapper = styled.div`
-    width: 100vw;
-    height: 100vh;
-    
+    width: 100%;
+    height: 100%;
 `;
 
 interface Props {
   children?: (ReactNode[] | ReactNode),
-  sections: ReactNode[]
+  sections: ReactNode[],
+  currentSection?: number
 }
 export const SectionsWrapper: React.FC<Props> =
-  ({ children: children, sections }) => {
+  ({ children: children, sections, currentSection }) => {
     const levelContext: LevelContextItf | undefined = useContext(LevelContext);
-    const currentSection = levelContext?.levels?.['Section'];
+    // take the current section from the inherit props, otherwise from the context
+    currentSection = currentSection!==undefined ? 
+      currentSection : levelContext?.levels?.['Section'];
     return (
       <GlobalSectionWrapper>
-        <ParallaxContainer active={currentSection === 1}
+        <ParallaxContainer active={currentSection === 1} currentStage={currentSection as number}
           parallaxChildren2={[
             <DecorationImage key="1" 
             initialPos={[-0,0.05]} initialSize={50}

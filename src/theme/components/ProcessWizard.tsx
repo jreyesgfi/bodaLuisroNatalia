@@ -1,28 +1,31 @@
 import { createContext, ReactNode, useState } from 'react';
 import { ChangeLevelsDictType, LevelDictType } from '../../types';
 
-
+//callbackFunction?: (...args: any[]) => void;
 interface Props {
     children?: (ReactNode[] | ReactNode);
-    callbackFunction?: (...args: any[]) => void;
+    callbackFunction?: () => void;
+    changeCurrentLevel?: (next:boolean) => void;
     levelName: string;                                                  // this level identifier
     parentLevels?: LevelDictType;                     // recovers the whole picture of the parents levels
     changeParentLevels?: ChangeLevelsDictType;    // brings one update function for each level
 }
 export const LevelContext = createContext<any>({});
 export const ProcessWizard: React.FC<Props> =
-    ({callbackFunction, children:children, levelName, changeParentLevels, parentLevels}) => {
-        const [currentLevelNum, setCurrentLevelNum] = useState<number>(1);
-        const [lastLevelChecked, setLastLevelChecked] = useState<number>(0);     
-        const changeCurrentLevel = (next:boolean) => {
-            //if (currentLevelNum > lastLevelChecked+1) { setLastLevelChecked(currentLevelNum-1);}
+    ({ children:children, levelName, changeParentLevels, parentLevels, changeCurrentLevel, callbackFunction}) => {
+        const [currentLevelNum, setCurrentLevelNum] = useState<number>(0);
+  
+        
+        // propose an alternative in case changeCurrentLevel is not set
+        changeCurrentLevel = changeCurrentLevel!==undefined?changeCurrentLevel:
+        (next:boolean) => {
             setCurrentLevelNum(currentLevelNum + (next===false?-1:1));
-            console.log(currentLevelNum);
-            //callbackFunction?.();
+            callbackFunction?.();
         };
+
         const changeLevels: {[level:number]:((next:boolean)=>void)} = {
             ...changeParentLevels,
-            [levelName]: (next:boolean) =>changeCurrentLevel(next),
+            [levelName]: (next:boolean) =>changeCurrentLevel?.(next),
         };
         // const changeLevel = (selectedLevel: keyof typeof changeLevels, next: boolean) => {// reducer function           
         //     changeLevels[selectedLevel](next);

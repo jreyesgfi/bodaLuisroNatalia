@@ -8,21 +8,24 @@ const activeStyles = css`
     transform: translateY(0%);
 `
 
-const unactiveStyles = (level: number) => css`
-    transform: translateY(-${100 * (1-(level/5))/(level+1)}%);
+const unactiveStyles = (level:number, currentStage: number) => css`
+    transform: translateY(-${currentStage*100 * (1-(level/5))/(level+1)}vh);
 `
 //transition: transform ${1.5-level/3}s;
 const permanentStyles = (level: number) => css`
     transition: transform 1.3s ease-in-out;
     
 `;
-
+interface ParallaxWrapperItf {
+    level: number;
+    currentStage:number
+}
 // Styled components
-const ParallaxWrapper = styled.div<{ level: number; active: boolean }>`
-    ${({ active, level }) => (active === true ? activeStyles : unactiveStyles(level))}
+const ParallaxWrapper = styled.div<ParallaxWrapperItf>`
+    ${({level, currentStage}) => (`transform: translateY(-${currentStage*100 * (1-(level/5))/(level+1)}%);`)}
     pointer-events: none;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: absolute;
     ${({ level }) => (permanentStyles(level))};
     z-index: ${({ level }) => (level === 0 ? '20': '')};
@@ -37,7 +40,7 @@ const OtherWrapper = styled.div`
 
 const GlobalParallaxWrapper = styled.div`
     width: 100%;
-    height: 100%;
+    height: 100vw;
     z-index: 10;
     overflow: hidden;
 `;
@@ -45,9 +48,11 @@ const GlobalParallaxWrapper = styled.div`
 // Types
 interface ChildProps {
     level: number;
+    currentStage: number;
 }
 
 interface ParallaxContainerProps {
+    currentStage: number;
     active: boolean;
     parallaxChildren0?: ChildrenType;
     parallaxChildren1?: ChildrenType;
@@ -57,7 +62,7 @@ interface ParallaxContainerProps {
 }
 
 // Component
-export const ParallaxContainer: React.FC<ParallaxContainerProps> = ({ active, parallaxChildren0, parallaxChildren1, parallaxChildren2, parallaxChildren3 , children: children }) => {
+export const ParallaxContainer: React.FC<ParallaxContainerProps> = ({ active, currentStage, parallaxChildren0, parallaxChildren1, parallaxChildren2, parallaxChildren3 , children: children }) => {
     // const levels: React.ReactElement<ChildProps>[][] = [];
 
     // React.Children.toArray(parallaxChildren).forEach((child) => {
@@ -72,7 +77,7 @@ export const ParallaxContainer: React.FC<ParallaxContainerProps> = ({ active, pa
     // });
 
     const parallaxGroups = [parallaxChildren0,parallaxChildren1,parallaxChildren2,parallaxChildren3].map((levelChildren, i) => (
-        <ParallaxWrapper key={i} level={i} active={active}>
+        <ParallaxWrapper key={i} level={i} currentStage={currentStage}>
             {levelChildren}
         </ParallaxWrapper>
 

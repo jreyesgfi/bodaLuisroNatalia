@@ -2,9 +2,9 @@ import { ReactNode, useContext, useEffect, useState } from "react"
 import styled from 'styled-components';
 
 import { commonAllergiesList } from "../assets/allergies";
-import { answersAllergiesText, answersAssistanceText, answersBusGoText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAssistanceText, questionBusText, questionFinishGuest, answersFinishGuest, otherAllergyText, questionHotelText, answersHotelText, questionBusTimeText, answersBusTimeText, answersBusBackText } from "../assets/texts/guestText";
+import { answersAllergiesText, answersAttendanceText, answersBusGoText, answerAllergiesDone, questionAllergiesDone, questionAllergiesText, questionAttendanceText, questionBusText, questionFinishGuest, answersFinishGuest, otherAllergyText, questionHotelText, answersHotelText, questionBusTimeText, answersBusTimeText, answersBusBackText } from "../assets/texts/guestText";
 import { UpdateGuestContext } from "../pages/ConfirmationPage/ConfirmationPage";
-import { ChangeGuestContext } from "../pages/ConfirmationPage/ConfirmationSection";
+import { ChangeGuestContext } from "../pages/ConfirmationPage/sections/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
 import { Column, Heading, NameHeading} from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy,  UpdateGuest, type GuestType, HandleSelection, QuestionAnswerData, StageLabel } from "../types"
@@ -37,9 +37,9 @@ export const Guest: React.FC<Props> =
         
         type StagesFlow = StageLabel[];
         const [stagesFlow, setStagesFlow] = useState<StagesFlow>(
-            ['assistance']);
+            ['attendance']);
         
-        const fullFlow = ['assistance','busGo','busTime','hotel','allergies','allergiesList','finish'];
+        const fullFlow = ['attendance','busGo','busTime','hotel','allergies','allergiesList','finish'];
         useEffect(() => {
             // Calculate the index of the last element in stagesFlow
             const lastStageIndex = stagesFlow.length - 1;
@@ -59,7 +59,7 @@ export const Guest: React.FC<Props> =
         
         interface NextStagesFlow {[key: string]: StageLabel[];}
         const nextStagesFlow:NextStagesFlow = {
-            assistance: ['busGo','finish'],
+            attendance: ['busGo','finish'],
             busGo: ['busTime','hotel'],
             busTime: ['hotel'],
             hotel: ['allergies'],
@@ -72,7 +72,7 @@ export const Guest: React.FC<Props> =
             [key: string]: QuestionAnswerData;
         }
         const questionsAnswerData:QuestionsAnswerData = {
-            'assistance':{question:questionAssistanceText, answers:answersAssistanceText, flowChangerAnswers:[0]},
+            'attendance':{question:questionAttendanceText, answers:answersAttendanceText, flowChangerAnswers:[0]},
             'busGo':{question:questionBusText, answers:answersBusGoText, flowChangerAnswers:[0,1]},
             'busTime':{question:questionBusTimeText, answers:answersBusTimeText, flowChangerAnswers:[]},
             'hotel':{question:questionHotelText, answers:answersHotelText, flowChangerAnswers:[]},
@@ -124,8 +124,10 @@ export const Guest: React.FC<Props> =
             handleFlowChange(property, changed);
             
             // update the guest data
+            console.log(rawState);
             const stateGo = answersBusGoText[rawState].value;
             const stateBack = answersBusBackText[rawState].value;
+            console.log(stateGo,stateBack);
             const updateGuest: UpdateGuest = (guest: GuestType) => {
                 // @ts-ignore
                 guest['busGo'] = stateGo;
@@ -212,8 +214,8 @@ export const Guest: React.FC<Props> =
 
         return (
             <GuestWrapper>  
-                <Heading inverse={true}>
-                    <b>{firstName} {lastName1} {lastName2}</b>
+                <Heading mb="0" inverse={true}>
+                    <b>{firstName} {lastName1}</b>
                 </Heading>
                 <ProgressPercentageWidget
                     numStages={fullFlow.length-1}

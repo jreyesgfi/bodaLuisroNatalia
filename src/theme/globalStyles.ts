@@ -248,23 +248,23 @@ interface Section extends LocatedElementItf, LocatedElementItf, InversedElementI
 }
 export const Section = styled.section<Section>`
 	scroll-snap-align: start;
-	padding: ${({ padding }) => (padding ? padding : '0')};
+	margin: ${({ padding }) => (padding ? padding : '0')};
 	user-select: none;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	margin: ${({ margin }) => (margin ? margin : '16px 24px')};
+	padding: ${({ margin }) => (margin ? margin : '16px 24px')};
 	background: ${({ inverse }) => (inverse ?
 		globalColors.transparent.full :
 		globalColors.dark.primary)};
 	position: ${({ position }) => (position ? position : 'relative')};
-	width: ${({ width }) => (width ? width : 'calc(100% - 48px)')};
+	width: ${({ width }) => (width ? width : '100%')};
 	min-width: ${({ minWidth }) => (minWidth ? minWidth : minimumSize)};
 	max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : 'auto')};
-	height: ${({ height }) => (height ? height : '95%')};
+	height: ${({ height }) => (height ? height : '100%')};
 	max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : 'auto')};
 	min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
 	@media screen and (max-width: ${mediumSize}) {
-		padding: ${({ smPadding }) => (smPadding ? smPadding : '0')};
+		/*padding: ${({ smPadding }) => (smPadding ? smPadding : '0')};*/
 	}
 `;
 /*padding-bottom: ${({ bottomWave}) => (bottomWave ? 0 : '')};

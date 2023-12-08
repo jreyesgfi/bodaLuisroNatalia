@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import styled from "styled-components";
 
-import { ChangeGuestContext } from "../pages/ConfirmationPage/ConfirmationSection";
+import { ChangeGuestContext } from "../pages/ConfirmationPage/sections/ConfirmationSection";
 import { ListOfGuests, UpdateGuest, HandleNumberChange } from "../types"
 import { Guest } from "./Guest"
-import { NextBackGuestControl } from "./Next&BackGuest";
+import { NextBackControl } from "../theme/components/Next&BackGuest";
 
 
 // styled components

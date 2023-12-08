@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { dateText, initialButtonText, introductionText1_2, introductionText1_1, introductionText2, introductionText3, mainTitleText, purposeText, finalIntroductionText } from '../../assets/texts/textConfirmationPage';
-import { CustomButton } from '../../theme/components/Button';
-import { LateralBigImage } from '../../theme/components/LateralBigImage';
-import { ParallaxContainer } from '../../theme/components/ParallaxContainer';
-import { LevelContext } from '../../theme/components/ProcessWizard';
-import { globalColors, Heading, Image, MainHeading, Section, Subtitle, Text } from '../../theme/globalStyles';
-import { LevelContextItf } from '../../types';
+import { dateText, initialButtonText, introductionText1_2, introductionText1_1, introductionText2, introductionText3, mainTitleText, purposeText, finalIntroductionText } from '../../../assets/texts/textConfirmationPage';
+import { CustomButton } from '../../../theme/components/Button';
+import { LateralBigImage } from '../../../theme/components/LateralBigImage';
+import { ParallaxContainer } from '../../../theme/components/ParallaxContainer';
+import { LevelContext } from '../../../theme/components/ProcessWizard';
+import { globalColors, Heading, Image, MainHeading, Section, Subtitle, Text } from '../../../theme/globalStyles';
+import { LevelContextItf } from '../../../types';
 
 
 
@@ -50,8 +50,6 @@ interface HeroWrapperItf {
     active: boolean;
 }
 const HeroSectionWrapper = styled(Section) <HeroWrapperItf>`
-    height: 100%;
-    width: 100%;  
     position: relative;
     transition:  transform 1s, max-height 1.3s ease-out;
     ${({ active }) => (active === true ? activeStyles : unactiveStyles(1))}

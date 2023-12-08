@@ -1,19 +1,22 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { CustomProguessDots } from "../theme/components/ProgressDots";
-import { Text, globalColors, GeneralWrapper } from "../theme/globalStyles";
-import { ControlPropsItf } from "../types";
+import { CustomProguessDots } from "./ProgressDots";
+import { Text, globalColors, GeneralWrapper } from "../globalStyles";
+import { ControlPropsItf } from "../../types";
+
 
 interface Props {
     numStages: number;
     currentStage: number;
-    guestsNames: string[];
+    labels?: string[];
     Control: ControlPropsItf;
 }
 
-const GuestsProgressWrapper = styled(GeneralWrapper)`
+
+const ProgressWrapper = styled(GeneralWrapper)`
     width: auto;
     justify-content: center;
+    align-items: center;
     position: absolute;
     display: flex;
     width: 100%;
@@ -24,27 +27,27 @@ const GuestsProgressWrapper = styled(GeneralWrapper)`
     }
 `;
 
-export const GuestsProgressWidget: React.FC<Props> = ({ numStages, currentStage, guestsNames, Control}) => {
+export const DotsProgressWidget: React.FC<Props> = ({ numStages, currentStage, labels, Control}) => {
     const ControlWidget = Control?.ControlComponent;
-    const {possibleTakeBack, possibleNext, changeGuest} = Control;
+    const {possibleTakeBack, possibleNext, changeStage} = Control;
     
     return (
-        <GuestsProgressWrapper>
+        <ProgressWrapper>
             {ControlWidget ? (
-                <ControlWidget possibleTakeBack={possibleTakeBack} possibleNext={possibleNext} changeGuest={changeGuest}>
+                <ControlWidget possibleTakeBack={possibleTakeBack} possibleNext={possibleNext} changeStage={changeStage}>
                     <CustomProguessDots
                         numStages={numStages}
                         currentStage={currentStage + 1}
-                        labels={guestsNames}
+                        labels={labels}
                     />
                 </ControlWidget>
             ) : (
                 <CustomProguessDots
                     numStages={numStages}
                     currentStage={currentStage + 1}
-                    labels={guestsNames}
+                    labels={labels}
                 />
             )}
-        </GuestsProgressWrapper>
+        </ProgressWrapper>
     );
 };

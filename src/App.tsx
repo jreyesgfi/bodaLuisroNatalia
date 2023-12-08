@@ -13,6 +13,7 @@ import { LevelContext, ProcessWizard } from './theme/components/ProcessWizard'
 import GlobalStyles from './theme/globalStyles'
 import { HomePage } from './pages/HomePage'
 import { ConfirmationPage } from './pages/ConfirmationPage/ConfirmationPage'
+import { OurHistoryPage } from './pages/OurHistory/OurHistoryPage'
 
 const App = (): JSX.Element => {
 
@@ -21,9 +22,10 @@ const App = (): JSX.Element => {
       <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route index element={<ConfirmationPage></ConfirmationPage>}/>
+            <Route index element={<OurHistoryPage></OurHistoryPage>}/>
             <Route path="/home" element={<HomePage></HomePage>}/>
             <Route path="/asistencia" element={<ConfirmationPage></ConfirmationPage>}/>
+            <Route path="/nuestra-historia" element={<OurHistoryPage></OurHistoryPage>}/>
           </Routes>
         </BrowserRouter>
     </Fragment>

@@ -92,9 +92,8 @@ const QuestionWrapper = styled.div<QuestionWrapperItf>`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding-top: 12px;
     overflow: visible;
-    padding-bottom:${({ difStages }) => (difStages > 1 ? '0px':'10px')};
+    padding:${({ difStages }) => (difStages > 1 ? '0px':'12px 0')};
     transition: transform 0s, opacity 0.7s, max-height 1.3s, padding 0.7s;
     ${({ difStages }) => (difStages >= 0 ? 
                 onTheStageStyle({difStages:difStages,element:"wrapper"})
