@@ -96,6 +96,9 @@ const GlobalStyles = createGlobalStyle`
 	body{
 		position: relative;
 	}
+	body > div:nth-child(2) {
+		visibility: hidden !important;
+	}
 	.customIcon{
 		fill: ${globalColors.sencondary[200]};
 	}

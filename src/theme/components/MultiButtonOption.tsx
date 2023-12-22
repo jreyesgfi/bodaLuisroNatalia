@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { globalColors, Text } from '../globalStyles';
+import styled from 'styled-components';
 import { OptionButtonItf } from '../../types';
 import { useState } from 'react';
 import { ButtonItf, CustomButton } from './Button';
@@ -9,17 +8,6 @@ interface Props {
     buttonList: OptionButtonItf[];
     handleSelection: (state: number| null) => void;
 }
-
-const checkedStyles = css`
-  border: 2px solid ${globalColors.sencondary[400]};
-`;
-const uncheckedStyles = css`
-  border: 2px solid ${globalColors.dark.primary};
-`;
-
-const SmallIcon = styled.img`
-  width: 2rem;
-`;
 
 const OptionButtonWrapper = styled.div`
   width: 100%;

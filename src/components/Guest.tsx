@@ -6,7 +6,7 @@ import { answersAllergiesText, answersAttendanceText, answersBusGoText, answerAl
 import { UpdateGuestContext } from "../pages/ConfirmationPage/ConfirmationPage";
 import { ChangeGuestContext } from "../pages/ConfirmationPage/sections/ConfirmationSection";
 import { MultiOptionSelector } from "../theme/components/MultiOptionSelector";
-import { Column, Heading, NameHeading} from "../theme/globalStyles";
+import {Heading} from "../theme/globalStyles";
 import { HandleChange, HandleNewAllergy,  UpdateGuest, type GuestType, HandleSelection, QuestionAnswerData, StageLabel } from "../types"
 import { Question } from "./Question";
 import { ProgressPercentageWidget } from "../theme/components/ProgressPercentage";
@@ -27,8 +27,7 @@ interface Props extends GuestType {
 }
 export const Guest: React.FC<Props> =
     ({
-        guestID, firstName, lastName1, lastName2,
-        attendance, busGo, busBack, allergies, allergiesList, otherAllergy }) => {
+        guestID, firstName, lastName1, allergiesList }) => {
 
 
         // Define the states
@@ -117,7 +116,7 @@ export const Guest: React.FC<Props> =
             else { previousStage();}
         }
 
-        const handleBus:HandleSelection = (guestID, property,rawState, answers, flowChangerAnswers )=>{
+        const handleBus:HandleSelection = (guestID, property,rawState,flowChangerAnswers )=>{
             if (rawState === null) { return }
             // check if the flow has changed
             const changed = rawState in flowChangerAnswers;

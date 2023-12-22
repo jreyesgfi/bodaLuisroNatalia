@@ -15,12 +15,6 @@ const ProgressDotsWrapper = styled.div`
     gap: 12px;
     justify-content: center;
 `;
-const ProgressLine = styled.div`
-    height: 8px;
-    inset:0px;
-    margin: auto;
-    border-radius: 4px;
-`;
 
 interface StageProps {
     current_stage?: boolean;

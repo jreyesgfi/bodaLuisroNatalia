@@ -10,7 +10,6 @@ interface Props {
 
 export const Footer: React.FC<Props> = ({
   activeCount = 0,
-  completedCount = 0,
   filterSelected = 'all',
   handleFilterChange
 }) => {

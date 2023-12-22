@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import { AreaText, globalColors, Text } from "../globalStyles";
 import { RoundIconImage, RoundIconWrapper } from "./Icon";
 import { ChangeEvent, useState } from "react";
-import { HandleChange } from "../../types";
 
 type ElementType = any;
 interface Props {

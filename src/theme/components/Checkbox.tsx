@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
-import { globalColors, Icon } from "../globalStyles";
+import { globalColors} from "../globalStyles";
 
 const checkAnimation = keyframes`
 0% { stroke-dashoffset: 30; }

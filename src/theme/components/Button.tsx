@@ -33,14 +33,7 @@ export interface ButtonItf {
 	hidden_style?: boolean;
 	none_style?: boolean;
 }
-const ListItem = styled.div<{ selected:boolean }>`
-    margin: 8pt 0;
-    padding: 0 8px;
-    border-radius: 8px;
-    width: 300px;
-    transition: all 0.3s;
-    ${({selected}) => (selected===true ? checkedStyles : uncheckedStyles)};
-`;
+
 export const CustomButton = styled.button<ButtonItf>`
 	${({selected, highlighted, hidden_style, none_style}) => {
         if (selected===true){return checkedStyles}

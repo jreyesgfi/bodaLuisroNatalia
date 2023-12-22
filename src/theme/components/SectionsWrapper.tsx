@@ -2,10 +2,9 @@ import { ReactNode, useContext } from 'react';
 import { ParallaxContainer } from './ParallaxContainer'
 import { LevelContext } from './ProcessWizard'
 import { DecorationImage } from '../../components/ParallaxDecoration'
-import { HeroSection } from '../../pages/ConfirmationPage/sections/HeroSection';
-import { ConfirmationSection } from '../../pages/ConfirmationPage/sections/ConfirmationSection';
-import { LevelContextItf, ListOfGuests } from '../../types';
+import { LevelContextItf} from '../../types';
 import styled from "styled-components";
+import { PUBLIC_BASE_PATH } from '../../serverConfig';
 
 const GlobalSectionWrapper = styled.div`
     width: 100%;
@@ -29,28 +28,30 @@ export const SectionsWrapper: React.FC<Props> =
           parallaxChildren2={[
             <DecorationImage key="1" 
             initialPos={[-0,0.05]} initialSize={50}
-            src="../../public/assets/images/testSmall.svg" />,
+            src={PUBLIC_BASE_PATH+"assets/images/testSmall3.svg"} />,
             <DecorationImage key="2" 
             initialPos={[-0,0.83]} initialSize={400}
-            src="../../public/assets/images/testSmall.svg" />,
+            src={PUBLIC_BASE_PATH+"assets/images/testSmall1.svg"} />,
             <DecorationImage key="3" 
             initialPos={[0.96,0.7]} initialSize={60}
-            src="../../public/assets/images/testSmall2.svg" />,
+            src={PUBLIC_BASE_PATH+"assets/images/testSmall2.svg"} />,
             <DecorationImage key="4" 
             initialPos={[0.8,0.12]} initialSize={40}
-            src="../../public/assets/images/testSmall3.svg" />
+            src={PUBLIC_BASE_PATH+"assets/images/testSmall3.svg"} />
           ]}
           parallaxChildren3={[
             <DecorationImage key="1" 
             initialPos={[0.9,0.95]} initialSize={230}
-            src="../../public/assets/images/testSmall2.svg" />,
+            src={PUBLIC_BASE_PATH+"assets/images/testSmall2.svg"} />,
             <DecorationImage key="2" 
             initialPos={[0.9,0.1]} initialSize={60}
-            src="../../public/assets/images/testSmall.svg" />,
+            src={PUBLIC_BASE_PATH+"assets/images/testSmall.svg"} />,
           ]}
+          
           parallaxChildren0={
             sections
           }>
+            {children}
         </ParallaxContainer>
       </GlobalSectionWrapper>
 

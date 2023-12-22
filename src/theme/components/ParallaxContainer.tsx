@@ -1,18 +1,13 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { ChildrenType } from "../../types";
 
 
 // checked and not checked styles
-const activeStyles = css`
-    transform: translateY(0%);
-`
 
-const unactiveStyles = (level:number, currentStage: number) => css`
-    transform: translateY(-${currentStage*100 * (1-(level/5))/(level+1)}vh);
-`
+
 //transition: transform ${1.5-level/3}s;
-const permanentStyles = (level: number) => css`
+const permanentStyles = () => css`
     transition: transform 1.3s ease-in-out;
     
 `;
@@ -27,7 +22,7 @@ const ParallaxWrapper = styled.div<ParallaxWrapperItf>`
     width: 100%;
     height: 100%;
     position: absolute;
-    ${({ level }) => (permanentStyles(level))};
+    ${permanentStyles};
     z-index: ${({ level }) => (level === 0 ? '20': '')};
     opacity: ${({ level }) => (`${1-level*0.3}`)};
     >*{
@@ -46,10 +41,7 @@ const GlobalParallaxWrapper = styled.div`
 `;
 
 // Types
-interface ChildProps {
-    level: number;
-    currentStage: number;
-}
+
 
 interface ParallaxContainerProps {
     currentStage: number;
@@ -62,7 +54,7 @@ interface ParallaxContainerProps {
 }
 
 // Component
-export const ParallaxContainer: React.FC<ParallaxContainerProps> = ({ active, currentStage, parallaxChildren0, parallaxChildren1, parallaxChildren2, parallaxChildren3 , children: children }) => {
+export const ParallaxContainer: React.FC<ParallaxContainerProps> = ({ currentStage, parallaxChildren0, parallaxChildren1, parallaxChildren2, parallaxChildren3 , children: children }) => {
     // const levels: React.ReactElement<ChildProps>[][] = [];
 
     // React.Children.toArray(parallaxChildren).forEach((child) => {

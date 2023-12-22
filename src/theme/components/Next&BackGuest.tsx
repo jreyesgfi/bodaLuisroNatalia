@@ -11,6 +11,7 @@ import { ControlItf } from '../../types';
 //styled components
 const ButtonsWrapper = styled.div`
     border-top: 1px solid ${globalColors.sencondary[400]};
+    padding-top:8px;
     display: flex;
     justify-content: center;
     align-items: center;

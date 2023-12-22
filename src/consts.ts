@@ -1,5 +1,3 @@
-type TodoFilterKey = string
-type TodoFilterLiteral = string
 export const TODO_FILTERS = {
     ALL:"all",
     ACTIVE:"active",

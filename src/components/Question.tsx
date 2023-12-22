@@ -1,7 +1,6 @@
 import { MultiButtonOption } from "../theme/components/MultiButtonOption";
-import { ReactNode, useState } from "react";
+import { ReactNode} from "react";
 import { OptionButtonItf } from "../types";
-import { CustomButton } from "../theme/components/Button";
 import { Text, globalColors } from "../theme/globalStyles";
 import styled, { css } from 'styled-components';
 import { RoundIconWrapper, RoundIconImage } from "../theme/components/Icon";

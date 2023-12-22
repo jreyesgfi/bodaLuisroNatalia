@@ -13,8 +13,8 @@ export const ChangeGuestContext = createContext<any>(null);
 
 export const ConfirmationSection: React.FC<Props> =
     ({ guests }) => {
-        const [currentGuestNum, setCurrentGuestNum] = useState<number>(0);
-        const [lastGuestChecked, setLastGuestChecked] = useState<number>(0);
+        const [currentGuestNum, setCurrentGuestNum] = useState<number>(1);
+        const [lastGuestChecked, setLastGuestChecked] = useState<number>(1);
         const triggerSubmitData = () => { submitData(guests) };
         const changeGuest = (next?: boolean) => {
             if (currentGuestNum > lastGuestChecked + 1) { setLastGuestChecked(currentGuestNum - 1); }
@@ -33,8 +33,8 @@ export const ConfirmationSection: React.FC<Props> =
           const controlProps: ControlPropsItf = {
             ControlComponent: NextBackControl,
             changeStage: changeGuest,
-            possibleNext: currentGuestNum <= lastGuestChecked,
-            possibleTakeBack: currentGuestNum > 0  
+            possibleNext: currentGuestNum < lastGuestChecked,
+            possibleTakeBack: currentGuestNum > 1  
           };
           
         return (
@@ -47,7 +47,7 @@ export const ConfirmationSection: React.FC<Props> =
                     />
                    <DotsProgressWidget
                     numStages={guests.length}
-                    currentStage={currentGuestNum}
+                    currentStage={currentGuestNum-1}
                     labels={guests.map(guest => guest.firstName)}
                     Control={controlProps}/>
                 </Section>

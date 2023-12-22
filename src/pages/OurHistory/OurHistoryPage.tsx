@@ -3,9 +3,8 @@ import { SectionsWrapper } from '../../theme/components/SectionsWrapper'
 
 import styled from 'styled-components';
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import { LevelContext, ProcessWizard } from '../../theme/components/ProcessWizard'
 import { OurHistorySection } from './sections/OurHistorySection';
 import { DotsProgressWidget } from '../../theme/components/DotsProgressWidget';
 import { ControlPropsItf } from '../../types';
