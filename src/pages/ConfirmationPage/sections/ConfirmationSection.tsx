@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import { Guests } from '../../../components/Guests'
-import { NextBackControl } from '../../../theme/components/Next&BackGuest';
+import { NextBackControl } from '../../../theme/components/Next&BackControl';
 import { submitData } from '../../../connection/connectionMethods';
 import { Section } from '../../../theme/globalStyles';
 import { ControlPropsItf, ListOfGuests } from '../../../types'

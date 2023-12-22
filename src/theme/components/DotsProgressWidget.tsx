@@ -14,13 +14,15 @@ interface Props {
 
 
 const ProgressWrapper = styled(GeneralWrapper)`
-    width: auto;
+
     justify-content: center;
     align-items: center;
     position: absolute;
     display: flex;
-    width: 100%;
-    bottom: 20px;
+    max-width: calc(100% - 48px);
+    margin: 0 auto;
+    box-sizing: content-box;
+    inset: auto 0 20px;
     z-index:100;
     > div{
         margin:auto;

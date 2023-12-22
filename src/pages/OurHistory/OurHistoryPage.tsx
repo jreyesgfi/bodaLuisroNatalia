@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { OurHistorySection } from './sections/OurHistorySection';
 import { DotsProgressWidget } from '../../theme/components/DotsProgressWidget';
 import { ControlPropsItf } from '../../types';
-import { NextBackControl } from '../../theme/components/Next&BackGuest';
+import { NextBackControl } from '../../theme/components/Next&BackControl';
 
 const GlobalWrapper = styled.div`
 overflow: hidden;
