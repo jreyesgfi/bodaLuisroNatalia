@@ -7,9 +7,9 @@ import { useState } from 'react'
 
 import { OurHistorySection } from './sections/OurHistorySection';
 import { DotsProgressWidget } from '../../theme/components/DotsProgressWidget';
-import { ControlPropsItf } from '../../types';
-import { NextBackControl } from '../../theme/components/Next&BackControl';
 import { OurHistorySection2 } from './sections/OurHistorySection2';
+import { CustomButton } from '../../theme/components/Button';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const GlobalWrapper = styled.div`
 overflow: hidden;
@@ -18,24 +18,40 @@ width: 98vw;
 padding: 0;
 margin: 0;
 scroll: none;
+position: relative;
 `;
 
 // intialize the context
 export const OurHistoryPage: React.FC= () => {
+  
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
   // States
   //const [stage, setStage] = useState<number>([]);
 
   const [currentSection, setCurrentSection] = useState<number>(0);
   
-  const changeSection = (next?: boolean) => {
-    setCurrentSection(currentSection + (next === false ? -1 : 1));
+  const handleNext = () => {
+    if (currentSection >=1) {
+      const groupID = searchParams.get('groupID');
+      const token = searchParams.get('token');
+      navigate(`/asistencia?groupID=${groupID}&token=${token}`);
+    }
+    setCurrentSection(currentSection + 1);
   }
-  const controlProps: ControlPropsItf = {
-    ControlComponent: NextBackControl,
-    changeStage: changeSection,
-    possibleNext: currentSection <1,
-    possibleTakeBack: currentSection > 0  
-  };
+
+  const HistoryButton = styled(CustomButton)`
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 200px;
+    background-color: #ffffff00;
+    z-index: 100;
+    
+`;
   
   return (
   <GlobalWrapper>
@@ -45,10 +61,12 @@ export const OurHistoryPage: React.FC= () => {
           <OurHistorySection key={1}/>,
           <OurHistorySection2 key={2}/>]}
       />
-      <DotsProgressWidget
-        numStages = {2}
-        currentStage={currentSection}
-        Control={controlProps}
-      />
+      <HistoryButton
+        onClick={handleNext}
+        highlighted={true}
+        > 
+        Siguiente
+      </HistoryButton>
+
   </GlobalWrapper>
 )};

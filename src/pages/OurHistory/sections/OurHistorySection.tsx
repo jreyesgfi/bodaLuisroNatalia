@@ -2,8 +2,6 @@
 import styled from 'styled-components';
 import { adjustUrlForEnvironment } from '../../../serverConfig';
 import { MainHeading, Section, Text } from '../../../theme/globalStyles';
-import {historyText1, historyTitle1} from '../../../assets/texts/historyTexts'
-import { CustomButton } from '../../../theme/components/Button';
 
 interface Props {
     
@@ -26,20 +24,12 @@ const HistoryImage = styled.img`
     inset: 0;
     object-fit: cover;
 `;
-const HistoryButton = styled(CustomButton)`
-    position: absolute;
-    bottom: 24px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    max-width: 200px;
-`;
+
 export const OurHistorySection: React.FC<Props> =
     () => {
         return (
             <Section inverse={true} padding='0'>
                 <HistoryImage src={adjustUrlForEnvironment("../../../../public/assets/images/Apuntes Carta Acuarela Marron.svg")}/>
-                <HistoryButton> Siguiente</HistoryButton>
             </Section>
         )
     }

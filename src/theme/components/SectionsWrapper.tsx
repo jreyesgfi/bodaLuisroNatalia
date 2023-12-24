@@ -14,7 +14,8 @@ const GlobalSectionWrapper = styled.div`
 interface Props {
   children?: (ReactNode[] | ReactNode),
   sections: ReactNode[],
-  currentSection?: number
+  currentSection?: number,
+  version?: number
 }
 export const SectionsWrapper: React.FC<Props> =
   ({ children: children, sections, currentSection }) => {
@@ -30,7 +31,7 @@ export const SectionsWrapper: React.FC<Props> =
             initialPos={[-0,0.05]} initialSize={50}
             src={adjustUrlForEnvironment("assets/images/testSmall3.svg")} />,
             <DecorationImage key="2" 
-            initialPos={[-0,0.83]} initialSize={400}
+            initialPos={[0.1,0.83]} initialSize={30}
             src={adjustUrlForEnvironment("assets/images/testSmall1.svg")} />,
             <DecorationImage key="3" 
             initialPos={[0.96,0.7]} initialSize={60}
@@ -42,6 +43,9 @@ export const SectionsWrapper: React.FC<Props> =
           parallaxChildren3={[
             <DecorationImage key="1" 
             initialPos={[0.9,0.95]} initialSize={230}
+            src={adjustUrlForEnvironment("assets/images/testSmall2.svg")} />,
+            <DecorationImage key="2" 
+            initialPos={[0.08,0.87]} initialSize={40}
             src={adjustUrlForEnvironment("assets/images/testSmall2.svg")} />,
             <DecorationImage key="2" 
             initialPos={[0.9,0.1]} initialSize={60}
