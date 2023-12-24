@@ -10,8 +10,7 @@ import { ControlItf } from '../../types';
 
 //styled components
 const ButtonsWrapper = styled.div`
-    border-top: 1px solid ${globalColors.sencondary[400]};
-    padding-top:8px;
+    padding-top:16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +37,7 @@ interface ArrowIconItf {
 }
 const ArrowIcon = styled.div`
     > svg {
-        fill: ${globalColors.sencondary[400]};
+        fill: ${globalColors.primary[400]};
         witdh: 16px;
         height: 16px;
     }

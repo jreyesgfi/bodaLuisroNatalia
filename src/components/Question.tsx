@@ -35,7 +35,7 @@ const onTheStageStyle = ({difStages, element}:CSSInterface) => css`
     transform: ${transformDict[element]};
     max-height: ${difStages ===0 ||difStages ===1 ? '500px': '0px'};
     ${element==='wrapper'?
-    `border-bottom:1px solid ${globalColors.sencondary[400]};
+    `border-bottom:1px solid ${globalColors.primary[400]};
     `:``}  
 `
 
@@ -59,7 +59,7 @@ const TakeBackButton = styled(RoundIconWrapper)`
     cursor: pointer;
     z-index:50;
     &:hover{
-        background:linear-gradient(to top, ${globalColors.sencondary[100]} 0%, rgba(255, 255, 255,0) 30%);
+        background:linear-gradient(to top, ${globalColors.primary[100]} 0%, rgba(255, 255, 255,0) 30%);
     }
 `;
 const TakeBackIcon = styled(RoundIconImage)`

@@ -22,7 +22,7 @@ const ProgressWrapper = styled(GeneralWrapper)`
     max-width: calc(100% - 48px);
     margin: 0 auto;
     box-sizing: content-box;
-    inset: auto 0 20px;
+    inset: auto 0 8px;
     z-index:100;
     > div{
         margin:auto;

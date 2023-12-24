@@ -22,12 +22,12 @@ const ProgressLine = styled.div`
 `;
 const BackgroundLine = styled(ProgressLine)`
     width: 100%;
-    background-color: ${globalColors.sencondary[100]}
+    background-color: ${globalColors.primary[100]}
 `;
 const CurrentProgressLine = styled(ProgressLine)<{progressPercentage:number}>`
     width: ${({ progressPercentage }) => (`${progressPercentage}%`) };
     right: auto;
-    background-color: ${globalColors.sencondary[400]};
+    background-color: ${globalColors.primary[400]};
     transition: width 0.5s;
     z-index: 25;
 `;
@@ -45,7 +45,7 @@ const StageDot = styled.div<DotProps>`
     top: 0;
     bottom: 0;
     left: ${({ stagePosition }) => (`${stagePosition}%`) };
-    background-color: ${({ passedStage }) => (passedStage===true?`${globalColors.sencondary[800]}`:`${globalColors.light.white}`) };;
+    background-color: ${({ passedStage }) => (passedStage===true?`${globalColors.primary[800]}`:`${globalColors.light.white}`) };;
     z-index: 50;
 `;
 

@@ -17,8 +17,8 @@ interface CheckBoxItf {
   handleOnChange: () => void;
 }
 const checkedStyles = css`
-    border: 2px solid ${globalColors.sencondary[200]};
-    background:${globalColors.sencondary[200]};
+    border: 2px solid ${globalColors.primary[200]};
+    background:${globalColors.primary[200]};
 `
 const uncheckedStyles = css`
     border: 2px solid ${globalColors.dark.second};

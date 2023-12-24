@@ -9,6 +9,7 @@ import { OurHistorySection } from './sections/OurHistorySection';
 import { DotsProgressWidget } from '../../theme/components/DotsProgressWidget';
 import { ControlPropsItf } from '../../types';
 import { NextBackControl } from '../../theme/components/Next&BackControl';
+import { OurHistorySection2 } from './sections/OurHistorySection2';
 
 const GlobalWrapper = styled.div`
 overflow: hidden;
@@ -32,7 +33,7 @@ export const OurHistoryPage: React.FC= () => {
   const controlProps: ControlPropsItf = {
     ControlComponent: NextBackControl,
     changeStage: changeSection,
-    possibleNext: currentSection <3,
+    possibleNext: currentSection <1,
     possibleTakeBack: currentSection > 0  
   };
   
@@ -41,12 +42,11 @@ export const OurHistoryPage: React.FC= () => {
       <SectionsWrapper
         currentSection={currentSection}
         sections={[
-          <OurHistorySection key={1} sectionNum={1}/>,
-          <OurHistorySection key={2} sectionNum={2}/>,
-          <OurHistorySection key={3} sectionNum={3}/>]}
+          <OurHistorySection key={1}/>,
+          <OurHistorySection2 key={2}/>]}
       />
       <DotsProgressWidget
-        numStages = {3}
+        numStages = {2}
         currentStage={currentSection}
         Control={controlProps}
       />

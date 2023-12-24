@@ -4,11 +4,14 @@ import { useSpring, animated } from "react-spring";
 
 
 const ProgressNumber = styled(animated(Text))`
-    color: ${globalColors.sencondary[400]};
-    font-size: 36pt;
-    width:100%;
+    color: ${globalColors.primary[400]};
+    font-size: 32pt;
     text-align: right;
     transition: transform 0.5s ease-in-out;
+    max-width: 82px;
+    margin-right: 0px;
+    margin-left: auto;
+    display:inline-block;
 `;
 
 

@@ -22,7 +22,7 @@ export const answersBusTimeText = [
     {text:'01:00',value:'Tarde'}];
 
 
-export const questionAllergiesText = '¿Alguna alergia alimentaria?';
+export const questionAllergiesText = '¿Alergias alimentarias?';
 export const answersAllergiesText = [
     {text:'No, ninguna', value:false},
     {text:'Sí',value:true}];

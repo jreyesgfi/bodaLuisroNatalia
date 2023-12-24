@@ -21,7 +21,7 @@ export const globalColors = {
 		third: '#E6CE1D',
 		light: '#FDEC00'
 	},
-	primary: {
+	secondary: {
 		100: '#f6eecf',
 		200: '#e3c566',
 		300: '#e3c566',
@@ -32,11 +32,11 @@ export const globalColors = {
 		800: '#7f4421',
 		900: '#69391e'
 	},
-	sencondary: {
+	primary: {
 		100: '#d6f2f7',
-		200: '#b2e5ef',
+		200: '#C8DBC7',
 		300: '#7dd1e3',
-		400: '#40b4d0',
+		400: '#82A880',
 		500: '#2597b5',
 		600: '#217a99',
 		700: '#21637d',
@@ -100,7 +100,7 @@ const GlobalStyles = createGlobalStyle`
 		visibility: hidden !important;
 	}
 	.customIcon{
-		fill: ${globalColors.sencondary[200]};
+		fill: ${globalColors.primary[200]};
 	}
 
 `;
@@ -159,7 +159,7 @@ export const MainHeading = styled.h1<InversedElementItf>`
 	margin: 16px auto 16px;
 	padding-bottom:0;
 	color: ${({ inverse }) => (inverse ?
-		globalColors.sencondary[400] :
+		globalColors.primary[400] :
 		globalColors.light.primary)};
 	width: fit-content;
 	height:fit-content;
@@ -185,7 +185,7 @@ export const Heading = styled.h2<HeadingInterface>`
 	margin-bottom: ${({ mb }) => (mb ? mb : '16pt')};
 	margin-top: ${({ mt }) => (mt ? mt : '12pt')};
 	color: ${({ inverse }) => (inverse ?
-		globalColors.sencondary[400] :
+		globalColors.primary[400] :
 		globalColors.light.primary)};
 	letter-spacing: 4pt;
 	line-height: 1.4;
@@ -211,7 +211,7 @@ export const NameHeading = styled(Heading)<HeadingInterface>`
 	margin-bottom: ${({ mb }) => (mb ? mb : '0')};
 	margin-top: ${({ mt }) => (mt ? mt : '16px')};
 	color: ${({ inverse }) => (inverse ?
-		globalColors.sencondary[400] :
+		globalColors.primary[400] :
 		globalColors.light.primary)};
 	letter-spacing: 0.4rem;
 	line-height: 1.4;
@@ -251,11 +251,11 @@ interface Section extends LocatedElementItf, LocatedElementItf, InversedElementI
 }
 export const Section = styled.section<Section>`
 	scroll-snap-align: start;
-	margin: ${({ padding }) => (padding ? padding : '0')};
+	padding: ${({ padding }) => (padding ? padding : '16px 24px 4px')};
 	user-select: none;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	padding: ${({ margin }) => (margin ? margin : '16px 24px')};
+	margin:${({ margin }) => (margin ? margin : '0')};
 	background: ${({ inverse }) => (inverse ?
 		globalColors.transparent.full :
 		globalColors.dark.primary)};

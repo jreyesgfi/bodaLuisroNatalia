@@ -28,7 +28,6 @@ export const submitData = (guests:ListOfGuests): void => {
     // Send a POST request with the data string to your Google Apps Script
     axios.post(connectionUrl, data, connectionData)
         .then(response => {
-            console.log(response);
         })
         .catch((error) => {
             console.error('Error:', error);

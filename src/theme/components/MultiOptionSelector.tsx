@@ -16,7 +16,7 @@ interface Props {
 
 // checked and not checked styles
 const checkedStyles = css`
-    border: 1px solid ${globalColors.sencondary[400]};
+    border: 1px solid ${globalColors.primary[400]};
 `
 const uncheckedStyles = css`
     border: 1px solid ${globalColors.dark.primary};
@@ -74,7 +74,7 @@ const OtherArea = styled(AreaText)<{activated:boolean}>`
     padding: 8px 0 8px 16px;
     background-color: ${globalColors.transparent.full};
     min-width: fit-content;
-    border: ${({activated})=>`1px solid ${activated===true?globalColors.sencondary[400] : globalColors.dark.primary}`}
+    border: ${({activated})=>`1px solid ${activated===true?globalColors.primary[400] : globalColors.dark.primary}`}
 `;
 
 export const MultiOptionSelector: React.FC<Props> = ({ listGiven, checked, handleClick, otherOption, handleOtherOption }) => {

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage":"www.bodanatyluis.com/",
+  "homepage": "www.bodanatyluis.com/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^1.5.1",
+    "mobile-detect": "^1.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",

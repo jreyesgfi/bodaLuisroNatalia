@@ -6,7 +6,7 @@ export const RoundIconWrapper = styled.div`
     background-color: ${globalColors.light.primary};
     padding: 4px;
     border-radius: 50%;
-    border: 1px solid ${globalColors.sencondary[400]};
+    border: 1px solid ${globalColors.primary[400]};
     cursor: pointer;
     z-index:50;
 `;

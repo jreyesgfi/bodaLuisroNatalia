@@ -22,6 +22,13 @@ const GuestWrapper = styled.div`
     justify-content: left;
 `;
 
+const NameText = styled(Heading)`
+    max-width: calc(100% - 88px);
+    margin-left: 0;
+    display:inline-block;
+    justify-self: left;
+`;
+
 // Define the function and its props
 interface Props extends GuestType {
 }
@@ -42,7 +49,6 @@ export const Guest: React.FC<Props> =
         useEffect(() => {
             // Calculate the index of the last element in stagesFlow
             const lastStageIndex = stagesFlow.length - 1;
-            console.log(stagesFlow[lastStageIndex]);
             // If stagesFlow has elements
             if (lastStageIndex >= 0) {
               // Find the index of the last stage in the fullFlow array
@@ -213,9 +219,9 @@ export const Guest: React.FC<Props> =
 
         return (
             <GuestWrapper>  
-                <Heading mb="0" inverse={true}>
+                <NameText mb="0" inverse={true}>
                     <b>{firstName} {lastName1}</b>
-                </Heading>
+                </NameText>
                 <ProgressPercentageWidget
                     numStages={fullFlow.length-1}
                     currentStage={progress}

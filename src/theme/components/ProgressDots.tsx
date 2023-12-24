@@ -22,7 +22,7 @@ interface StageProps {
 
 const GuestName = styled(Text) <StageProps>`
     margin: auto auto 0;
-    color: ${({ current_stage }) => (current_stage === true ? `${globalColors.sencondary[400]}` : `${globalColors.sencondary[200]}`)};
+    color: ${({ current_stage }) => (current_stage === true ? `${globalColors.primary[400]}` : `${globalColors.primary[200]}`)};
     font-size: ${({ current_stage }) => (current_stage === true ? `14pt` : `8pt`)};
 `;
 
@@ -32,7 +32,7 @@ const StageDot = styled.div<StageProps>`
     height: ${({ current_stage }) => (current_stage === true ? `14px` : `8px`)};
     border-radius: 50%;
     margin: 0 auto;
-    background-color: ${({ current_stage }) => (current_stage === true ? `${globalColors.sencondary[400]}` : `${globalColors.sencondary[200]}`)};
+    background-color: ${({ current_stage }) => (current_stage === true ? `${globalColors.primary[400]}` : `${globalColors.primary[200]}`)};
     z-index: 50;
 `;
 

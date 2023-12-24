@@ -3,14 +3,14 @@ import { globalColors } from "../globalStyles";
 
 // checked and not checked styles
 const checkedStyles = css`
-    border: 1px solid ${globalColors.sencondary[400]};
-    background-color:${globalColors.sencondary[400]};
+    border: 1px solid ${globalColors.primary[400]};
+    background-color:${globalColors.primary[400]};
     color: ${globalColors.light.primary};
 `
 
 const highlightedStyles = css`
-    border: 1px solid ${globalColors.sencondary[400]};
-    color: ${globalColors.sencondary[400]};
+    border: 1px solid ${globalColors.primary[400]};
+    color: ${globalColors.primary[400]};
     background-color: ${globalColors.light.primary};
 `
 const uncheckedStyles = css`
