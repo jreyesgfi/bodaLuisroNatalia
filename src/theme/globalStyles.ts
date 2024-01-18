@@ -93,8 +93,9 @@ const GlobalStyles = createGlobalStyle`
 	html, body {
 		overflow:hidden;
 	}
-	body{
+	body, #root{
 		position: relative;
+		height: 92vh;
 	}
 	body > div:nth-child(2) {
 		visibility: hidden !important;

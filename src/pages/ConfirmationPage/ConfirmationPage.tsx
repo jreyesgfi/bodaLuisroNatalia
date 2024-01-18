@@ -10,10 +10,11 @@ import { receiveData } from '../../connection/connectionMethods'
 
 import { LevelContext, ProcessWizard } from '../../theme/components/ProcessWizard'
 import { GuestType } from '../../types';
+import { FinalSection } from './sections/FinalSection';
 
 const GlobalWrapper = styled.div`
 overflow: hidden;
-height: 100vh;
+height: 100%;
 width: 100vw;
 padding: 0;
 margin: 0;
@@ -28,10 +29,6 @@ export const ConfirmationPage: React.FC= () => {
     const newGuests = guests.map((guest:GuestType) => guest.guestID === givenGuestID ? updateFunction(guest) : guest);
     setGuests(newGuests)
   }
-
-  const currentLevelContext:any = useContext(LevelContext);
-  //const currentSection = currentLevelContext?.levels?.['Section'];
-
   const handleNewData = (data: ListOfGuests): void => {
     setGuests(data);
   }
@@ -48,7 +45,8 @@ export const ConfirmationPage: React.FC= () => {
             <SectionsWrapper
               sections={[
                 <HeroSection key={1}></HeroSection>,
-                <ConfirmationSection key={2} guests={guests}></ConfirmationSection>
+                <ConfirmationSection key={2} guests={guests}></ConfirmationSection>,
+                <FinalSection key={3}></FinalSection>
               ]} />
           </ProcessWizard>
         </UpdateGuestContext.Provider>

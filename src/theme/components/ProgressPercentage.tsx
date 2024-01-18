@@ -8,10 +8,12 @@ const ProgressNumber = styled(animated(Text))`
     font-size: 32pt;
     text-align: right;
     transition: transform 0.5s ease-in-out;
-    max-width: 82px;
+    max-width: fit-content;
     margin-right: 0px;
     margin-left: auto;
-    display:inline-block;
+    position:absolute;
+    right:0;
+    margin-top: -60px;
 `;
 
 

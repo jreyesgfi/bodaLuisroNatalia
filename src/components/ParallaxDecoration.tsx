@@ -11,7 +11,7 @@ const Image = styled.img<ImageItf>`
     height: ${size}px;`)};
 
     position: absolute;
-    inset: ${({pos})=>(`${pos[1]*100}vh auto auto ${pos[0]*100}vw`)};
+    inset: ${({pos})=>(`${pos[1]*100}% auto auto ${pos[0]*100}vw`)};
     margin: auto;
     transform: translate(-50%, -50%);
     transition: transform 0.2s linear;

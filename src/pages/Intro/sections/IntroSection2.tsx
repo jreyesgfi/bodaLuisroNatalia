@@ -18,9 +18,9 @@ const HistoryTextWrapper = styled(Text)`
 `;
 const HistoryImage = styled.img`
     max-width: 100%;
-    max-height: 70vh;
+    max-height: 70%;
 `;
-export const OurHistorySection2: React.FC<Props> =
+export const IntroSection2: React.FC<Props> =
     () => {
         return (
             <Section inverse={true}>

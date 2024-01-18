@@ -35,7 +35,7 @@ const OtherWrapper = styled.div`
 
 const GlobalParallaxWrapper = styled.div`
     width: 100%;
-    height: 100vw;
+    height: 100%;
     z-index: 10;
     overflow: hidden;
 `;

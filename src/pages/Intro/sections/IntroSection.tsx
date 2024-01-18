@@ -19,17 +19,17 @@ const HistoryTextWrapper = styled(Text)`
 `;
 const HistoryImage = styled.img`
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     position:absolute;
     inset: 0;
     object-fit: cover;
 `;
 
-export const OurHistorySection: React.FC<Props> =
+export const IntroSection: React.FC<Props> =
     () => {
         return (
             <Section inverse={true} padding='0'>
-                <HistoryImage src={adjustUrlForEnvironment("../../../../public/assets/images/Apuntes Carta Acuarela Marron.svg")}/>
+                <HistoryImage src={adjustUrlForEnvironment("../../../../public/assets/images/ApuntesCartaAcuarelaMarron.svg")}/>
             </Section>
         )
     }

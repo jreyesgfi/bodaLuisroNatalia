@@ -38,8 +38,8 @@ interface ArrowIconItf {
 const ArrowIcon = styled.div`
     > svg {
         fill: ${globalColors.primary[400]};
-        witdh: 16px;
-        height: 16px;
+        witdh: 24px;
+        height: 24px;
     }
     `;
 

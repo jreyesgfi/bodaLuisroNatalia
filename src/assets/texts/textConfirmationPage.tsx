@@ -7,3 +7,14 @@ export const dateText = '13 de Julio'
 export const introductionText3 = 'en la parroquia -----. Si deseas acudir confirma tu asistencia a continuación:'
 export const finalIntroductionText = 'Aquí, dejaremos todo preparado para recibirte con tan solo un par de preguntas.'
 export const initialButtonText = '¡Vamos a por ello!'
+
+export const finalSectionTitle = '¡Enhorabuena!'
+export const FinalSectionText = () => (
+    <>
+        Has completado la confirmación de asistencia pero <br/>
+        <b>¡NO TE VAYAS!</b>
+        <br/>
+        Queremos compartir contigo cómo ha sido este camino...
+    </>
+);
+export const finalSectionButtonText = 'Comenzar el camino'

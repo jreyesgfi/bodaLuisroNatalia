@@ -23,10 +23,11 @@ const GuestWrapper = styled.div`
 `;
 
 const NameText = styled(Heading)`
-    max-width: calc(100% - 88px);
+    width: calc(100% - 100px);
     margin-left: 0;
-    display:inline-block;
+    display:block;
     justify-self: left;
+    text-align: left;
 `;
 
 // Define the function and its props
@@ -129,10 +130,8 @@ export const Guest: React.FC<Props> =
             handleFlowChange(property, changed);
             
             // update the guest data
-            console.log(rawState);
             const stateGo = answersBusGoText[rawState].value;
             const stateBack = answersBusBackText[rawState].value;
-            console.log(stateGo,stateBack);
             const updateGuest: UpdateGuest = (guest: GuestType) => {
                 // @ts-ignore
                 guest['busGo'] = stateGo;
@@ -220,7 +219,8 @@ export const Guest: React.FC<Props> =
         return (
             <GuestWrapper>  
                 <NameText mb="0" inverse={true}>
-                    <b>{firstName} {lastName1}</b>
+                    <b>{firstName}</b> <br/>
+                    <b>{lastName1}</b>
                 </NameText>
                 <ProgressPercentageWidget
                     numStages={fullFlow.length-1}
