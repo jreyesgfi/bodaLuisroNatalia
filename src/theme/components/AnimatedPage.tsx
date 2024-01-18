@@ -37,3 +37,12 @@ const AnimatedPage: React.FC<AnimatedPageProps> = ({ children }) => {
 };
 
 export default AnimatedPage;
+
+export const withAnimation = (Component: React.ComponentType) => {
+    return (props: any) => (
+      <AnimatedPage>
+        <Component {...props} />
+      </AnimatedPage>
+    );
+  };
+  

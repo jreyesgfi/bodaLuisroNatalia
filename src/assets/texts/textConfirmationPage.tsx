@@ -12,9 +12,9 @@ export const finalSectionTitle = '¡Enhorabuena!'
 export const FinalSectionText = () => (
     <>
         Has completado la confirmación de asistencia pero <br/>
-        <b>¡NO TE VAYAS!</b>
+        <b>HAY MÁS</b>
         <br/>
         Queremos compartir contigo cómo ha sido este camino...
     </>
 );
-export const finalSectionButtonText = 'Comenzar el camino'
+export const finalSectionButtonText = 'COMENZAR EL CAMINO'
