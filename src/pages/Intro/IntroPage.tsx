@@ -1,12 +1,5 @@
-import { SectionsWrapper } from '../../theme/components/SectionsWrapper'
-
-
 import styled from 'styled-components';
 
-import { useState } from 'react'
-
-import { IntroSection } from './sections/IntroSection';
-import { IntroSection2 } from './sections/IntroSection2';
 import { CustomButton } from '../../theme/components/Button';
 import { useCustomNavigate } from '../../theme/customHooks/useCustomNavigate';
 import { Section, Text } from '../../theme/globalStyles';
@@ -33,14 +26,16 @@ scroll-snap-type: y mandatory;
 const SemiSection = styled(Section)`
 height: 90%;
 border: 1px solid red;
-overflow: visible;
+width: 100vw;
+padding: 0;
 `;
 
 const WrapperText = styled(Text)`
-text-align: center;
+text-align: left;
 position: absolute;
 inset: 0;
 margin: auto;
+margin-top: 64px;
 max-height: fit-content;
 z-index:100;
 `;
@@ -63,7 +58,6 @@ const BackgroundImage = styled.img`
   object-fit: cover;
 `;
 const RelativeImage = styled.img`
-  margin-left: -24px;
   width: 100vw;
   height: fit-content;
   object-fit: contain;
@@ -82,9 +76,41 @@ const GradientDiv1 = styled.div`
   max-width: none;
   top:0;
   margin-top: -280px;
-  margin-left:-24px;
   background: linear-gradient(to top, rgba(249, 248, 237, 1) 5%, rgba(249, 248, 237,0) 85%);;
   `
+
+const GradientDiv3 = styled(GradientDiv1)`
+  position:absolute;
+  margin-top: -8px;
+  height: 40vh;
+  z-index:20;
+  background: linear-gradient(to top, rgba(249, 248, 237, 1) 5%, rgba(255, 254, 250,1) 85%);
+  `
+const GradientDiv4 = styled(GradientDiv1)`
+  position:relative;
+  margin-top: -16px;
+  height: 24px;
+  z-index:20;
+  background-color: rgba(249, 248, 237, 1);
+  `
+  const GradientDiv5 = styled(GradientDiv1)`
+  position:relative;
+  margin-top: -16px;
+  height:200px;
+  z-index:20;
+  background: rgba(2, 9, 22,1);
+  `
+
+  const Transition = () => {
+    return(
+      <>
+        <GradientDiv5/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="100vw" margin-top="-16px">
+          <path fill="#020818" fill-opacity="1" d="M0,128L60,138.7C120,149,240,171,360,202.7C480,235,600,277,720,277.3C840,277,960,235,1080,224C1200,213,1320,235,1380,245.3L1440,256L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+        </svg>
+      </>
+    )
+  }
 const GradientDiv2 = styled(GradientDiv1)`
   position:absolute;
   margin-top: -8px;
@@ -101,28 +127,34 @@ const Button = styled(CustomButton)`
   max-width: 200px;
   z-index: 100;
   font-size: 18px;
+  display:block;
 `;
 // intialize the context
 export const IntroPage: React.FC = () => {
-const customNavigate = useCustomNavigate();
-const handleNext = () => {
-  customNavigate('asistencia');
-};
+  const customNavigate = useCustomNavigate();
+  const handleNext = () => {
+    customNavigate('asistencia');
+  };
 
   return (
     <GlobalWrapper>
       <ScrollWrapper>
         <SemiSection inverse>
-          <BottomWrapperText inverse>
-            {introText_1_1}
-            <br /><br />
-            <b>{introText_1_2}</b>
-          </BottomWrapperText>
-          <BackgroundImage src={adjustUrlForEnvironment("../../../../public/assets/images/ApuntesCartaAcuarelaMarron.svg")} />
+          <RelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/title.webp")} />
+          <RelativeHolder>
+            <GradientDiv3 />
+            <RelativeWrapperText inverse>
+              <br />
+              {introText_1_1}
+              <br />
+              <br />
+              <b>{introText_1_2}</b>
+            </RelativeWrapperText>
+          </RelativeHolder>
         </SemiSection>
         <SemiSection inverse>
           <GradientDiv1 />
-          <RelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/Camino2.png")} />
+          <RelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/Camino2.webp")} />
           <RelativeHolder>
             <GradientDiv2 />
             <RelativeWrapperText inverse>
@@ -131,24 +163,33 @@ const handleNext = () => {
           </RelativeHolder>
         </SemiSection>
         <SemiSection inverse>
-          <RelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/mirando-estrellas-silueta.png")} />
-          <RelativeWrapperText inverse>
-            {introText_3}
-          </RelativeWrapperText>
+          <RelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/mirando-estrellas-silueta.webp")} />
+          <RelativeHolder>
+            <RelativeWrapperText inverse>
+              {introText_3}
+            </RelativeWrapperText>
+            <GradientDiv3 /> 
+          </RelativeHolder>
+          
         </SemiSection>
         <SemiSection inverse>
-          <WrapperText inverse>
-            {introText_4}
-          </WrapperText>
+          <GradientDiv4 />
+          <RelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/mountain-stars.webp")} />
+          <RelativeHolder>
+            <Transition />
+            <WrapperText>
+              {introText_4}
+            </WrapperText>
+          </RelativeHolder>
         </SemiSection>
         <SemiSection inverse>
           <RelativeWrapperText inverse>
             {introText_5}
           </RelativeWrapperText>
-        <RelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/mochila-botas.png")} /> 
+          <RelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/mochila-botas.webp")} />
         </SemiSection>
         <SemiSection inverse>
-        <BigRelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/piedra-te-apuntas.png")} />
+          <BigRelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/piedra-te-apuntas.webp")} />
           <RelativeWrapperText inverse>
             {introText_6}
           </RelativeWrapperText>

@@ -80,7 +80,7 @@ export const FinalSection: React.FC =
 
             <SectionWrapper inverse={true} active={true}>
                 <GradientDiv></GradientDiv>
-                <BackgrounImage src={adjustUrlForEnvironment("../../../../public/assets/images/Camino.png")}/>
+                <BackgrounImage src={adjustUrlForEnvironment("../../../../public/assets/images/Camino.webp")}/>
                 <TextWrapper>
                     <HighlightedText inverse={true}>
                             <b>{finalSectionTitle}</b>

@@ -2,8 +2,9 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 export const globalColors = {
 	dark: {
-		primary: '#3b1d0d',
-		second: '#235367'
+		primary: '#2f1609',
+		second: '#235367',
+		other: '#3b1d0d'
 	},
 	light: {
 		primary: '#ffffff',
