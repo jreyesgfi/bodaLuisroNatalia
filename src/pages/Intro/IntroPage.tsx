@@ -24,7 +24,6 @@ overflow: scroll;
 scroll-snap-type: none;
 `;
 const SemiSection = styled(Section)`
-min-height: 90%;
 height: fit-content;
 width: 100vw;
 padding: 0;
@@ -110,7 +109,7 @@ const GradientDiv6 = styled(GradientDiv1)`
 `
 
 const Button = styled(CustomButton)`
-  margin: -8px auto;
+  margin: -8px auto 32px;
   width: 200px;
   padding: 8px 16px;
   z-index: 100;
@@ -203,6 +202,7 @@ export const IntroPage: React.FC = () => {
               selected={true}>
               <b>¡Estoy Listo!</b>
             </Button>
+
             <GradientDiv6 />
           </RelativeHolder>
 
