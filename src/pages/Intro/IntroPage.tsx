@@ -105,7 +105,7 @@ const GradientDiv4 = styled(GradientDiv1)`
     return(
       <>
         <GradientDiv5/>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="100vw" margin-top="-16px">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="100vw" style={{ marginTop: '-4px' }}>
           <path fill="#020818" fill-opacity="1" d="M0,128L60,138.7C120,149,240,171,360,202.7C480,235,600,277,720,277.3C840,277,960,235,1080,224C1200,213,1320,235,1380,245.3L1440,256L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
         </svg>
       </>
