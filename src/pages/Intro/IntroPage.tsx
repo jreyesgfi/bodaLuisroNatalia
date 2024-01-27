@@ -81,7 +81,6 @@ const BigRelativeImage = styled.img`
 
 const GradientDiv1 = styled.div`
   position:absolute;
-  min-height: 300px;
   height: 102%;
   width: 100vw;
   max-width: none;
@@ -193,7 +192,6 @@ export const IntroPage: React.FC = () => {
           <BigRelativeImage src={adjustUrlForEnvironment("../../../../public/assets/images/piedra-te-apuntas.png")} />
           <RelativeHolder>
             <RelativeWrapperText inverse>
-              <br />
               <br />
               {introText_6}
             </RelativeWrapperText>
