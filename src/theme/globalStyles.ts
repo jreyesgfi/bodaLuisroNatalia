@@ -135,6 +135,7 @@ interface TextItf {
 	weight?: string;
 	spacing?: string;
 	font?: string;
+	letterSpacing?: string;
 }
 
 export const movilSize = '550px';
@@ -155,7 +156,7 @@ export const Container = styled.div`
 	}
 `;
 export const MainHeading = styled.h1<InversedElementItf>`
-    font-size: 60px;
+    font-size: 21pt;
 	font-family: primary-title, monospace;
 	font-weight: 100;
 	margin: 16px auto 16px;
@@ -325,7 +326,7 @@ export const Text = styled.p<TextWrapperItf>`
     width:${({ width }) => width ? width : 'auto'};
 	font-size:${({ fontSize }) => fontSize ? fontSize : '13pt'};
 	line-height:1.5;
-	letter-spacing: 2px;
+	letter-spacing: ${({ letterSpacing }) => letterSpacing ? letterSpacing : '2px'};
 	user-select: none;
 	max-width: 45vw;
 	font-family:${({ font }) => font ? font : 'primary-body'};
@@ -335,6 +336,10 @@ export const Text = styled.p<TextWrapperItf>`
 		max-width: 80vw;
 		width:${({ smWidth }) => smWidth ? smWidth : 'auto'};
 	}
+`;
+export const OtherHeading = styled(Text)`
+	font-size: 21pt;
+	letter-spacing: 2px;
 `;
 export const Subtitle = styled(Text)`
 	font-size: 16.5pt;

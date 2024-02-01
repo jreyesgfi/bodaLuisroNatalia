@@ -72,6 +72,7 @@ const WideRelativeImage = styled(RelativeImage)`
   margin-left: -10vw;
 `;
 const BigRelativeImage = styled.img`
+  position: relative;
   margin-left: -15vw;
   width: 120vw;
   height: fit-content;
