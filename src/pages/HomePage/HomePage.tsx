@@ -1,93 +1,156 @@
 import styled, { css, keyframes } from "styled-components";
-import { Heading, MainHeading, OtherHeading, Section, Subtitle, Text } from "../../theme/globalStyles";
+import { Heading, Image, MainHeading, OtherHeading, Section, Subtitle, Text } from "../../theme/globalStyles";
 import { CustomButton } from "../../theme/components/Button";
 import { useCustomNavigate } from "../../theme/customHooks/useCustomNavigate";
-import {HomeBody, homeSubtitle, homeTitle} from "../../assets/texts/homeTexts"
+import { HomeBody, homeSubtitle, homeTitle } from "../../assets/texts/homeTexts"
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from 'framer-motion';
+import { DecorationImage } from "../../components/ParallaxDecoration";
+import { adjustUrlForEnvironment } from "../../serverConfig";
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+const variants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+    maxHeight: "0px",
+  },
+  animate: (custom: number) => ({
+    opacity: 1,
+    y: 0,
+    maxHeight: "700px",
+    transition: {
+      duration:1,
+      delay: custom*0.4,
+      type: "tween",
+      maxHeight: {
+        duration: 6
+      }
+    }
+  }),
+  exit: {
+    opacity: 0,
+    y: -20,
+    maxHeight: "0px",
+    transition:{
+      duration:0.5,
+      type: "tween",
+      maxHeight: {
+        duration: 2
+      }
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-// Fade-out keyframes
-const fadeOutToTop = keyframes`
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-`;
+};
 const TextWrapper = styled.div`
-    margin: auto auto;
+    margin: 64px auto auto;
     display: block;
-    position: absolute;
-    inset: 0 auto 0;
+    position: relative;
     height: 50%;
     max-width: 600px;
     > *{
         text-align: left;
         display: block;
-        animation: ${fadeIn} 0.5s ease-out forwards;
-        animation-delay: calc(0.2s * var(--animation-order));
-        opacity: 0; // Start elements as invisible
     }
 `;
 const IntroductionText = styled(Text)`
-    margin-top: 24px;
-    animation: ${fadeOutToTop} 0.5s ease-out forwards;
-    animation-delay: 3s;
+    margin-top: 12px;
 `;
-const LinkButton = styled(CustomButton)`
-`;
+
 const HeroSectionWrapper = styled(Section)`
     position: relative;
-    transition:  transform 1s, max-height 1.3s ease-out;
 `;
-
-interface AnimatedProps {
-    index?: number;
-}
-const withAnimation = (Component: any) => styled(Component)<AnimatedProps>`
-  animation: ${fadeIn} 0.5s ease-out forwards;
-  animation-delay: ${({ index }) => `${index! * 0.2}s`};
-`;
-const AnimatedOtherHeading = withAnimation(OtherHeading);
-const AnimatedText = withAnimation(Text);
-const AnimatedIntroductionText = withAnimation(IntroductionText);
-const AnimatedLinkButton = withAnimation(LinkButton);
+const LinksWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 80vh;
+`
+const LinkPanel = styled.div`
+  position: relative;
+  height:200px;
+  width: 200px;
+  > *{
+    z-index:50;
+  }
+`
+const LinkBlob = styled.img`
+  width: 140%;
+  height: 140%;
+  position: absolute;
+  inset: -20% -20% auto auto;
+  z-index: 20;
+`
 
 export const HomePage: React.FC = ({ }) => {
+    
+    const [showIntroduction, setShowIntroduction] = useState(true);
     const customNavigate = useCustomNavigate();
-    const handleClick = (subsection: string) => {
-        customNavigate(subsection);
+        const handleNavigate = (subsection: string) => {
+            customNavigate(subsection);
     }
+    const handleCloseBody = () => {
+        const timer = setTimeout(() => {
+            setShowIntroduction(false);
+        }, 15000);
+        return () => clearTimeout(timer);
+    }
+    const handleOpenBody = () => {
+        setShowIntroduction(true);
+        handleCloseBody();
+    }
+    interface LinkButtonItf {
+      subsection: string,
+      label: string,
+      rootNumber: number,
+    }
+    const LinkButton: React.FC<LinkButtonItf> = ({
+      subsection, label}) => (
+        <LinkPanel onClick={() => handleNavigate(subsection)}>
+          {label}
+          <LinkBlob
+            src={adjustUrlForEnvironment("assets/blobs/blob1.svg")}
+          />
+            
+        </LinkPanel>
+      
+      )
+
+    useEffect(() => {
+        handleCloseBody();
+    }, []);
     return (
         <HeroSectionWrapper inverse>
           <TextWrapper>
-            <AnimatedOtherHeading inverse index={0}>{homeTitle}</AnimatedOtherHeading>
-            <AnimatedText inverse index={1}>
-              {homeSubtitle}
-            </AnimatedText>
-            <AnimatedIntroductionText index={2}>
-              <HomeBody />
-            </AnimatedIntroductionText>
-            <AnimatedLinkButton
-              selected={true}
-              onClick={() => handleClick('nuestra-historia')}
-              index={3}
-            >
-              Nuestra historia
-            </AnimatedLinkButton>
+          <AnimatePresence>
+            <motion.div key= "title" custom={0} variants={variants} initial="initial" animate="animate">
+              <OtherHeading inverse>{homeTitle}</OtherHeading>
+            </motion.div>
+
+            <motion.div key="subtitle" custom={1} variants={variants} initial="initial" animate="animate">
+              <Text inverse>{homeSubtitle}</Text>
+            </motion.div>
+            {!showIntroduction && (
+                <motion.div key="openBodyButton" custom={0} variants={variants} initial="initial" animate="animate" exit="exit"
+                    onClick={()=>{handleOpenBody()}}>
+                    ...
+                </motion.div>
+              )}
+               {showIntroduction && (
+                <motion.div key="body" custom={2} variants={variants} initial="initial" animate="animate" exit="exit">
+                  <IntroductionText>
+                    <HomeBody />
+                  </IntroductionText>
+                </motion.div>
+              )}
+            <motion.div key="button" custom={3} variants={variants} initial="initial" animate="animate">
+              <LinksWrapper>
+                <LinkButton
+                  subsection="nuestra-historia"
+                  label="Nuestra Historia"
+                  rootNumber={1}
+                />
+              </LinksWrapper>
+            </motion.div>
+            </AnimatePresence>
           </TextWrapper>
         </HeroSectionWrapper>
-    );
+      );
 }
