@@ -40,7 +40,7 @@ const variants = {
   }
 };
 const TextWrapper = styled.div`
-    margin: 64px auto auto;
+    margin: 32px auto auto;
     display: block;
     position: relative;
     height: 50%;
@@ -57,7 +57,16 @@ const IntroductionText = styled(Text)`
 const HeroSectionWrapper = styled(Section)`
     position: relative;
 `;
+
+interface CustomMotionItf {
+  zIndex: number;
+}
+const CustomMotion = styled(motion.div) <CustomMotionItf>`
+  z-index: ${({ zIndex }) => zIndex};
+`;
+
 const LinksWrapper = styled(Column)`
+  display: flex;
   position: relative;
   align-items: center;
   width: 100%;
@@ -65,60 +74,72 @@ const LinksWrapper = styled(Column)`
   gap: 8px;
   overflow-y: scroll;
 `
-const LinkAndDecorWrapper = styled.div`
-  display: flex; // Use flex to position children
-  flex-direction: row; // Layout children in a row
-  justify-content: space-between; // Space between items
-  align-items: center; // Align items vertically
-  width: 100%; // Take up full width
-  gap: 8px; // Space between children
+interface LinkAndDecorWrapperItf { alignRight: boolean }
+const LinkAndDecorWrapper = styled.div<LinkAndDecorWrapperItf>`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  max-width: 100%;
+  gap: 8px;
+  ${({ alignRight }) => alignRight === true && 'flex-direction: row-reverse;'} /* Align to the right if alignRight is true */
 `;
 
 interface DecorativeSquareItf {
-  backgroundImage: string;
-  alignRight?: boolean;
+  maxWidth?: number;
+  height?: number;
+  odd?: boolean;
 }
-const DecorativeSquare = styled.div<DecorativeSquareItf>`
+const DecorativeSquare = styled(CustomMotion) <DecorativeSquareItf>`
   flex-grow: 1;
-  height: 60px;
-  background-image: url(${({ backgroundImage }) => adjustUrlForEnvironment("assets/blobs/blob1.svg")});
-  background-size: 200% 200%;
-  background-repeat: no-repeat;
+  height: ${({ height }) => height || 60}px;
+  max-width: ${({ maxWidth, odd }) => maxWidth||80 + (odd?1:-1) * 20}px;
+  background-color: ${globalColors.grey.light};
   // border: 1px solid ${globalColors.dark.second};
   border-radius: 8px;
-  ${({ alignRight }) => alignRight && 'align-self: flex-end;'} /* Align to the right if alignRight is true */
 `;
 const ColorDict: { [key: number]: string } = {
-  1: globalColors.primary[200],
-  2: globalColors.secondary[200],
-  3: globalColors.color.third
+  1: globalColors.color.third,
+  2: globalColors.primary[200],
+  3: globalColors.primary[200],
+  4: globalColors.color.third,
 }
 
 interface LinkRoundedSquareItf {
-  rootNumber: number,
+  rootNumber: number;
+  backgroundImage: string
 }
-const LinkRoundedSquare = styled.div<LinkRoundedSquareItf>`
+const LinkRoundedSquare = styled(CustomMotion) <LinkRoundedSquareItf>`
   position: relative;
-  height:70px;
-  width: 250px;
+  height:60px;
+  width: fit-content;
+  min-width:160px;
   flex-shrink:0;
+  align-items: bottom;
   border-radius: 8px;
   background-color: ${({ rootNumber }) => ColorDict[rootNumber] || globalColors.color.third};
-  > *{
-    position: absolute;
-  }
+
+  background-image: url(${({ backgroundImage }) => adjustUrlForEnvironment(backgroundImage)});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 20% 15%;
   overflow: hidden;
 `
 const LinkText = styled(Heading)`
+  position: relative;
   color: ${globalColors.dark.primary};
-  font-size: 16pt;
-  margin: 4px 4px;
+  font-size: 18px;
+  margin: 32px auto 0 0;
+  padding: 4px 24px 4px 8px;
 `
-interface CustomMotionItf {
-  zIndex: number;
-}
-const CustomMotion = styled(motion.div) <CustomMotionItf>`
-  z-index: ${({ zIndex }) => zIndex};
+const LinkIcon = styled.img`
+  position:absolute;
+  inset: 0;
+  z-index: 50;
+  width: 80%;
+  max-height: 30%;
+  margin: 8px auto;
 `;
 
 const LinkPanel = styled.div`
@@ -156,24 +177,6 @@ export const HomePage: React.FC = ({ }) => {
     setShowIntroduction(true);
     handleCloseBody();
   }
-  interface LinkButtonItf {
-    subsection: string,
-    label: string,
-    rootNumber?: number,
-  }
-  const LinkButton: React.FC<LinkButtonItf> = ({
-    subsection, label, rootNumber = 1 }) => (
-    <LinkRoundedSquare rootNumber={rootNumber}
-      onClick={() => handleNavigate(subsection)}>
-      <LinkText inverse>{label}</LinkText>
-    </LinkRoundedSquare>
-    // <LinkPanel onClick={() => handleNavigate(subsection)}>
-    //   <LinkText inverse>{label}</LinkText>
-    //   <LinkBlob
-    //     src={adjustUrlForEnvironment("assets/blobs/blob1.svg")}
-    //   />
-    // </LinkPanel>
-  )
 
   useEffect(() => {
     handleCloseBody();
@@ -202,24 +205,55 @@ export const HomePage: React.FC = ({ }) => {
               </IntroductionText>
             </CustomMotion>
           )}
-          <CustomMotion key="button" zIndex={20} custom={6} variants={variants} initial="initial" animate="animate">
-            <LinksWrapper>
-              {HomeLinks.map((link, index) => (
-                <LinkAndDecorWrapper key={link.href}>
-                  {/* Decorative element on the left for even items */}
-                  {index % 2 === 0 && <DecorativeSquare backgroundImage="path-to-your-image.svg" />}
-
-                  {/* Link button in the middle */}
-                  <LinkRoundedSquare rootNumber={index} onClick={() => handleNavigate(link.href)}>
-                    <LinkText inverse>{link.title}</LinkText>
-                  </LinkRoundedSquare>
-
-                  {/* Decorative element on the right for odd items */}
-                  {index % 2 === 1 && <DecorativeSquare alignRight backgroundImage="path-to-your-image.svg" />}
-                </LinkAndDecorWrapper>
-              ))}
-            </LinksWrapper>
-          </CustomMotion>
+          <LinksWrapper>
+            <LinkAndDecorWrapper key="first" alignRight={false}>
+              <DecorativeSquare
+                    custom={4}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                    maxWidth={150}
+                    height={40}
+                  />
+            </LinkAndDecorWrapper>
+            {HomeLinks.map((link, index) => (
+              <LinkAndDecorWrapper key={link.href} alignRight={index % 2 === 0}>
+                <DecorativeSquare
+                  custom={5 + index * 2 + 1}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                  odd={index%2 === 0}
+                />
+                <LinkRoundedSquare
+                  custom={5 + index * 2}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                  rootNumber={(index)%4 +1}
+                  backgroundImage={link.background}
+                  onClick={() => handleNavigate(link.href)}
+                >
+                  <LinkText inverse>{link.title}</LinkText>
+                  {link.icon&& <LinkIcon src={link.icon} />}
+                </LinkRoundedSquare>
+              </LinkAndDecorWrapper>
+            ))}
+            <LinkAndDecorWrapper key="last" alignRight={false}>
+              <DecorativeSquare
+                    custom={4 + HomeLinks.length * 2 + 1}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                    maxWidth={150}
+                    height={40}
+                  />
+            </LinkAndDecorWrapper>
+          </LinksWrapper>
         </AnimatePresence>
       </TextWrapper>
     </HeroSectionWrapper>

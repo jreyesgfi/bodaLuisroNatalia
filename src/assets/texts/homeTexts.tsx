@@ -10,13 +10,21 @@ export const HomeBody = () => {return(
 export const HomeLinks = [
     {title: 'Nuestra Historia',
     href: 'nuestra-historia',
-    icon: 'history'},
+    background: 'assets/svgs/',
+    icon: 'assets/svgs/one-line-rings.svg'},
 
     {title: 'Itinerario',
     href: 'itinerario',
-    icon: 'directions_walk'},
+    background: 'assets/svgs/ ',
+    icon: ''},
 
     {title: 'Cómo Llegar',
     href: 'como-llegar',
-    icon: 'flight'}
+    background: 'assets/svgs/geography.svg',
+    icon: ''},
+
+    {title: 'Galería',
+    href: 'galeria',
+    background: 'assets/svgs/gallery.svg',
+    icon: ''},
 ]
