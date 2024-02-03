@@ -19,7 +19,7 @@ export const globalColors = {
 	color: {
 		primary: '#7f4421',
 		second: '#b2e5ef',
-		third: '#E6CE1D',
+		third: '#DCCADD',
 		light: '#FDEC00'
 	},
 	secondary: {

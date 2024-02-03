@@ -6,3 +6,17 @@ export const HomeBody = () => {return(
         Aquí podrás explorar <b>Nuestra Historia</b>, el <b>Itinerario</b>,  indicaciones de <b>Cómo Llegar</b>  y ¡todas las <b>fotos</b> que subamos!
     </Text>
 )}
+
+export const HomeLinks = [
+    {title: 'Nuestra Historia',
+    href: 'nuestra-historia',
+    icon: 'history'},
+
+    {title: 'Itinerario',
+    href: 'itinerario',
+    icon: 'directions_walk'},
+
+    {title: 'Cómo Llegar',
+    href: 'como-llegar',
+    icon: 'flight'}
+]
