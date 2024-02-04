@@ -13,9 +13,9 @@ export const HomeLinks = [
     background: 'assets/svgs/',
     icon: 'assets/svgs/one-line-rings.svg'},
 
-    {title: 'Itinerario',
-    href: 'itinerario',
-    background: 'assets/svgs/ ',
+    {title: 'Planning',
+    href: 'planning',
+    background: 'assets/svgs/planning.svg',
     icon: ''},
 
     {title: 'Cómo Llegar',

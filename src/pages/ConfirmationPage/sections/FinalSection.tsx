@@ -74,7 +74,7 @@ export const FinalSection: React.FC =
     ({ }) => {
         const customNavigate = useCustomNavigate();
         const handleClick = () => {
-            customNavigate('nuestra-historia')
+            customNavigate('home')
         }
         return (
 

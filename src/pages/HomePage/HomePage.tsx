@@ -33,7 +33,28 @@ const variants = {
     transition: {
       duration: 0.5,
       type: "tween",
+    }
+  },
+  exitLink: {
+    opacity: 0,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      type: "tween",
+    }
+  },
+  exitDecoration: {
+    opacity: 1,
+    y: 0,
+    maxWidth: "0px",
+    backgroundColor: globalColors.grey.light,
+    transition: {
+      duration: 0.5,
+      type: "tween",
       maxHeight: {
+        duration: 2
+      },
+      maxWidth: {
         duration: 2
       }
     }
@@ -70,9 +91,9 @@ const LinksWrapper = styled(Column)`
   position: relative;
   align-items: center;
   width: 100%;
-  padding: 32px 0;
+  padding: 16px 0;
   gap: 8px;
-  overflow-y: scroll;
+  overflow-y: hidden;
 `
 interface LinkAndDecorWrapperItf { alignRight: boolean }
 const LinkAndDecorWrapper = styled.div<LinkAndDecorWrapperItf>`
@@ -94,7 +115,7 @@ interface DecorativeSquareItf {
 const DecorativeSquare = styled(CustomMotion) <DecorativeSquareItf>`
   flex-grow: 1;
   height: ${({ height }) => height || 60}px;
-  max-width: ${({ maxWidth, odd }) => maxWidth||80 + (odd?1:-1) * 20}px;
+  max-width: ${({ maxWidth, odd }) => maxWidth || 80 + (odd ? 1 : -1) * 20}px;
   background-color: ${globalColors.grey.light};
   // border: 1px solid ${globalColors.dark.second};
   border-radius: 8px;
@@ -108,24 +129,26 @@ const ColorDict: { [key: number]: string } = {
 
 interface LinkRoundedSquareItf {
   rootNumber: number;
-  backgroundImage: string
+  backgroundImage: string;
+  faded: boolean;
 }
 const LinkRoundedSquare = styled(CustomMotion) <LinkRoundedSquareItf>`
   position: relative;
-  height:60px;
+  height: 60px;
   width: fit-content;
-  min-width:160px;
-  flex-shrink:0;
+  min-width: 160px;
+  flex-shrink: 0;
   align-items: bottom;
   border-radius: 8px;
-  background-color: ${({ rootNumber }) => ColorDict[rootNumber] || globalColors.color.third};
-
-  background-image: url(${({ backgroundImage }) => adjustUrlForEnvironment(backgroundImage)});
+  background-color: ${({ rootNumber, faded }) => faded ? globalColors.grey.light : (ColorDict[rootNumber] || globalColors.color.third)};
+  background-image: url(${({ backgroundImage, faded }) => faded ? 'none' : adjustUrlForEnvironment(backgroundImage)});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 20% 15%;
   overflow: hidden;
-`
+  transition: background-color 0.5s ease, opacity 0.5s ease, background-image 0.5s ease; // Adding transition for background-image
+  opacity: ${({ faded }) => faded ? 0 : 1};
+`;
 const LinkText = styled(Heading)`
   position: relative;
   color: ${globalColors.dark.primary};
@@ -137,9 +160,10 @@ const LinkIcon = styled.img`
   position:absolute;
   inset: 0;
   z-index: 50;
-  width: 80%;
-  max-height: 30%;
-  margin: 8px auto;
+  width: 100%;
+  padding: 8px;
+  max-height: 65%;
+  margin: 0 0 auto;
 `;
 
 const LinkPanel = styled.div`
@@ -161,11 +185,13 @@ const LinkBlob = styled.img`
 `
 
 export const HomePage: React.FC = ({ }) => {
-
+  const [selectedLink, setSelectedLink] = useState<null | string>(null);
   const [showIntroduction, setShowIntroduction] = useState(true);
   const customNavigate = useCustomNavigate();
   const handleNavigate = (subsection: string) => {
-    customNavigate(subsection);
+    setSelectedLink(subsection);
+    const timer = setTimeout(()=>{customNavigate(subsection);},500);
+    return () => clearTimeout(timer);
   }
   const handleCloseBody = () => {
     const timer = setTimeout(() => {
@@ -208,14 +234,23 @@ export const HomePage: React.FC = ({ }) => {
           <LinksWrapper>
             <LinkAndDecorWrapper key="first" alignRight={false}>
               <DecorativeSquare
-                    custom={4}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={variants} // Ensure these variants include the delay based on the `custom` prop
-                    maxWidth={150}
-                    height={40}
-                  />
+                custom={3}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                maxWidth={50}
+                height={40}
+              />
+              <DecorativeSquare
+                custom={4}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                maxWidth={130}
+                height={40}
+              />
             </LinkAndDecorWrapper>
             {HomeLinks.map((link, index) => (
               <LinkAndDecorWrapper key={link.href} alignRight={index % 2 === 0}>
@@ -223,35 +258,56 @@ export const HomePage: React.FC = ({ }) => {
                   custom={5 + index * 2 + 1}
                   initial="initial"
                   animate="animate"
-                  exit="exit"
+                  exit="exitDecoration"
                   variants={variants} // Ensure these variants include the delay based on the `custom` prop
-                  odd={index%2 === 0}
+                  odd={index % 2 === 0}
                 />
                 <LinkRoundedSquare
                   custom={5 + index * 2}
                   initial="initial"
                   animate="animate"
-                  exit="exit"
+                  exit="exitLink"
                   variants={variants} // Ensure these variants include the delay based on the `custom` prop
-                  rootNumber={(index)%4 +1}
+                  rootNumber={(index) % 4 + 1}
                   backgroundImage={link.background}
+                  faded={selectedLink !== null && selectedLink !== link.href}
                   onClick={() => handleNavigate(link.href)}
                 >
                   <LinkText inverse>{link.title}</LinkText>
-                  {link.icon&& <LinkIcon src={link.icon} />}
+                  {link.icon && <LinkIcon src={link.icon} />}
                 </LinkRoundedSquare>
               </LinkAndDecorWrapper>
             ))}
-            <LinkAndDecorWrapper key="last" alignRight={false}>
+            <LinkAndDecorWrapper key="last1" alignRight={false}>
               <DecorativeSquare
-                    custom={4 + HomeLinks.length * 2 + 1}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={variants} // Ensure these variants include the delay based on the `custom` prop
-                    maxWidth={150}
-                    height={40}
-                  />
+                custom={5 + HomeLinks.length * 2}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                maxWidth={120}
+                height={40}
+              />
+              <DecorativeSquare
+                custom={6 + HomeLinks.length * 2}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                maxWidth={60}
+                height={40}
+              />
+            </LinkAndDecorWrapper>
+            <LinkAndDecorWrapper key="last2" alignRight={false}>
+              <DecorativeSquare
+                custom={7 + HomeLinks.length * 2}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={variants} // Ensure these variants include the delay based on the `custom` prop
+                maxWidth={110}
+                height={40}
+              />
             </LinkAndDecorWrapper>
           </LinksWrapper>
         </AnimatePresence>
