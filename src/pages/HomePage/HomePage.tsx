@@ -61,6 +61,8 @@ const variants = {
   }
 };
 const TextWrapper = styled.div`
+    position: relative;
+    z-index: 50;
     margin: 32px auto auto;
     display: block;
     position: relative;
@@ -75,7 +77,7 @@ const IntroductionText = styled(Text)`
     margin-top: 12px;
 `;
 
-const HeroSectionWrapper = styled(Section)`
+const SectionWrapper = styled(Section)`
     position: relative;
 `;
 
@@ -94,6 +96,7 @@ const LinksWrapper = styled(Column)`
   padding: 16px 0;
   gap: 8px;
   overflow-y: hidden;
+  z-index: 20;
 `
 interface LinkAndDecorWrapperItf { alignRight: boolean }
 const LinkAndDecorWrapper = styled.div<LinkAndDecorWrapperItf>`
@@ -166,22 +169,12 @@ const LinkIcon = styled.img`
   margin: 0 0 auto;
 `;
 
-const LinkPanel = styled.div`
-  position: relative;
-  height:150px;
-  width: 150px;
-  > *{
-    position: absolute;
-  }
-  overflow: visible;
-`
-const LinkBlob = styled.img`
-  width: 200%;
-  height: 200%;
-  position: absolute;
-  inset: -50% -50% auto auto;
-  z-index: 20;
-  pointer-events: none;
+const BackgrounImage = styled.img`
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  z-index:10;
+  inset: 0;
 `
 
 export const HomePage: React.FC = ({ }) => {
@@ -208,7 +201,8 @@ export const HomePage: React.FC = ({ }) => {
     handleCloseBody();
   }, []);
   return (
-    <HeroSectionWrapper inverse>
+    <SectionWrapper inverse>
+      <BackgrounImage src={adjustUrlForEnvironment('assets/svgs/home-background.svg')}/>
       <TextWrapper>
         <AnimatePresence>
           <CustomMotion key="title" zIndex={50} custom={0} variants={variants} initial="initial" animate="animate">
@@ -258,7 +252,7 @@ export const HomePage: React.FC = ({ }) => {
                   custom={5 + index * 2 + 1}
                   initial="initial"
                   animate="animate"
-                  exit="exitDecoration"
+                  exit="exit"
                   variants={variants} // Ensure these variants include the delay based on the `custom` prop
                   odd={index % 2 === 0}
                 />
@@ -266,7 +260,7 @@ export const HomePage: React.FC = ({ }) => {
                   custom={5 + index * 2}
                   initial="initial"
                   animate="animate"
-                  exit="exitLink"
+                  exit="exit"
                   variants={variants} // Ensure these variants include the delay based on the `custom` prop
                   rootNumber={(index) % 4 + 1}
                   backgroundImage={link.background}
@@ -274,7 +268,7 @@ export const HomePage: React.FC = ({ }) => {
                   onClick={() => handleNavigate(link.href)}
                 >
                   <LinkText inverse>{link.title}</LinkText>
-                  {link.icon && <LinkIcon src={link.icon} />}
+                  {link.icon && <LinkIcon src={adjustUrlForEnvironment(link.icon)} />}
                 </LinkRoundedSquare>
               </LinkAndDecorWrapper>
             ))}
@@ -312,6 +306,6 @@ export const HomePage: React.FC = ({ }) => {
           </LinksWrapper>
         </AnimatePresence>
       </TextWrapper>
-    </HeroSectionWrapper>
+    </SectionWrapper>
   );
 }
