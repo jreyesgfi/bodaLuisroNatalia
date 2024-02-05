@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import GlobalStyles from './theme/globalStyles'
 import { HomePage } from './pages/HomePage/HomePage'
+import { PlanningPage } from './pages/PlanningPage/PlanningPage'
 import { ConfirmationPage } from './pages/ConfirmationPage/ConfirmationPage'
 
 import AnimatedPage, { withAnimation } from './theme/components/AnimatedPage'
@@ -24,7 +25,7 @@ const App = (): JSX.Element => {
             <Route path="/home" element={withAnimation(HomePage)({})} />
             <Route path="/asistencia" element={withAnimation(ConfirmationPage)({})} />
             <Route path="/nuestra-historia" element={withAnimation(OurHistoryPage)({})} />
-            <Route path="/itinerario" element={withAnimation(OurHistoryPage)({})} />
+            <Route path="/planning" element={withAnimation(PlanningPage)({})} />
             <Route path="/como-llegar" element={withAnimation(OurHistoryPage)({})} />
             <Route path="/galeria" element={withAnimation(OurHistoryPage)({})} />
           </Routes>
