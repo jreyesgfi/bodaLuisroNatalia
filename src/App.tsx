@@ -7,9 +7,10 @@ import GlobalStyles from './theme/globalStyles'
 import { HomePage } from './pages/HomePage/HomePage'
 import { PlanningPage } from './pages/PlanningPage/PlanningPage'
 import { ConfirmationPage } from './pages/ConfirmationPage/ConfirmationPage'
+import { LocationPage } from './pages/LocationPage/LocationPage'
+import { GalleryPage } from './pages/GalleryPage/GalleryPage'
 
 import AnimatedPage, { withAnimation } from './theme/components/AnimatedPage'
-import { AnimatePresence } from 'framer-motion'
 import { IntroPage } from './pages/Intro/IntroPage'
 import { OurHistoryPage } from './pages/OurHistory/OurHistoryPage'
 
@@ -26,8 +27,8 @@ const App = (): JSX.Element => {
             <Route path="/asistencia" element={withAnimation(ConfirmationPage)({})} />
             <Route path="/nuestra-historia" element={withAnimation(OurHistoryPage)({})} />
             <Route path="/planning" element={withAnimation(PlanningPage)({})} />
-            <Route path="/como-llegar" element={withAnimation(OurHistoryPage)({})} />
-            <Route path="/galeria" element={withAnimation(OurHistoryPage)({})} />
+            <Route path="/como-llegar" element={withAnimation(LocationPage)({})} />
+            <Route path="/galeria" element={withAnimation(GalleryPage)({})} />
           </Routes>
         </AnimatedPage>
       </BrowserRouter>

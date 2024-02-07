@@ -9,7 +9,7 @@
       stroke-width: 2;
       stroke-dasharray: 2500;
       stroke-dashoffset: 2500;
-      animation: draw 6s linear forwards;
+      animation: draw 3s linear forwards;
     }
   </style>
 <g transform="translate(-1484 15)"><path d="M2635.88 56.3547C2620.25 51.1552 2584.93 65.91 2576.43 78.6536 2567.94 91.3973 2569.28 127.617 2584.91 132.817 2600.54 138.016 2660.88 122.286 2670.22 109.85 2679.55 97.4144 2651.51 61.5542 2635.88 56.3547Z" fill="#F6F6FA" fill-rule="evenodd"/>

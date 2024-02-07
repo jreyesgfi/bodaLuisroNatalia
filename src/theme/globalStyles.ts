@@ -17,32 +17,49 @@ export const globalColors = {
 		dark: '#5f6368',
 	},
 	color: {
-		primary: '#7f4421',
-		second: '#b2e5ef',
+		primary: '#c8dbc7',
+		second: '',
 		third: '#DCCADD',
 		light: '#FDEC00'
 	},
+	third: {
+		50: '#faf8fb',
+		100: '#f5f1f6',
+		200: '#ebe2ec',
+		300: '#dccadd',
+		400: '#c7aac8',
+		500: '#ad87ae',
+		600: '#906891',
+		700: '#775477',
+		800: '#624661',
+		900: '#523d51',
+		950: '#322031'
+	},
 	secondary: {
-		100: '#f6eecf',
-		200: '#e3c566',
-		300: '#e3c566',
-		400: '#dcb043',
-		500: '#d3942d',
-		600: '#bb7424',
-		700: '#9b5522',
-		800: '#7f4421',
-		900: '#69391e'
+		50: '#f5f8f5',
+		100: '#e8f0e8',
+		200: '#c8dbc7',
+		300: '#adc9ac',
+		400: '#82a880',
+		500: '#5e8a5d',
+		600: '#4b7049',
+		700: '#3d593c',
+		800: '#334833',
+		900: '#2b3c2b',
+		950: '#141f15'
 	},
 	primary: {
-		100: '#d6f2f7',
-		200: '#C8DBC7',
-		300: '#7dd1e3',
-		400: '#82A880',
-		500: '#2597b5',
-		600: '#217a99',
-		700: '#21637d',
-		800: '#235367',
-		900: '#224657'
+		50: '#f5f8f5',
+		100: '#e8f0e8',
+		200: '#c8dbc7',
+		300: '#adc9ac',
+		400: '#82a880',
+		500: '#5e8a5d',
+		600: '#4b7049',
+		700: '#3d593c',
+		800: '#334833',
+		900: '#2b3c2b',
+		950: '#141f15'
 	},
 	transparent: {
 		dark: '#3E4463cc',
@@ -324,7 +341,7 @@ export const Column = styled.div<ContainerItf>`
 export const Text = styled.p<TextWrapperItf>`
     color:${({ inverse }) => inverse ? globalColors.dark.primary : globalColors.light.primary};
     width:${({ width }) => width ? width : 'auto'};
-	font-size:${({ fontSize }) => fontSize ? fontSize : '13pt'};
+	font-size:${({ fontSize }) => fontSize ? fontSize : '12pt'};
 	line-height:1.5;
 	letter-spacing: ${({ letterSpacing }) => letterSpacing ? letterSpacing : '2px'};
 	user-select: none;

@@ -193,7 +193,7 @@ export const PlanningPage: React.FC = ({ }) => {
   return (
     <SectionWrapper inverse>
       <BackgrounImage src={adjustUrlForEnvironment('assets/svgs/planning-watercolor.svg')}/>
-        <BackButtom onClick={()=>{customNavigate('home')}}>Volver al Home</BackButtom>
+      <BackButtom onClick={()=>{customNavigate('home')}}>Volver al Home</BackButtom>
     </SectionWrapper>
   );
 }
