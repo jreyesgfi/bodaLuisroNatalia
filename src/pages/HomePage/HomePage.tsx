@@ -6,6 +6,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import { AnimatePresence, motion } from 'framer-motion';
 import { DecorationImage } from "../../components/ParallaxDecoration";
 import { adjustUrlForEnvironment } from "../../serverConfig";
+import { ListOfGuests } from "../../types";
+import { receiveData } from "../../connection/connectionMethods";
 
 const variants = {
   initial: {
@@ -63,7 +65,7 @@ const variants = {
 const TextWrapper = styled.div`
     position: relative;
     z-index: 50;
-    margin: 32px auto auto;
+    margin: 16px auto auto;
     display: block;
     position: relative;
     height: 50%;
@@ -117,17 +119,19 @@ interface DecorativeSquareItf {
 }
 const DecorativeSquare = styled(CustomMotion) <DecorativeSquareItf>`
   flex-grow: 1;
-  height: ${({ height }) => height || 60}px;
+  height: ${({ height }) => height || 50}px;
   max-width: ${({ maxWidth, odd }) => maxWidth || 80 + (odd ? 1 : -1) * 20}px;
   background-color: ${globalColors.grey.light};
   // border: 1px solid ${globalColors.dark.second};
   border-radius: 8px;
 `;
 const ColorDict: { [key: number]: string } = {
+  0: globalColors.color.third,
   1: globalColors.color.third,
   2: globalColors.primary[200],
   3: globalColors.primary[200],
   4: globalColors.color.third,
+  5: globalColors.primary[200],
 }
 
 interface LinkRoundedSquareItf {
@@ -137,7 +141,7 @@ interface LinkRoundedSquareItf {
 }
 const LinkRoundedSquare = styled(CustomMotion) <LinkRoundedSquareItf>`
   position: relative;
-  height: 60px;
+  height: 50px;
   width: fit-content;
   min-width: 160px;
   flex-shrink: 0;
@@ -156,7 +160,7 @@ const LinkText = styled(Heading)`
   position: relative;
   color: ${globalColors.dark.primary};
   font-size: 18px;
-  margin: 32px auto 0 0;
+  margin: 20px auto 0 0;
   padding: 4px 24px 4px 8px;
 `
 const LinkIcon = styled.img`
@@ -178,9 +182,23 @@ const BackgrounImage = styled.img`
 `
 
 export const HomePage: React.FC = ({ }) => {
+  // check if we need to move to the confirmation module
+  const customNavigate = useCustomNavigate();
+  const handleNewData = (data: ListOfGuests): void => {
+    data.forEach((guest) => {
+      if (guest.confirmed === false) {
+        customNavigate('introduccion');
+        return
+      }
+    })
+  };
+  useEffect(() => {
+    receiveData(handleNewData);
+  }, []);
+
+
   const [selectedLink, setSelectedLink] = useState<null | string>(null);
   const [showIntroduction, setShowIntroduction] = useState(true);
-  const customNavigate = useCustomNavigate();
   const handleNavigate = (subsection: string) => {
     setSelectedLink(subsection);
     const timer = setTimeout(()=>{customNavigate(subsection);},500);
@@ -262,7 +280,7 @@ export const HomePage: React.FC = ({ }) => {
                   animate="animate"
                   exit="exit"
                   variants={variants} // Ensure these variants include the delay based on the `custom` prop
-                  rootNumber={(index) % 4 + 1}
+                  rootNumber={(index)}
                   backgroundImage={link.background}
                   faded={selectedLink !== null && selectedLink !== link.href}
                   onClick={() => handleNavigate(link.href)}
@@ -288,18 +306,7 @@ export const HomePage: React.FC = ({ }) => {
                 animate="animate"
                 exit="exit"
                 variants={variants} // Ensure these variants include the delay based on the `custom` prop
-                maxWidth={60}
-                height={40}
-              />
-            </LinkAndDecorWrapper>
-            <LinkAndDecorWrapper key="last2" alignRight={false}>
-              <DecorativeSquare
-                custom={7 + HomeLinks.length * 2}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                variants={variants} // Ensure these variants include the delay based on the `custom` prop
-                maxWidth={110}
+                maxWidth={50}
                 height={40}
               />
             </LinkAndDecorWrapper>

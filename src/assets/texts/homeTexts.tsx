@@ -13,6 +13,11 @@ export const HomeLinks = [
     background: 'assets/svgs/',
     icon: 'assets/svgs/one-line-rings.svg'},
 
+    {title: 'Asistencia',
+    href: 'asistencia',
+    background: 'assets/svgs/attendance.svg',
+    icon: ''},
+
     {title: 'Planning',
     href: 'planning',
     background: 'assets/svgs/planning.svg',
@@ -27,4 +32,9 @@ export const HomeLinks = [
     href: 'galeria',
     background: 'assets/svgs/gallery.svg',
     icon: ''},
+
+    {title: 'Contribuye',
+    href: 'contribuye',
+    background: '',
+    icon: 'assets/svgs/gift.svg'},
 ]

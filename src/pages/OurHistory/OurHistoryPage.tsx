@@ -49,6 +49,14 @@ const CustomVideo = styled.video`
   width: 164px;
   margin-top: 50%;
 `;
+const BackButtom = styled(CustomButton)`
+    position: absolute;
+    inset: 0;
+    top: auto;
+    width: fit-content;
+    margin: 8px auto;
+    z-index: 50;
+`
 
 return (
   <GlobalWrapper>
@@ -60,6 +68,7 @@ return (
     <TextWrapper inverse={true}>
       ¡Vaya! La página de historia aun no está lista. Estamos trabajando para tenerla cuanto antes.
     </TextWrapper>
+    <BackButtom onClick={()=>{customNavigate('home')}}>Volver al Home</BackButtom>
   </GlobalWrapper>
 );
 };
