@@ -9,6 +9,7 @@ import { PlanningPage } from './pages/PlanningPage/PlanningPage'
 import { ConfirmationPage } from './pages/ConfirmationPage/ConfirmationPage'
 import { LocationPage } from './pages/LocationPage/LocationPage'
 import { GalleryPage } from './pages/GalleryPage/GalleryPage'
+import { ContributionPage } from './pages/ContributionPage/ContributionPage';
 
 import AnimatedPage, { withAnimation } from './theme/components/AnimatedPage'
 import { IntroPage } from './pages/Intro/IntroPage'
@@ -32,6 +33,7 @@ const App = (): JSX.Element => {
             <Route path="/planning" element={withAnimation(PlanningPage)({})} />
             <Route path="/como-llegar" element={withAnimation(LocationPage)({})} />
             <Route path="/galeria" element={withAnimation(GalleryPage)({})} />
+            <Route path="/contribuye" element={withAnimation(ContributionPage)({})} />
           </Routes>
         </AnimatedPage>
       </BrowserRouter>
