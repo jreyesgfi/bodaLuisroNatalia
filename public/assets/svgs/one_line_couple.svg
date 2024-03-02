@@ -9,8 +9,8 @@
       stroke-width: 2;
       stroke-dasharray: 1300;
       stroke-dashoffset: 1300;
-      animation: draw 4s ease-in forwards;
-      animation-delay: 12.5s;
+      animation: draw 3s ease-in forwards;
+      animation-delay: 6.5s;
     }
   </style>
 <g transform="translate(-1484 0)">

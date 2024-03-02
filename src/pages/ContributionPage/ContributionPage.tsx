@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { adjustUrlForEnvironment } from '../../serverConfig'; // Ensure this import is correct
 import { OtherHeading, Text, globalColors } from '../../theme/globalStyles';
 import { contributionBody, contributionSubtitle, contributionTitle } from '../../assets/texts/contributionTexts';
+import { CustomButton } from '../../theme/components/Button';
+import { useCustomNavigate } from '../../theme/customHooks/useCustomNavigate';
 
 const Container = styled(motion.div)`
   display: flex;
@@ -16,7 +18,7 @@ const TextWrapper = styled.div`
   position: absolute;
   z-index: 50;
   inset:0;
-  top:25%;
+  top:12vh;
   display: block;
   margin-left: 24px;
   width: 100%; // Ensure it fills the container
@@ -56,8 +58,68 @@ const BackgrounImage = styled.img`
 `
 
 const variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  initial: {
+    opacity: 0,
+    y: 20,
+    maxHeight: "0px",
+  },
+  animate: (custom: number) => ({
+    opacity: 1,
+    y: 0,
+    maxHeight: "700px",
+    transition: {
+      duration: 1,
+      delay: custom * 0.4,
+      type: "tween",
+      maxHeight: {
+        duration: 6
+      }
+    }
+  }),
+  initialButton: {
+    opacity: 0,
+  },
+  animateButton: (custom: number) => ({
+    opacity: 1,
+    transition: {
+      duration: 1,
+      delay: custom * 0.4,
+      type: "tween",
+    }
+  }),
+  exit: {
+    opacity: 0,
+    y: -20,
+    maxHeight: "0px",
+    transition: {
+      duration: 0.5,
+      type: "tween",
+    }
+  },
+  exitLink: {
+    opacity: 0,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      type: "tween",
+    }
+  },
+  exitDecoration: {
+    opacity: 1,
+    y: 0,
+    maxWidth: "0px",
+    backgroundColor: globalColors.grey.light,
+    transition: {
+      duration: 0.5,
+      type: "tween",
+      maxHeight: {
+        duration: 2
+      },
+      maxWidth: {
+        duration: 2
+      }
+    }
+  }
 };
 
 export const ContributionPage = () => {
@@ -78,7 +140,20 @@ export const ContributionPage = () => {
   const CustomMotion = styled(motion.div) <CustomMotionItf>`
     z-index: ${({ zIndex }) => zIndex};
   `;
-
+  const BackButtom = styled(CustomButton)`
+    position: relative;
+    inset: 0;
+    display:block;
+    top: auto;
+    width: fit-content;
+    margin-top: 16px;
+    z-index: 50;
+    color:${globalColors.secondary[600]};
+    font-weight: 600;
+    background-color:${globalColors.secondary[100]}bb;
+    border: none;
+`
+  const customNavigate = useCustomNavigate();
   return (
     <Container initial="hidden" animate="visible" variants={variants}>
       <BackgrounImage src={adjustUrlForEnvironment('assets/svgs/contribution-background.svg')}/>
@@ -107,6 +182,9 @@ export const ContributionPage = () => {
             <img src={copyIconUrl} alt="Copy" width="24" height="24" />
             {copied && <Message>Copiado</Message>}
           </IBANWrapper>
+          <CustomMotion key='backbuttom' custom={3} variants={variants} initial="initial" animate="animate">
+            <BackButtom onClick={() => { customNavigate('home') }}>Volver al Home</BackButtom>
+          </CustomMotion>
         </AnimatePresence>
       </TextWrapper>
 
