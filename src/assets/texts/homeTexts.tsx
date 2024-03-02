@@ -33,8 +33,8 @@ export const HomeLinks = [
     background: 'assets/svgs/gallery.svg',
     icon: ''},
 
-    {title: 'Contribuye',
-    href: 'contribuye',
+    {title: 'Ayúdanos',
+    href: 'ayudanos',
     background: '',
     icon: 'assets/svgs/gift.svg'},
 ]

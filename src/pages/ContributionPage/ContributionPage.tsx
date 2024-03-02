@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { adjustUrlForEnvironment } from '../../serverConfig'; // Ensure this import is correct
 import { OtherHeading, Text, globalColors } from '../../theme/globalStyles';
-import { contributionBody, contributionSubtitle, contributionTitle } from '../../assets/texts/contributionTexts';
+import { IBAN, contributionBody, contributionSubtitle, contributionTitle } from '../../assets/texts/contributionTexts';
 import { CustomButton } from '../../theme/components/Button';
 import { useCustomNavigate } from '../../theme/customHooks/useCustomNavigate';
 
@@ -124,7 +124,6 @@ const variants = {
 
 export const ContributionPage = () => {
   const [copied, setCopied] = useState(false);
-  const IBAN = 'ES0221032356710030105052'; // Replace with the actual IBAN number
   const copyIconUrl = adjustUrlForEnvironment('assets/icons/copy.svg'); // Adjust the path
 
   const copyToClipboard = (text: string) => {
@@ -178,9 +177,12 @@ export const ContributionPage = () => {
               <Text inverse fontSize='10pt' letterSpacing="1px">
                 {IBAN}
               </Text>
+              
             </IBANText>
             <img src={copyIconUrl} alt="Copy" width="24" height="24" />
-            {copied && <Message>Copiado</Message>}
+            <CustomMotion key='backbuttom' custom={3} variants={variants} initial="initial" animate="animate">
+                {copied && <Message>Copiado</Message>}
+              </CustomMotion>
           </IBANWrapper>
           <CustomMotion key='backbuttom' custom={3} variants={variants} initial="initial" animate="animate">
             <BackButtom onClick={() => { customNavigate('home') }}>Volver al Home</BackButtom>

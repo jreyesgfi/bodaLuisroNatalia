@@ -33,7 +33,7 @@ const App = (): JSX.Element => {
             <Route path="/planning" element={withAnimation(PlanningPage)({})} />
             <Route path="/como-llegar" element={withAnimation(LocationPage)({})} />
             <Route path="/galeria" element={withAnimation(GalleryPage)({})} />
-            <Route path="/contribuye" element={withAnimation(ContributionPage)({})} />
+            <Route path="/ayudanos" element={withAnimation(ContributionPage)({})} />
           </Routes>
         </AnimatedPage>
       </BrowserRouter>
